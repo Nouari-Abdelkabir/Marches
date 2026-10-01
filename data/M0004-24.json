@@ -9653,43 +9653,31 @@
   },
   "constats": {
     "TR1": {
-      "date": "2026-10-31",
-      "anterieures": {
-        "1": 100,
-        "5": 2,
-        "11": 40
-      },
+      "date": "2026-09-30",
+      "anterieures": {},
       "observations": {},
       "quantitesMois": {}
     },
     "TR2": {
-      "date": "2026-10-31",
+      "date": "2026-09-30",
       "anterieures": {},
       "observations": {},
       "quantitesMois": {}
     },
     "TR3": {
-      "date": "2026-10-31",
-      "anterieures": {
-        "1": 240,
-        "5": 4,
-        "6": 10,
-        "7": 5,
-        "11": 244
-      },
+      "date": "2026-09-30",
+      "anterieures": {},
       "observations": {},
       "quantitesMois": {}
     },
     "TR4": {
-      "date": "2026-10-31",
-      "anterieures": {
-        "205": 250
-      },
+      "date": "2026-09-30",
+      "anterieures": {},
       "observations": {},
       "quantitesMois": {}
     },
     "CONS": {
-      "date": "2026-10-31",
+      "date": "2026-09-30",
       "anterieures": {},
       "observations": {},
       "quantitesMois": {}
