@@ -19,25 +19,25 @@
     "signatures": {
       "TR1": {
         "fonction": "Foughali",
-        "nom": "",
+        "nom": "Elmoudene",
         "remplacant": "",
         "enConge": false
       },
       "TR2": {
         "fonction": "Elmoudene",
-        "nom": "",
+        "nom": "Foughali",
         "remplacant": "",
         "enConge": false
       },
       "TR3": {
         "fonction": "Nouari",
-        "nom": "",
+        "nom": "Khoubane",
         "remplacant": "",
         "enConge": false
       },
       "TR4": {
         "fonction": "Khoubane",
-        "nom": "",
+        "nom": "Nouari",
         "remplacant": "",
         "enConge": false
       }
@@ -7553,6 +7553,12 @@
     }
   ],
   "historique": [
+    {
+      "id": "mupr34v47fg6s",
+      "date": "2026-10-01T16:30:30.496Z",
+      "action": "MODIFICATION PARAMÈTRES",
+      "details": "Mise à jour des paramètres et signatures"
+    },
     {
       "id": "mupr2phnu1xhz",
       "date": "2026-10-01T16:30:10.572Z",
