@@ -24,7 +24,7 @@
         "enConge": false
       },
       "TR2": {
-        "fonction": "",
+        "fonction": "Elmoudene",
         "nom": "",
         "remplacant": "",
         "enConge": false
@@ -7553,6 +7553,12 @@
     }
   ],
   "historique": [
+    {
+      "id": "mupp585lwvxkf",
+      "date": "2026-10-01T15:36:08.841Z",
+      "action": "MODIFICATION PARAMÈTRES",
+      "details": "Mise à jour des paramètres et signatures"
+    },
     {
       "id": "mupp3xtsctb21",
       "date": "2026-10-01T15:35:08.800Z",
