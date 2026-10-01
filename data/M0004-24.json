@@ -1,34 +1,73 @@
 {
-  "marcheActif": "M0004-24",
   "parametres": {
-    "mo": "La SociÃ©tÃ© Nationale des Autoroutes du Maroc reprÃ©sentÃ©e par le Chef de la Division Prestations Techniques",
-    "moe": "Le Chef de division ViabilitÃ© et SÃ©curitÃ© EL Jadida",
+    "mo": "La Société Nationale des Autoroutes du Maroc représentée par le Chef de la Division Prestations Techniques",
+    "moe": "Le Chef de division Viabilité et Sécurité EL Jadida",
     "prestataire": "AIC",
     "marche": "M0004/24",
     "section": "PK106 oued Oum rbii - Chichaoua",
-    "objet": "La rÃ©alisation des travaux de l'Entretien multitechnique des Axes Autoroutiers Centre et Sud.",
+    "objet": "La réalisation des travaux de l'Entretien multitechnique des Axes Autoroutiers Centre et Sud.",
     "dateDebut": "",
     "dateFin": "",
     "logo": "",
-    "dressePar": "L'Adjoint ViabilitÃ©",
+    "dressePar": "L'Adjoint Viabilité",
     "dresseNom": "",
-    "validePar": "Le chef de division sÃ©curitÃ© et entretien",
+    "validePar": "Le chef de division sécurité et entretien",
     "valideNom": "",
-    "acceptePar": "Le reprÃ©sentant de l'entreprise",
+    "acceptePar": "Le représentant de l'entreprise",
     "accepteNom": "",
-    "accepteDate": ""
+    "accepteDate": "",
+    "signatures": {
+      "TR1": {
+        "fonction": "nouari",
+        "nom": "",
+        "remplacant": "",
+        "enConge": false
+      },
+      "TR2": {
+        "fonction": "",
+        "nom": "",
+        "remplacant": "",
+        "enConge": false
+      },
+      "TR3": {
+        "fonction": "",
+        "nom": "",
+        "remplacant": "",
+        "enConge": false
+      },
+      "TR4": {
+        "fonction": "",
+        "nom": "",
+        "remplacant": "",
+        "enConge": false
+      }
+    },
+    "ingenieurs": {
+      "ing1": {
+        "fonction": "",
+        "nom": ""
+      },
+      "ing2": {
+        "fonction": "",
+        "nom": ""
+      }
+    },
+    "entreprise": {
+      "texte": "",
+      "nom": "",
+      "date": ""
+    }
   },
   "catalogue": [],
-  "commandes": [
+  "commandes": [],
+  "historique": [
     {
-      "id": "t1790856897044",
-      "numero": "TEST",
-      "date": "2026-10-01",
-      "objet": "Test",
-      "lignes": []
+      "id": "muplsfkn34nqc",
+      "date": "2026-10-01T14:02:13.079Z",
+      "action": "MODIFICATION PARAMÈTRES",
+      "details": "Mise à jour des paramètres et signatures"
     }
   ],
-  "historique": [],
   "metresEnregistres": [],
   "constatsEnregistres": [],
   "suivisPrix": [],
@@ -72,22 +111,32 @@
     "TR1": {
       "date": "",
       "anterieures": {},
-      "observations": {}
+      "observations": {},
+      "quantitesMois": {}
     },
     "TR2": {
       "date": "",
       "anterieures": {},
-      "observations": {}
+      "observations": {},
+      "quantitesMois": {}
     },
     "TR3": {
       "date": "",
       "anterieures": {},
-      "observations": {}
+      "observations": {},
+      "quantitesMois": {}
     },
     "TR4": {
       "date": "",
       "anterieures": {},
-      "observations": {}
+      "observations": {},
+      "quantitesMois": {}
+    },
+    "CONS": {
+      "date": "",
+      "anterieures": {},
+      "observations": {},
+      "quantitesMois": {}
     }
   }
 }
