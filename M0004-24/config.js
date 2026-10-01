@@ -5,7 +5,7 @@
    ═══════════════════════════════════════════════════════════ */
 
 window.MARCHE_ID = 'M0004-24';
-window.MARCHE_NOM = 'Entretien Axes Centre-Sud';
+window.MARCHE_NOM = 'Entretien de dispositif de sécurité';
 window.MARCHE_COULEUR = '#1e3a8a';
 
 /* Identité visuelle (si besoin d'overrides) */

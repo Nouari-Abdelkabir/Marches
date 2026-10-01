@@ -53,14 +53,18 @@ const PLAGES_PK = {
 /* ═══════════════════════════════════════════════════════════
    ÉTAT GLOBAL
    ═══════════════════════════════════════════════════════════ */
-let DATA = chargerDonnees();
-let editingState = { cmdId: null, ligneId: null, buffer: null };
-let currentMetreTR = 'TR1';
-let currentConstatTR = 'TR1';
-let currentMoisMetre = new Date().toISOString().slice(0,7);
-let currentMoisConstat = new Date().toISOString().slice(0,7);
-let currentDashDebut = new Date().toISOString().slice(0,7);
-let currentDashFin   = new Date().toISOString().slice(0,7);
+/* DATA sera chargé de manière asynchrone au démarrage */
+let DATA = {
+  parametres: getDefaultParametres(),
+  catalogue: [], commandes: [], historique: [],
+  metresEnregistres: [], constatsEnregistres: [],
+  suivisPrix: [], etatsSinistres: [],
+  facturesSinistres: {}, photoSinistres: {},
+  equipementsEnregistres: [], facturesEnregistrees: [],
+  factureAutoNumbers: {}
+};
+initMetres(DATA);
+initConstats(DATA);
 
 /* ═══════════════════════════════════════════════════════════
    UTILITAIRES
@@ -271,57 +275,75 @@ function initConstats(d) {
 /* ═══════════════════════════════════════════════════════════
    💾 CHARGEMENT DES DONNÉES (SIMPLE — pas de migration)
    ═══════════════════════════════════════════════════════════ */
-function chargerDonnees() {
+/* ═══════════════════════════════════════════════════════════
+   💾 CHARGEMENT — Depuis GitHub si possible, sinon localStorage
+   ═══════════════════════════════════════════════════════════ */
+async function chargerDonneesAsync() {
   let d = null;
-  try {
-    const raw = localStorage.getItem(CLE_STORAGE);
-    if (raw && raw.length > 5) {
-      d = JSON.parse(raw);
-      console.log('✅ Données chargées:', CLE_STORAGE, '(' + raw.length + ' chars)');
-      console.log('   • Commandes :', d.commandes?.length || 0);
-      console.log('   • Catalogue :', d.catalogue?.length || 0);
-      console.log('   • Metrés    :', d.metresEnregistres?.length || 0);
+
+  /* 1. Essayer GitHub (si PAT configuré) */
+  if (typeof ghHasToken === 'function' && ghHasToken()) {
+    try {
+      console.log('🌐 Chargement depuis GitHub...');
+      const remote = await ghLire(ID_MARCHE);
+      if (remote.ok) {
+        d = remote.data;
+        console.log('✅ Chargé depuis GitHub');
+        console.log('   • Commandes:', d.commandes?.length || 0);
+        console.log('   • Catalogue:', d.catalogue?.length || 0);
+        console.log('   • Metrés:', d.metresEnregistres?.length || 0);
+        /* Synchroniser localStorage (cache) */
+        localStorage.setItem(CLE_STORAGE, JSON.stringify(d));
+      } else {
+        console.warn('⚠️ GitHub inaccessible:', remote.error);
+      }
+    } catch (e) {
+      console.warn('⚠️ Erreur GitHub:', e.message);
     }
-  } catch (e) {
-    console.error('❌ Erreur de lecture :', e);
-    alert('❌ Erreur de lecture pour ' + ID_MARCHE + ' :\n' + e.message);
   }
 
-  /* Si pas de données → créer une structure vide */
+  /* 2. Fallback localStorage */
+  if (!d) {
+    try {
+      const raw = localStorage.getItem(CLE_STORAGE);
+      if (raw && raw.length > 5) {
+        d = JSON.parse(raw);
+        console.log('📦 Chargé depuis localStorage (cache)');
+      }
+    } catch (e) {
+      console.error('❌ localStorage corrompu:', e);
+    }
+  }
+
+  /* 3. Structure vide si rien */
   if (!d) {
     console.log('📂 Nouveau marché vide :', ID_MARCHE);
     d = {
       marcheActif: ID_MARCHE,
       parametres: getDefaultParametres(),
-      catalogue: [],
-      commandes: [],
-      historique: [],
-      metresEnregistres: [],
-      constatsEnregistres: [],
-      suivisPrix: [],
-      etatsSinistres: [],
-      facturesSinistres: {},
-      photoSinistres: {},
-      equipementsEnregistres: [],
-      facturesEnregistrees: [],
+      catalogue: [], commandes: [], historique: [],
+      metresEnregistres: [], constatsEnregistres: [],
+      suivisPrix: [], etatsSinistres: [],
+      facturesSinistres: {}, photoSinistres: {},
+      equipementsEnregistres: [], facturesEnregistrees: [],
       factureAutoNumbers: {}
     };
   }
 
-  /* S'assurer que les champs de base existent */
+  /* 4. S'assurer que tous les champs existent */
   if (!d.parametres) d.parametres = getDefaultParametres();
-  if (!d.catalogue)  d.catalogue = [];
-  if (!d.commandes)  d.commandes = [];
+  if (!d.catalogue) d.catalogue = [];
+  if (!d.commandes) d.commandes = [];
   if (!d.historique) d.historique = [];
-  if (!d.metresEnregistres)  d.metresEnregistres = [];
+  if (!d.metresEnregistres) d.metresEnregistres = [];
   if (!d.constatsEnregistres) d.constatsEnregistres = [];
-  if (!d.suivisPrix)         d.suivisPrix = [];
-  if (!d.etatsSinistres)     d.etatsSinistres = [];
-  if (!d.facturesSinistres)  d.facturesSinistres = {};
-  if (!d.photoSinistres)     d.photoSinistres = {};
+  if (!d.suivisPrix) d.suivisPrix = [];
+  if (!d.etatsSinistres) d.etatsSinistres = [];
+  if (!d.facturesSinistres) d.facturesSinistres = {};
+  if (!d.photoSinistres) d.photoSinistres = {};
   if (!d.equipementsEnregistres) d.equipementsEnregistres = [];
-  if (!d.facturesEnregistrees)   d.facturesEnregistrees = [];
-  if (!d.factureAutoNumbers)     d.factureAutoNumbers = {};
+  if (!d.facturesEnregistrees) d.facturesEnregistrees = [];
+  if (!d.factureAutoNumbers) d.factureAutoNumbers = {};
 
   initMetres(d);
   initConstats(d);
@@ -347,12 +369,34 @@ function initStructureMarche(m) {
   initConstats(m);
 }
 
-function sauvegarderDonnees(silencieux = false) {
+/* ═══════════════════════════════════════════════════════════
+   💾 SAUVEGARDE — localStorage + GitHub (async)
+   ═══════════════════════════════════════════════════════════ */
+async function sauvegarderDonnees(silencieux = false) {
+  /* 1. Toujours sauvegarder dans localStorage (rapide, local) */
   try {
     localStorage.setItem(CLE_STORAGE, JSON.stringify(DATA));
-    if (!silencieux) notifier('✅ Données sauvegardées', 'success');
   } catch (e) {
-    notifier('❌ Erreur: ' + e.message, 'danger');
+    console.error('❌ localStorage:', e);
+    notifier('❌ Mémoire locale pleine', 'danger');
+    return;
+  }
+
+  /* 2. Sync vers GitHub si PAT disponible */
+  if (typeof ghHasToken === 'function' && ghHasToken()) {
+    try {
+      const result = await ghEcrire(ID_MARCHE, DATA, `Update ${ID_MARCHE} — ${new Date().toISOString().slice(0,16)}`);
+      if (result.ok) {
+        if (!silencieux) notifier('☁️ Synchronisé avec GitHub', 'success');
+      } else {
+        console.warn('⚠️ GitHub échoué:', result.error);
+        if (!silencieux) notifier('⚠️ Local sauvegardé, GitHub échoué', 'danger');
+      }
+    } catch (e) {
+      console.warn('⚠️ GitHub exception:', e.message);
+    }
+  } else {
+    if (!silencieux) notifier('💾 Sauvegardé localement', 'success');
   }
 }
 
@@ -7186,18 +7230,67 @@ if (headerNom && window.MARCHE_NOM) {
   headerNom.textContent = ID_MARCHE + ' — ' + window.MARCHE_NOM;
 }
 
-/* Rendus initiaux (dans un try pour ne pas bloquer) */
-const initTasks = [
-  ['Dashboard',            () => rendreDashboard()],
-  ['Formulaire paramètres',() => chargerFormParametres()],
-  ['Catalogue',            () => rendreCatalogue()],
-  ['Commandes',            () => rendreListeCommandes()],
-  ['Historique',           () => rendreHistorique()],
-  ['Mois Metré',           () => changerMoisMetre(currentMoisMetre)],
-  ['Mois Constat',         () => changerMoisConstat(currentMoisConstat)],
-  ['Switch Metré',         () => switchMetre('TR1')],
-  ['Switch Constat',       () => switchConstat('TR1')]
-];
+/* ═══════════════════════════════════════════════════════════
+   🚀 INITIALISATION ASYNC
+   ═══════════════════════════════════════════════════════════ */
+(async function initApp() {
+  console.log('🚀 Démarrage de l\'application...');
+
+  /* 1. Charger les données (async — peut venir de GitHub) */
+  try {
+    DATA = await chargerDonneesAsync();
+  } catch (e) {
+    console.error('❌ Erreur chargement:', e);
+    DATA = chargerDonnees(); /* fallback synchrone */
+  }
+
+  /* 2. Initialiser la période */
+  const y = new Date().getFullYear();
+  if (!currentDashDebut) currentDashDebut = `${y}-01`;
+  if (!currentDashFin) currentDashFin = `${y}-12`;
+  if (!currentMoisMetre) currentMoisMetre = new Date().toISOString().slice(0,7);
+  if (!currentMoisConstat) currentMoisConstat = new Date().toISOString().slice(0,7);
+  if (typeof currentSuiviDebut !== 'undefined' && !currentSuiviDebut) currentSuiviDebut = new Date().toISOString().slice(0,7);
+  if (typeof currentSuiviFin !== 'undefined' && !currentSuiviFin) currentSuiviFin = new Date().toISOString().slice(0,7);
+  if (typeof currentEquipDebut !== 'undefined' && !currentEquipDebut) currentEquipDebut = new Date().toISOString().slice(0,7);
+  if (typeof currentEquipFin !== 'undefined' && !currentEquipFin) currentEquipFin = new Date().toISOString().slice(0,7);
+  if (typeof currentEtatDebut !== 'undefined' && !currentEtatDebut) currentEtatDebut = new Date().toISOString().slice(0,7);
+  if (typeof currentEtatFin !== 'undefined' && !currentEtatFin) currentEtatFin = new Date().toISOString().slice(0,7);
+
+  /* 3. Date d'import */
+  const importDateEl = document.getElementById('import-date');
+  if (importDateEl) importDateEl.valueAsDate = new Date();
+
+  /* 4. Nom du marché dans le header */
+  const headerNom = document.getElementById('header-marche-nom');
+  if (headerNom && window.MARCHE_NOM) {
+    headerNom.textContent = ID_MARCHE + ' — ' + window.MARCHE_NOM;
+  }
+
+  /* 5. Rendus */
+  const tasks = [
+    ['Dashboard',             () => rendreDashboard()],
+    ['Formulaire paramètres', () => chargerFormParametres()],
+    ['Catalogue',             () => rendreCatalogue()],
+    ['Commandes',             () => rendreListeCommandes()],
+    ['Historique',            () => rendreHistorique()],
+    ['Mois Metré',            () => changerMoisMetre(currentMoisMetre)],
+    ['Mois Constat',          () => changerMoisConstat(currentMoisConstat)],
+    ['Switch Metré',          () => switchMetre('TR1')],
+    ['Switch Constat',        () => switchConstat('TR1')]
+  ];
+
+  tasks.forEach(([nom, fn]) => {
+    try { fn(); }
+    catch(e) { console.error(`❌ Init ${nom} :`, e); }
+  });
+
+  console.log('✅ Application prête —', ID_MARCHE);
+  console.log('   • Commandes:', DATA.commandes.length);
+  console.log('   • Catalogue:', DATA.catalogue.length);
+  console.log('   • Metrés:', DATA.metresEnregistres.length);
+  console.log('   • PAT configuré:', ghHasToken ? ghHasToken() : false);
+})();
 
 initTasks.forEach(([nom, fn]) => {
   try { fn(); }
