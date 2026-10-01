@@ -8,12 +8,12 @@ window.MARCHE_SECTIONS = {
   catalogue:    true,
   commandes:    true,
   metre:        true,
-  constat:      true,
-  attachement:  false,
+  constat:      false,
+  attachement:  true,
   decomptes:    false,
   suivi:        true,
   sinistres:    false,
   equipements:  false,
-  historique:   true,
+  historique:   false,
   export:       true
 };
