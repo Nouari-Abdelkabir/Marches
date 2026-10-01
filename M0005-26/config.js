@@ -1,12 +1,23 @@
 /* ═══════════════════════════════════════════════════════════
-   ⚙️ CONFIGURATION DU MARCHÉ
-   ═══════════════════════════════════════════════════════════
-   Chaque marché a son propre config.js
+   ⚙️ CONFIGURATION DU MARCHÉ M0005-26
    ═══════════════════════════════════════════════════════════ */
 
 window.MARCHE_ID = 'M0005-26';
 window.MARCHE_NOM = 'Entretien des bâtiments';
 window.MARCHE_COULEUR = '#059669';
 
-/* Identité visuelle (si besoin d'overrides) */
-window.MARCHE_LOGO_URL = '../image/adm.jpg';
+window.MARCHE_SECTIONS = {
+  dashboard:    true,
+  parametres:   true,
+  catalogue:    true,
+  commandes:    true,
+  metre:        true,
+  constat:      true,
+  attachement:  false,
+  decomptes:    false,
+  suivi:        true,
+  sinistres:    true,
+  equipements:  true,
+  historique:   true,
+  export:       true
+};

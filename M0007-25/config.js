@@ -1,12 +1,19 @@
-/* ═══════════════════════════════════════════════════════════
-   ⚙️ CONFIGURATION DU MARCHÉ
-   ═══════════════════════════════════════════════════════════
-   Chaque marché a son propre config.js
-   ═══════════════════════════════════════════════════════════ */
-
 window.MARCHE_ID = 'M0007-25';
-window.MARCHE_NOM = 'Assistance au usager';
+window.MARCHE_NOM = 'M0007/25';
 window.MARCHE_COULEUR = '#7c3aed';
 
-/* Identité visuelle (si besoin d'overrides) */
-window.MARCHE_LOGO_URL = '../image/adm.jpg';
+window.MARCHE_SECTIONS = {
+  dashboard:    true,
+  parametres:   true,
+  catalogue:    true,
+  commandes:    true,
+  metre:        true,
+  constat:      true,
+  attachement:  false,
+  decomptes:    false,
+  suivi:        true,
+  sinistres:    true,
+  equipements:  true,
+  historique:   true,
+  export:       true
+};
