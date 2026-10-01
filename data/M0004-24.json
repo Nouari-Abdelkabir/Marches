@@ -1,25 +1,33 @@
 {
   "marcheActif": "M0004-24",
   "parametres": {
-    "mo": "La Société Nationale des Autoroutes du Maroc représentée par le Chef de la Division Prestations Techniques",
-    "moe": "Le Chef de division Viabilité et Sécurité EL Jadida",
+    "mo": "La SociÃ©tÃ© Nationale des Autoroutes du Maroc reprÃ©sentÃ©e par le Chef de la Division Prestations Techniques",
+    "moe": "Le Chef de division ViabilitÃ© et SÃ©curitÃ© EL Jadida",
     "prestataire": "AIC",
     "marche": "M0004/24",
     "section": "PK106 oued Oum rbii - Chichaoua",
-    "objet": "La réalisation des travaux de l'Entretien multitechnique des Axes Autoroutiers Centre et Sud.",
+    "objet": "La rÃ©alisation des travaux de l'Entretien multitechnique des Axes Autoroutiers Centre et Sud.",
     "dateDebut": "",
     "dateFin": "",
     "logo": "",
-    "dressePar": "L'Adjoint Viabilité",
+    "dressePar": "L'Adjoint ViabilitÃ©",
     "dresseNom": "",
-    "validePar": "Le chef de division sécurité et entretien",
+    "validePar": "Le chef de division sÃ©curitÃ© et entretien",
     "valideNom": "",
-    "acceptePar": "Le représentant de l'entreprise",
+    "acceptePar": "Le reprÃ©sentant de l'entreprise",
     "accepteNom": "",
     "accepteDate": ""
   },
   "catalogue": [],
-  "commandes": [],
+  "commandes": [
+    {
+      "id": "t1790856897044",
+      "numero": "TEST",
+      "date": "2026-10-01",
+      "objet": "Test",
+      "lignes": []
+    }
+  ],
   "historique": [],
   "metresEnregistres": [],
   "constatsEnregistres": [],
@@ -31,15 +39,55 @@
   "facturesEnregistrees": [],
   "factureAutoNumbers": {},
   "metres": {
-    "TR1": { "date": "", "entrees": {}, "sinistres": {}, "fax": {}, "prestations": {} },
-    "TR2": { "date": "", "entrees": {}, "sinistres": {}, "fax": {}, "prestations": {} },
-    "TR3": { "date": "", "entrees": {}, "sinistres": {}, "fax": {}, "prestations": {} },
-    "TR4": { "date": "", "entrees": {}, "sinistres": {}, "fax": {}, "prestations": {} }
+    "TR1": {
+      "date": "",
+      "entrees": {},
+      "sinistres": {},
+      "fax": {},
+      "prestations": {}
+    },
+    "TR2": {
+      "date": "",
+      "entrees": {},
+      "sinistres": {},
+      "fax": {},
+      "prestations": {}
+    },
+    "TR3": {
+      "date": "",
+      "entrees": {},
+      "sinistres": {},
+      "fax": {},
+      "prestations": {}
+    },
+    "TR4": {
+      "date": "",
+      "entrees": {},
+      "sinistres": {},
+      "fax": {},
+      "prestations": {}
+    }
   },
   "constats": {
-    "TR1": { "date": "", "anterieures": {}, "observations": {} },
-    "TR2": { "date": "", "anterieures": {}, "observations": {} },
-    "TR3": { "date": "", "anterieures": {}, "observations": {} },
-    "TR4": { "date": "", "anterieures": {}, "observations": {} }
+    "TR1": {
+      "date": "",
+      "anterieures": {},
+      "observations": {}
+    },
+    "TR2": {
+      "date": "",
+      "anterieures": {},
+      "observations": {}
+    },
+    "TR3": {
+      "date": "",
+      "anterieures": {},
+      "observations": {}
+    },
+    "TR4": {
+      "date": "",
+      "anterieures": {},
+      "observations": {}
+    }
   }
 }
