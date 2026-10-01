@@ -30,7 +30,7 @@
         "enConge": false
       },
       "TR3": {
-        "fonction": "",
+        "fonction": "Nouari",
         "nom": "",
         "remplacant": "",
         "enConge": false
@@ -7553,6 +7553,12 @@
     }
   ],
   "historique": [
+    {
+      "id": "mupp3w94b42qd",
+      "date": "2026-10-01T15:35:06.760Z",
+      "action": "MODIFICATION PARAMÈTRES",
+      "details": "Mise à jour des paramètres et signatures"
+    },
     {
       "id": "mupofdce8nnuq",
       "date": "2026-10-01T15:16:02.510Z",
