@@ -18,6 +18,6 @@ window.MARCHE_SECTIONS = {
   suivi:        true,
   sinistres:    false,
   equipements:  false,
-  historique:   true,
+  historique:   false,
   export:       true
 };
