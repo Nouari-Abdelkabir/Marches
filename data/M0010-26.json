@@ -1,0 +1,95 @@
+{
+  "marcheActif": "M0010-26",
+  "parametres": {
+    "mo": "La Société Nationale des Autoroutes du Maroc",
+    "moe": "Le Chef de division Viabilité et Sécurité",
+    "prestataire": "M2M",
+    "marche": "M0010-26",
+    "section": "27+000 - 430+000",
+    "objet": "gardinage et securité",
+    "dateDebut": "2025-01-01",
+    "dateFin": "2026-12-31",
+    "logo": "",
+    "dressePar": "L'Adjoint Viabilité",
+    "dresseNom": "",
+    "validePar": "Le chef de division sécurité et entretien",
+    "valideNom": "",
+    "acceptePar": "Le représentant de l'entreprise",
+    "accepteNom": "",
+    "accepteDate": ""
+  },
+  "catalogue": [],
+  "commandes": [],
+  "historique": [],
+  "metresEnregistres": [],
+  "constatsEnregistres": [],
+  "suivisPrix": [],
+  "etatsSinistres": [],
+  "facturesSinistres": {},
+  "photoSinistres": {},
+  "equipementsEnregistres": [],
+  "facturesEnregistrees": [],
+  "factureAutoNumbers": {},
+  "metres": {
+    "TR1": {
+      "date": "",
+      "entrees": {},
+      "sinistres": {},
+      "fax": {},
+      "prestations": {}
+    },
+    "TR2": {
+      "date": "",
+      "entrees": {},
+      "sinistres": {},
+      "fax": {},
+      "prestations": {}
+    },
+    "TR3": {
+      "date": "",
+      "entrees": {},
+      "sinistres": {},
+      "fax": {},
+      "prestations": {}
+    },
+    "TR4": {
+      "date": "",
+      "entrees": {},
+      "sinistres": {},
+      "fax": {},
+      "prestations": {}
+    }
+  },
+  "constats": {
+    "TR1": {
+      "date": "",
+      "anterieures": {},
+      "observations": {},
+      "quantitesMois": {}
+    },
+    "TR2": {
+      "date": "",
+      "anterieures": {},
+      "observations": {},
+      "quantitesMois": {}
+    },
+    "TR3": {
+      "date": "",
+      "anterieures": {},
+      "observations": {},
+      "quantitesMois": {}
+    },
+    "TR4": {
+      "date": "",
+      "anterieures": {},
+      "observations": {},
+      "quantitesMois": {}
+    },
+    "CONS": {
+      "date": "",
+      "anterieures": {},
+      "observations": {},
+      "quantitesMois": {}
+    }
+  }
+}
