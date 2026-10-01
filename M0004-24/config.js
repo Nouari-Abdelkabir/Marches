@@ -17,8 +17,8 @@ window.MARCHE_SECTIONS = {
   attachement:  false,
   decomptes:    false,
   suivi:        true,
-  sinistres:    false,
-  equipements:  false,
+  sinistres:    true,
+  equipements:  true,
   historique:   false,
   export:       true
 };
