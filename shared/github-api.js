@@ -1,18 +1,16 @@
 /* ═══════════════════════════════════════════════════════════
    🌐 GITHUB API — Couche de communication avec GitHub
-   ═══════════════════════════════════════════════════════════
-   Permet de lire et écrire les fichiers JSON des marchés
-   depuis GitHub au lieu de localStorage uniquement.
+   Version : Anti-conflit 409 (file d'attente + SHA frais)
    ═══════════════════════════════════════════════════════════ */
 
 const GH_CONFIG = {
   owner: 'nouari-abdelkabir',
   repo: 'Marches',
   branch: 'main',
-  tokenKey: 'github_pat'   /* Clé dans localStorage */
+  tokenKey: 'github_pat'
 };
 
-/* ─── Récupérer le PAT stocké ─── */
+/* ─── Récupérer le PAT ─── */
 function ghGetToken() {
   return localStorage.getItem(GH_CONFIG.tokenKey) || '';
 }
@@ -32,13 +30,13 @@ function ghClearToken() {
   localStorage.removeItem(GH_CONFIG.tokenKey);
 }
 
-/* ─── Vérifier si un PAT est configuré ─── */
+/* ─── Vérifier si PAT est configuré ─── */
 function ghHasToken() {
   const t = ghGetToken();
   return t && t.startsWith('ghp_') && t.length === 40;
 }
 
-/* ─── Test de connexion (retourne le user GitHub) ─── */
+/* ─── Test de connexion ─── */
 async function ghTestConnexion() {
   const token = ghGetToken();
   if (!token) return { ok: false, error: 'Pas de token' };
@@ -47,9 +45,7 @@ async function ghTestConnexion() {
     const r = await fetch('https://api.github.com/user', {
       headers: { 'Authorization': 'Bearer ' + token }
     });
-    if (!r.ok) {
-      return { ok: false, error: 'HTTP ' + r.status };
-    }
+    if (!r.ok) return { ok: false, error: 'HTTP ' + r.status };
     const data = await r.json();
     return { ok: true, login: data.login, name: data.name };
   } catch (e) {
@@ -62,13 +58,16 @@ async function ghTestConnexion() {
    ═══════════════════════════════════════════════════════════ */
 async function ghLire(marcheId) {
   const token = ghGetToken();
-  const url = `https://api.github.com/repos/${GH_CONFIG.owner}/${GH_CONFIG.repo}/contents/data/${marcheId}.json?ref=${GH_CONFIG.branch}`;
+  const url = `https://api.github.com/repos/${GH_CONFIG.owner}/${GH_CONFIG.repo}/contents/data/${marcheId}.json?ref=${GH_CONFIG.branch}&t=${Date.now()}`;
 
   try {
-    const headers = { 'Accept': 'application/vnd.github.v3+json' };
+    const headers = {
+      'Accept': 'application/vnd.github.v3+json',
+      'Cache-Control': 'no-cache'
+    };
     if (token) headers['Authorization'] = 'Bearer ' + token;
 
-    const r = await fetch(url, { headers });
+    const r = await fetch(url, { headers, cache: 'no-store' });
 
     if (r.status === 404) {
       return { ok: false, error: 'Fichier non trouvé', status: 404 };
@@ -79,7 +78,6 @@ async function ghLire(marcheId) {
 
     const file = await r.json();
     const contenu = atob(file.content.replace(/\n/g, ''));
-    /* Décoder UTF-8 correctement */
     const decoded = decodeURIComponent(escape(contenu));
     const json = JSON.parse(decoded);
 
@@ -91,38 +89,112 @@ async function ghLire(marcheId) {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   ✏️ ÉCRITURE d'un fichier JSON
+   ✏️ ÉCRITURE avec FILE D'ATTENTE (anti-409)
    ═══════════════════════════════════════════════════════════ */
+
+/* État de la file d'attente par marché */
+const GH_PENDING = {};
+
+/**
+ * Écriture publique : met en file d'attente si une écriture est déjà en cours
+ */
 async function ghEcrire(marcheId, data, commitMessage) {
   const token = ghGetToken();
   if (!token) return { ok: false, error: 'Token manquant' };
 
+  /* 1. Si une écriture est en cours pour ce marché → marquer comme pending */
+  if (GH_PENDING[marcheId] && GH_PENDING[marcheId].running) {
+    GH_PENDING[marcheId].data = data;
+    GH_PENDING[marcheId].message = commitMessage;
+    console.log('⏳ Écriture mise en attente pour', marcheId);
+    return { ok: true, queued: true };
+  }
+
+  /* 2. Sinon, lancer la boucle de traitement */
+  GH_PENDING[marcheId] = {
+    running: true,
+    data: data,
+    message: commitMessage
+  };
+
+  let dernierResultat = { ok: false, error: 'Aucune écriture effectuée' };
+
+  /* 3. Boucler tant qu'il reste des modifications à envoyer */
+  while (GH_PENDING[marcheId]) {
+    const pending = GH_PENDING[marcheId];
+
+    /* Marquer comme "en cours" mais garder les données */
+    GH_PENDING[marcheId] = {
+      running: true,
+      data: null,
+      message: null
+    };
+
+    /* Écrire réellement */
+    dernierResultat = await ghEcrireDirect(marcheId, pending.data, pending.message);
+    console.log('📤 Résultat écriture:', dernierResultat.ok ? '✅' : '❌', dernierResultat.error || '');
+
+    /* Si une nouvelle donnée a été mise en attente pendant l'écriture → continuer */
+    if (GH_PENDING[marcheId] && GH_PENDING[marcheId].data !== null) {
+      console.log('🔄 Nouvelle donnée en attente, reprise...');
+      continue;
+    }
+
+    /* Sinon, terminer */
+    delete GH_PENDING[marcheId];
+  }
+
+  return dernierResultat;
+}
+
+/**
+ * Écriture réelle (appelée par la file d'attente uniquement)
+ * Lit TOUJOURS un SHA frais juste avant le PUT
+ */
+async function ghEcrireDirect(marcheId, data, commitMessage) {
+  const token = ghGetToken();
+  if (!token) return { ok: false, error: 'Token manquant' };
+  if (!data) return { ok: false, error: 'Aucune donnée à écrire' };
+
   const url = `https://api.github.com/repos/${GH_CONFIG.owner}/${GH_CONFIG.repo}/contents/data/${marcheId}.json`;
 
   try {
-    /* 1. Lire le SHA actuel */
-    const current = await ghLire(marcheId);
-    if (!current.ok && current.status !== 404) {
-      return { ok: false, error: 'Lecture SHA échouée: ' + current.error };
+    /* ─── A. Lire SHA FRAIS juste avant PUT (avec anti-cache) ─── */
+    const getResp = await fetch(url + '?t=' + Date.now(), {
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Accept': 'application/vnd.github.v3+json',
+        'Cache-Control': 'no-cache'
+      },
+      cache: 'no-store'
+    });
+
+    let sha = null;
+    if (getResp.ok) {
+      const file = await getResp.json();
+      sha = file.sha;
+      console.log('🔑 SHA frais:', sha.slice(0, 8));
+    } else if (getResp.status === 404) {
+      console.log('🆕 Nouveau fichier (SHA absent)');
+    } else {
+      return { ok: false, error: 'Lecture SHA échouée: HTTP ' + getResp.status };
     }
 
-    /* 2. Encoder en base64 (UTF-8 safe) */
+    /* ─── B. Encoder en base64 UTF-8 safe ─── */
     const jsonStr = JSON.stringify(data, null, 2);
     const base64 = btoa(unescape(encodeURIComponent(jsonStr)));
+    console.log('📏 Taille:', Math.round(jsonStr.length / 1024), 'Ko');
 
-    /* 3. Préparer le body */
+    /* ─── C. Préparer le body ─── */
     const body = {
-      message: commitMessage || `Update ${marcheId}`,
+      message: commitMessage || `Update ${marcheId} — ${new Date().toISOString().slice(0,16)}`,
       content: base64,
       branch: GH_CONFIG.branch
     };
-    /* SHA requis si le fichier existe déjà */
-    if (current.ok && current.sha) {
-      body.sha = current.sha;
-    }
+    if (sha) body.sha = sha;
 
-    /* 4. Envoyer */
-    const r = await fetch(url, {
+    /* ─── D. Envoyer PUT ─── */
+    const putResp = await fetch(url, {
       method: 'PUT',
       headers: {
         'Authorization': 'Bearer ' + token,
@@ -132,12 +204,17 @@ async function ghEcrire(marcheId, data, commitMessage) {
       body: JSON.stringify(body)
     });
 
-    if (!r.ok) {
-      const err = await r.json().catch(() => ({}));
-      return { ok: false, error: 'HTTP ' + r.status + ': ' + (err.message || ''), status: r.status };
+    if (!putResp.ok) {
+      const err = await putResp.json().catch(() => ({}));
+      return {
+        ok: false,
+        error: 'HTTP ' + putResp.status + ': ' + (err.message || ''),
+        status: putResp.status
+      };
     }
 
-    const result = await r.json();
+    const result = await putResp.json();
+    console.log('✅ Commit:', result.commit.sha.slice(0, 8));
     return {
       ok: true,
       commit: result.commit.sha.slice(0, 8),
@@ -150,21 +227,18 @@ async function ghEcrire(marcheId, data, commitMessage) {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   🔄 Lecture silencieuse avec fallback localStorage
-   (utilisée au démarrage : essaie GitHub, sinon localStorage)
+   🔄 Lecture avec fallback localStorage
    ═══════════════════════════════════════════════════════════ */
 async function ghLireAvecFallback(marcheId) {
-  /* 1. Si PAT disponible → essayer GitHub */
   if (ghHasToken()) {
     const remote = await ghLire(marcheId);
     if (remote.ok) {
       console.log('✅ Données lues depuis GitHub');
       return remote;
     }
-    console.warn('⚠️ GitHub inaccessible, utilisation localStorage:', remote.error);
+    console.warn('⚠️ GitHub inaccessible, fallback localStorage:', remote.error);
   }
 
-  /* 2. Fallback : localStorage */
   const local = localStorage.getItem('suivi_' + marcheId);
   if (local) {
     try {
@@ -178,7 +252,7 @@ async function ghLireAvecFallback(marcheId) {
   return { ok: false, error: 'Aucune donnée disponible' };
 }
 
-/* ─── Exposer les fonctions globalement ─── */
+/* ─── Exposer globalement ─── */
 window.ghGetToken = ghGetToken;
 window.ghSaveToken = ghSaveToken;
 window.ghClearToken = ghClearToken;
@@ -188,4 +262,4 @@ window.ghLire = ghLire;
 window.ghEcrire = ghEcrire;
 window.ghLireAvecFallback = ghLireAvecFallback;
 
-console.log('🌐 github-api.js chargé');
+console.log('🌐 github-api.js chargé (v2 — anti-409)');
