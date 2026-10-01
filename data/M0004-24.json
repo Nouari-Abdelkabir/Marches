@@ -15,7 +15,48 @@
     "valideNom": "",
     "acceptePar": "",
     "accepteNom": "",
-    "accepteDate": "2026-10-01"
+    "accepteDate": "2026-10-01",
+    "signatures": {
+      "TR1": {
+        "fonction": "Foughali",
+        "nom": "",
+        "remplacant": "",
+        "enConge": false
+      },
+      "TR2": {
+        "fonction": "",
+        "nom": "",
+        "remplacant": "",
+        "enConge": false
+      },
+      "TR3": {
+        "fonction": "",
+        "nom": "",
+        "remplacant": "",
+        "enConge": false
+      },
+      "TR4": {
+        "fonction": "",
+        "nom": "",
+        "remplacant": "",
+        "enConge": false
+      }
+    },
+    "ingenieurs": {
+      "ing1": {
+        "fonction": "",
+        "nom": ""
+      },
+      "ing2": {
+        "fonction": "",
+        "nom": ""
+      }
+    },
+    "entreprise": {
+      "texte": "",
+      "nom": "",
+      "date": ""
+    }
   },
   "catalogue": [
     {
@@ -7511,7 +7552,14 @@
       ]
     }
   ],
-  "historique": [],
+  "historique": [
+    {
+      "id": "mupofdce8nnuq",
+      "date": "2026-10-01T15:16:02.510Z",
+      "action": "MODIFICATION PARAMÈTRES",
+      "details": "Mise à jour des paramètres et signatures"
+    }
+  ],
   "metresEnregistres": [
     {
       "id": "m_mumocmb0g2m1d",
@@ -9458,29 +9506,74 @@
   },
   "metres": {
     "TR1": {
-      "date": "2026-10-31",
-      "entrees": {},
+      "date": "2026-09-30",
+      "entrees": {
+        "mumjpuzbouji8|mumjpuz39qqjs": {
+          "1": 20,
+          "11": 20
+        },
+        "mumjpuzbouji8|mumjpuz5pb9pw": {
+          "1": 20,
+          "5": 2,
+          "11": 20
+        },
+        "mumjpuzbouji8|mumjpuz4dd7ei": {
+          "1": 20
+        },
+        "mumjpuzbouji8|mumjpuz5vrc58": {
+          "1": 20
+        },
+        "mumjpuzbouji8|mumjpuz4j0dil": {
+          "1": 20
+        },
+        "mumjpuzbouji8|mumjpuz3ai5ih": {
+          "18": 60
+        }
+      },
       "sinistres": {},
       "fax": {},
       "prestations": {}
     },
     "TR2": {
-      "date": "2026-10-31",
+      "date": "2026-09-30",
       "entrees": {},
       "sinistres": {},
       "fax": {},
       "prestations": {}
     },
     "TR3": {
-      "date": "2026-10-31",
-      "entrees": {},
+      "date": "2026-09-30",
+      "entrees": {
+        "mumjpuzbouji8|mumjpuz6enhzh": {
+          "1": 20,
+          "5": 2,
+          "6": 5,
+          "7": 5,
+          "11": 20
+        },
+        "mumjpuzbouji8|mumjpuz72483u": {
+          "1": 200,
+          "11": 200
+        },
+        "mumjpuzbouji8|mumjpuz6gusx0": {
+          "1": 20,
+          "5": 2,
+          "6": 5,
+          "11": 24
+        }
+      },
       "sinistres": {},
       "fax": {},
       "prestations": {}
     },
     "TR4": {
-      "date": "2026-10-31",
-      "entrees": {},
+      "date": "2026-09-30",
+      "entrees": {
+        "mumjpuzbouji8|mumjpuz8yhqwc": {},
+        "mumjpuzbouji8|mumjpuz73pxed": {
+          "205": 250
+        }
+      },
       "sinistres": {},
       "fax": {},
       "prestations": {}
