@@ -61,13 +61,10 @@ async function ghLire(marcheId) {
   const url = `https://api.github.com/repos/${GH_CONFIG.owner}/${GH_CONFIG.repo}/contents/data/${marcheId}.json?ref=${GH_CONFIG.branch}&t=${Date.now()}`;
 
   try {
-    const headers = {
-      'Accept': 'application/vnd.github.v3+json',
-      'Cache-Control': 'no-cache'
-    };
+    const headers = { 'Accept': 'application/vnd.github.v3+json' };
     if (token) headers['Authorization'] = 'Bearer ' + token;
 
-    const r = await fetch(url, { headers, cache: 'no-store' });
+    const r = await fetch(url, { headers });
 
     if (r.status === 404) {
       return { ok: false, error: 'Fichier non trouvé', status: 404 };
@@ -161,12 +158,10 @@ async function ghEcrireDirect(marcheId, data, commitMessage) {
   try {
     /* ─── A. Lire SHA FRAIS juste avant PUT (avec anti-cache) ─── */
     const getResp = await fetch(url + '?t=' + Date.now(), {
-      headers: {
+    headers: {
         'Authorization': 'Bearer ' + token,
-        'Accept': 'application/vnd.github.v3+json',
-        'Cache-Control': 'no-cache'
-      },
-      cache: 'no-store'
+        'Accept': 'application/vnd.github.v3+json'
+    }
     });
 
     let sha = null;

@@ -18,6 +18,7 @@ var currentMoisMetre   = new Date().toISOString().slice(0,7);
 var currentMoisConstat = new Date().toISOString().slice(0,7);
 var currentDashDebut   = new Date().toISOString().slice(0,7);
 var currentDashFin     = new Date().toISOString().slice(0,7);
+var editingState = { cmdId: null, ligneId: null, buffer: null };
 
 console.log('🔑 Marché actif :', ID_MARCHE);
 console.log('🔑 Clé localStorage :', CLE_STORAGE);
