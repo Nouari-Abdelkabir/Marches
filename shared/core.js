@@ -7236,15 +7236,14 @@ if (headerNom && window.MARCHE_NOM) {
 (async function initApp() {
   console.log('🚀 Démarrage de l\'application...');
 
-  /* 1. Charger les données (async — peut venir de GitHub) */
   try {
     DATA = await chargerDonneesAsync();
   } catch (e) {
     console.error('❌ Erreur chargement:', e);
-    DATA = chargerDonnees(); /* fallback synchrone */
+    console.warn('⚠️ Utilisation des données par défaut');
   }
 
-  /* 2. Initialiser la période */
+  /* Période */
   const y = new Date().getFullYear();
   if (!currentDashDebut) currentDashDebut = `${y}-01`;
   if (!currentDashFin) currentDashFin = `${y}-12`;
@@ -7257,17 +7256,14 @@ if (headerNom && window.MARCHE_NOM) {
   if (typeof currentEtatDebut !== 'undefined' && !currentEtatDebut) currentEtatDebut = new Date().toISOString().slice(0,7);
   if (typeof currentEtatFin !== 'undefined' && !currentEtatFin) currentEtatFin = new Date().toISOString().slice(0,7);
 
-  /* 3. Date d'import */
   const importDateEl = document.getElementById('import-date');
   if (importDateEl) importDateEl.valueAsDate = new Date();
 
-  /* 4. Nom du marché dans le header */
   const headerNom = document.getElementById('header-marche-nom');
   if (headerNom && window.MARCHE_NOM) {
     headerNom.textContent = ID_MARCHE + ' — ' + window.MARCHE_NOM;
   }
 
-  /* 5. Rendus */
   const tasks = [
     ['Dashboard',             () => rendreDashboard()],
     ['Formulaire paramètres', () => chargerFormParametres()],
@@ -7285,19 +7281,9 @@ if (headerNom && window.MARCHE_NOM) {
     catch(e) { console.error(`❌ Init ${nom} :`, e); }
   });
 
-  console.log('✅ Application prête —', ID_MARCHE);
+  console.log('✅ Prête —', ID_MARCHE);
   console.log('   • Commandes:', DATA.commandes.length);
   console.log('   • Catalogue:', DATA.catalogue.length);
   console.log('   • Metrés:', DATA.metresEnregistres.length);
   console.log('   • PAT configuré:', ghHasToken ? ghHasToken() : false);
 })();
-
-initTasks.forEach(([nom, fn]) => {
-  try { fn(); }
-  catch(e) { console.error(`❌ Init ${nom} échouée :`, e); }
-});
-
-console.log('🚀 Application prête —', ID_MARCHE);
-console.log('   • Commandes :', DATA.commandes.length);
-console.log('   • Catalogue :', DATA.catalogue.length);
-console.log('   • Metrés :', DATA.metresEnregistres.length);
