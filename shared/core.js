@@ -380,34 +380,45 @@ function initStructureMarche(m) {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   💾 SAUVEGARDE — localStorage + GitHub (async)
+   💾 SAUVEGARDE avec DEBOUNCE (évite les appels multiples)
    ═══════════════════════════════════════════════════════════ */
+let _saveDebounceTimer = null;
+
 async function sauvegarderDonnees(silencieux = false) {
-  /* 1. Toujours sauvegarder dans localStorage (rapide, local) */
+  /* 1. localStorage immédiat */
   try {
     localStorage.setItem(CLE_STORAGE, JSON.stringify(DATA));
   } catch (e) {
     console.error('❌ localStorage:', e);
-    notifier('❌ Mémoire locale pleine', 'danger');
+    if (!silencieux) notifier('❌ Mémoire locale pleine', 'danger');
     return;
   }
 
-  /* 2. Sync vers GitHub si PAT disponible */
-  if (typeof ghHasToken === 'function' && ghHasToken()) {
-    try {
-      const result = await ghEcrire(ID_MARCHE, DATA, `Update ${ID_MARCHE} — ${new Date().toISOString().slice(0,16)}`);
-      if (result.ok) {
-        if (!silencieux) notifier('☁️ Synchronisé avec GitHub', 'success');
-      } else {
-        console.warn('⚠️ GitHub échoué:', result.error);
-        if (!silencieux) notifier('⚠️ Local sauvegardé, GitHub échoué', 'danger');
+  /* 2. Debounce : annuler le timer précédent */
+  if (_saveDebounceTimer) clearTimeout(_saveDebounceTimer);
+
+  _saveDebounceTimer = setTimeout(async () => {
+    /* 3. Sync vers GitHub si PAT disponible */
+    if (typeof ghHasToken === 'function' && ghHasToken()) {
+      try {
+        const result = await ghEcrire(
+          ID_MARCHE,
+          DATA,
+          `Update ${ID_MARCHE} — ${new Date().toISOString().slice(0,16)}`
+        );
+        if (result.ok) {
+          if (!silencieux && !result.queued) notifier('☁️ Synchronisé avec GitHub', 'success');
+        } else {
+          console.warn('⚠️ GitHub échoué:', result.error);
+          if (!silencieux) notifier('⚠️ Local OK, GitHub échoué', 'danger');
+        }
+      } catch (e) {
+        console.warn('⚠️ GitHub exception:', e.message);
       }
-    } catch (e) {
-      console.warn('⚠️ GitHub exception:', e.message);
+    } else {
+      if (!silencieux) notifier('💾 Sauvegardé localement', 'success');
     }
-  } else {
-    if (!silencieux) notifier('💾 Sauvegardé localement', 'success');
-  }
+  }, 1000);  /* 1 seconde après le dernier appel */
 }
 
 function logHistorique(action, details) {
