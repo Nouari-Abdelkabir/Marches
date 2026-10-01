@@ -8,6 +8,16 @@
    ═══════════════════════════════════════════════════════════ */
 const ID_MARCHE = (document.body.dataset.marche || window.MARCHE_ID || 'M0004-24').trim();
 const CLE_STORAGE = 'suivi_' + ID_MARCHE;
+/* ═══════════════════════════════════════════════════════════
+   📅 ÉTAT GLOBAL — Périodes et TR actifs
+   (déclarations indispensables pour éviter ReferenceError)
+   ═══════════════════════════════════════════════════════════ */
+var currentMetreTR     = 'TR1';
+var currentConstatTR   = 'TR1';
+var currentMoisMetre   = new Date().toISOString().slice(0,7);
+var currentMoisConstat = new Date().toISOString().slice(0,7);
+var currentDashDebut   = new Date().toISOString().slice(0,7);
+var currentDashFin     = new Date().toISOString().slice(0,7);
 
 console.log('🔑 Marché actif :', ID_MARCHE);
 console.log('🔑 Clé localStorage :', CLE_STORAGE);
