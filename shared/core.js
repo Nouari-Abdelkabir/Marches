@@ -9,6 +9,25 @@
 const ID_MARCHE = (document.body.dataset.marche || window.MARCHE_ID || 'M0004-24').trim();
 const CLE_STORAGE = 'suivi_' + ID_MARCHE;
 /* ═══════════════════════════════════════════════════════════
+   🎯 SECTIONS PAR DÉFAUT (toutes activées)
+   Chaque marché peut désactiver des sections dans son config.js
+   ═══════════════════════════════════════════════════════════ */
+const MARCHE_SECTIONS_DEFAUT = {
+  dashboard:    true,
+  parametres:   true,
+  catalogue:    true,
+  commandes:    true,
+  metre:        true,
+  constat:      true,
+  attachement:  false,   /* Section à construire */
+  decomptes:    false,   /* Section à construire */
+  suivi:        true,
+  sinistres:    true,
+  equipements:  true,
+  historique:   true,
+  export:       true
+};
+/* ═══════════════════════════════════════════════════════════
    📅 ÉTAT GLOBAL — Périodes et TR actifs
    (déclarations indispensables pour éviter ReferenceError)
    ═══════════════════════════════════════════════════════════ */
@@ -7302,6 +7321,8 @@ if (headerNom && window.MARCHE_NOM) {
     try { fn(); }
     catch(e) { console.error(`❌ Init ${nom} :`, e); }
   });
+ /* ═══ Appliquer les sections visibles du marché ═══ */
+  appliquerSectionsVisibles();
 
   console.log('✅ Prête —', ID_MARCHE);
   console.log('   • Commandes:', DATA.commandes.length);
@@ -7309,3 +7330,30 @@ if (headerNom && window.MARCHE_NOM) {
   console.log('   • Metrés:', DATA.metresEnregistres.length);
   console.log('   • PAT configuré:', ghHasToken ? ghHasToken() : false);
 })();
+
+
+/* ═══════════════════════════════════════════════════════════
+   🎨 Appliquer les sections visibles selon le marché
+   ═══════════════════════════════════════════════════════════ */
+function appliquerSectionsVisibles() {
+  /* Utiliser les sections du config.js ou les défauts */
+  const sections = window.MARCHE_SECTIONS || MARCHE_SECTIONS_DEFAUT;
+
+  console.log('🎨 Sections visibles:', sections);
+
+  /* Cacher/montrer les tabs selon la config */
+  document.querySelectorAll('.tabs .tab').forEach(tab => {
+    const key = tab.dataset.tab;
+    if (key in sections) {
+      tab.style.display = sections[key] ? '' : 'none';
+      if (!sections[key]) console.log('  ⛔ Caché:', key);
+    }
+  });
+
+  /* Si l'onglet actif est caché → basculer vers Dashboard */
+  const actif = document.querySelector('.tabs .tab.active');
+  if (actif && actif.style.display === 'none') {
+    const dash = document.querySelector('.tabs .tab[data-tab="dashboard"]');
+    if (dash) dash.click();
+  }
+}
