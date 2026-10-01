@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suivi Commandes - Marché M0004/24</title>
+  <link rel="stylesheet" href="../shared/core.css">
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+
+ <!-- ═══ HEADER FIXE ═══ -->
+  <header class="app-header">
+    <div class="header-brand">
+      <a href="../" class="btn-home" title="Retour à l'accueil">
+        🏠 Accueil
+      </a>
+      <img src="../image/adm.jpg" alt="ADM" class="header-logo" onerror="this.style.display='none'">
+      <div>
+        <h1>Suivi des Commandes & Constats ADM</h1>
+        <small style="color:#c7d2fe;font-size:11px;font-weight:600;display:block;margin-top:-2px;">
+          <span id="header-marche-nom">M0004/24</span>
+        </small>
+      </div>
+    </div>
+    <div class="header-actions-wrap">
+      <button class="btn-settings" id="btn-settings-menu" onclick="toggleSettingsMenu(event)" title="Paramètres">⚙️</button>
+      <div class="settings-dropdown" id="settings-dropdown">
+        <button id="btn-sauvegarder">💾 Sauvegarder</button>
+        <button id="btn-export-json">💾 Export JSON</button>
+        <button id="btn-import-json">📥 Import JSON</button>
+        <input type="file" id="file-json" accept=".json" hidden>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ LAYOUT : SIDEBAR + CONTENU ═══ -->
+  <div class="app-layout">
+
+    
+
+    <!-- CONTENU PRINCIPAL -->
+  <main class="content">
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="dashboard">🏠 Tableau de bord</button>
+    <button class="tab" data-tab="parametres">⚙️ Paramètres</button>
+    <button class="tab" data-tab="catalogue">📚 Catalogue (DE)</button>
+    <button class="tab" data-tab="commandes">📝 Commandes</button>
+    <button class="tab" data-tab="metre">📑 Metré</button>
+    <button class="tab" data-tab="constat">📑 Constat</button>
+    <button class="tab" data-tab="attachement">📄 Attachement</button>
+    <button class="tab" data-tab="decomptes">💰 Décomptes</button>
+    <button class="tab" data-tab="suivi">💰 Suivi des Prix</button>
+    <button class="tab" data-tab="sinistres">🚨 Suivi des Sinistres</button>
+    <button class="tab" data-tab="equipements">🏗️ Equipements</button>
+    <button class="tab" data-tab="historique">🕒 Historique</button>
+    <button class="tab" data-tab="export">📤 Export</button>
+  </nav>
+
+  <div class="container">
+
+    <!-- DASHBOARD -->
+    <section class="tab-content active" id="tab-dashboard">
+      <!-- Toolbar : Sélecteur de période -->
+      <div class="panel" style="margin-bottom:16px;">
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+          <label style="font-weight:700;color:#1e3a8a;">📅 Du :</label>
+          <span id="dash-picker-debut"></span>
+          <label style="font-weight:700;color:#1e3a8a;">Au :</label>
+          <span id="dash-picker-fin"></span>
+          <span id="dash-periode-label" style="font-weight:700;color:#16a34a;padding:6px 14px;background:#dcfce7;border-radius:12px;"></span>
+          <button class="btn btn-primary btn-sm" onclick="changerPeriodeDashboard()" style="margin-left:auto;">🔄 Appliquer</button>
+        </div>
+      </div>
+
+      <!-- CARTES FINANCES (5) -->
+      <div class="dash-grid">
+        <div class="dash-card" style="border-left-color:#16a34a;">
+          <div class="dash-icon">💰</div>
+          <div class="dash-label">Budget total du marché</div>
+          <div class="dash-value" id="dash-budget-marche">0</div>
+          <div class="dash-unit">DH (DE)</div>
+        </div>
+        <div class="dash-card" style="border-left-color:#2563eb;">
+          <div class="dash-icon">💸</div>
+          <div class="dash-label">Montant Metrés</div>
+          <div class="dash-value" id="dash-montant-metres">0</div>
+          <div class="dash-unit">DH</div>
+        </div>
+        <div class="dash-card" style="border-left-color:#dc2626;">
+          <div class="dash-icon">🧾</div>
+          <div class="dash-label">Montant Factures</div>
+          <div class="dash-value" id="dash-montant-factures">0</div>
+          <div class="dash-unit">DH TTC</div>
+        </div>
+        <div class="dash-card" style="border-left-color:#7c3aed;">
+          <div class="dash-icon">💵</div>
+          <div class="dash-label">TVA cumulée</div>
+          <div class="dash-value" id="dash-tva">0</div>
+          <div class="dash-unit">DH</div>
+        </div>
+        <div class="dash-card" style="border-left-color:#ea580c;">
+          <div class="dash-icon">📊</div>
+          <div class="dash-label">Taux consommation</div>
+          <div class="dash-value" id="dash-taux">0%</div>
+          <div class="dash-unit">Metré / Budget marché</div>
+        </div>
+      </div>
+
+      <!-- CARTES ACTIVITÉ (5) -->
+      <div class="dash-grid">
+        <div class="dash-card" style="border-left-color:#0891b2;">
+          <div class="dash-icon">📝</div>
+          <div class="dash-label">Commandes</div>
+          <div class="dash-value" id="dash-nb-commandes">0</div>
+          <div class="dash-unit">importées</div>
+        </div>
+        <div class="dash-card" style="border-left-color:#3b82f6;">
+          <div class="dash-icon">📑</div>
+          <div class="dash-label">Metrés</div>
+          <div class="dash-value" id="dash-nb-metres">0</div>
+          <div class="dash-unit">enregistrés</div>
+        </div>
+        <div class="dash-card" style="border-left-color:#f59e0b;">
+          <div class="dash-icon">📋</div>
+          <div class="dash-label">Constats</div>
+          <div class="dash-value" id="dash-nb-constats">0</div>
+          <div class="dash-unit">enregistrés</div>
+        </div>
+        <div class="dash-card" style="border-left-color:#b91c1c;">
+          <div class="dash-icon">🚨</div>
+          <div class="dash-label">Sinistres</div>
+          <div class="dash-value" id="dash-nb-sinistres">0</div>
+          <div class="dash-unit">détectés</div>
+        </div>
+        <div class="dash-card" style="border-left-color:#059669;">
+          <div class="dash-icon">🧾</div>
+          <div class="dash-label">Factures payées</div>
+          <div class="dash-value" id="dash-nb-factures">0</div>
+          <div class="dash-unit">enregistrées</div>
+        </div>
+      </div>
+
+      <!-- RÉPARTITION PAR TRONÇON -->
+      <div class="panel">
+        <h2>📊 Répartition par Tronçon (période sélectionnée)</h2>
+        <div id="dashboard-tr-cards" class="tr-cards-grid"></div>
+      </div>
+    </section>
+
+   <!-- PARAMÈTRES -->
+    <section class="tab-content" id="tab-parametres">
+      <div class="panel">
+        <div class="params-header">
+          <h2>⚙️ Paramètres du projet</h2>
+          <p class="hint">Ces informations sont utilisées dans l'en-tête et le pied de page des documents exportés.</p>
+        </div>
+
+        <!-- ═══ Layout 3 colonnes : Info | Bouton | Signatures ═══ -->
+        <div class="params-layout">
+
+          <!-- ═══ GAUCHE : Informations générales ═══ -->
+          <div class="params-section params-col-left">
+            <h3 class="params-section-title">🏢 Informations générales</h3>
+
+            <div class="params-grid-1col">
+              <div class="params-row">
+                <label>Maître d'ouvrage</label>
+                <input type="text" id="param-mo">
+              </div>
+
+              <div class="params-row">
+                <label>Maître d'œuvre</label>
+                <input type="text" id="param-moe">
+              </div>
+
+              <div class="params-row">
+                <label>Prestataire</label>
+                <input type="text" id="param-prestataire">
+              </div>
+
+              <div class="params-row">
+                <label>Marché N°</label>
+                <input type="text" id="param-marche">
+              </div>
+
+              <div class="params-row">
+                <label>Section</label>
+                <input type="text" id="param-section">
+              </div>
+
+              <div class="params-row">
+                <label>Objet</label>
+                <input type="text" id="param-objet">
+              </div>
+
+              <div class="params-row">
+                <label>Date de début</label>
+                <input type="date" id="param-date-debut">
+              </div>
+
+              <div class="params-row">
+                <label>Date de fin</label>
+                <input type="date" id="param-date-fin">
+              </div>
+            </div>
+          </div>
+
+          <!-- ═══ MILIEU : Bouton Enregistrer ═══ -->
+          <div class="params-col-middle">
+            <button class="btn btn-primary btn-save-vertical" id="btn-save-parametres">
+              <span class="save-icon">💾</span>
+              <span class="save-text">Enregistrer<br>les paramètres</span>
+            </button>
+          </div>
+
+          <!-- ═══ DROITE : Signatures ═══ -->
+          <!-- ═══ Section 2 : Signatures par TR ═══ -->
+<div class="params-section">
+  <h3 class="params-section-title">🖋️ Signatures par Tronçon</h3>
+  <p class="hint" style="margin-bottom:14px;">
+    Chaque <strong>technicien</strong> a son tronçon. En cas de congé, activez le remplaçant.
+    Les <strong>ingénieurs</strong> couvrent : <b>Ing. 1</b> → TR1+TR2, <b>Ing. 2</b> → TR3+TR4.
+  </p>
+
+  <!-- Tableau techniciens -->
+  <div class="sig-table-wrap">
+    <table class="sig-table">
+      <thead>
+        <tr>
+          <th style="width:200px;">Rôle</th>
+          <th>TR1</th>
+          <th>TR2</th>
+          <th>TR3</th>
+          <th>TR4</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Fonctions techniciens -->
+        <tr>
+          <td class="sig-row-label">👷 Fonction (Dressé par)</td>
+          <td><input type="text" id="sig-tech-fct-TR1" placeholder="Adjoint Viabilité"></td>
+          <td><input type="text" id="sig-tech-fct-TR2" placeholder="Adjoint Viabilité"></td>
+          <td><input type="text" id="sig-tech-fct-TR3" placeholder="Adjoint Viabilité"></td>
+          <td><input type="text" id="sig-tech-fct-TR4" placeholder="Adjoint Viabilité"></td>
+        </tr>
+        <!-- Noms titulaires -->
+        <tr>
+          <td class="sig-row-label">👤 Nom du titulaire</td>
+          <td><input type="text" id="sig-tech-nom-TR1" placeholder="A. Nouari"></td>
+          <td><input type="text" id="sig-tech-nom-TR2" placeholder="M. Alami"></td>
+          <td><input type="text" id="sig-tech-nom-TR3" placeholder="Y. Idrissi"></td>
+          <td><input type="text" id="sig-tech-nom-TR4" placeholder="H. Bennani"></td>
+            </tr>
+            <!-- Noms remplaçants -->
+            <tr>
+            <td class="sig-row-label">🔄 Nom du remplaçant</td>
+            <td><input type="text" id="sig-tech-remp-TR1" placeholder="B. Tazi"></td>
+            <td><input type="text" id="sig-tech-remp-TR2" placeholder="K. Fassi"></td>
+            <td><input type="text" id="sig-tech-remp-TR3" placeholder="R. Saidi"></td>
+            <td><input type="text" id="sig-tech-remp-TR4" placeholder="N. Cherkaoui"></td>
+            </tr>
+            <!-- Toggle congé -->
+            <tr>
+            <td class="sig-row-label">🔘 Titulaire en congé ?</td>
+            <td style="text-align:center;">
+                <label class="switch">
+                <input type="checkbox" id="sig-tech-conge-TR1">
+                <span class="slider"></span>
+                </label>
+            </td>
+            <td style="text-align:center;">
+                <label class="switch">
+                <input type="checkbox" id="sig-tech-conge-TR2">
+                <span class="slider"></span>
+                </label>
+            </td>
+            <td style="text-align:center;">
+                <label class="switch">
+                <input type="checkbox" id="sig-tech-conge-TR3">
+                <span class="slider"></span>
+                </label>
+            </td>
+            <td style="text-align:center;">
+                <label class="switch">
+                <input type="checkbox" id="sig-tech-conge-TR4">
+                <span class="slider"></span>
+                </label>
+            </td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+
+    <!-- Ingénieurs -->
+    <div class="sig-eng-grid">
+        <div class="sig-eng-card" style="border-left-color:#2563eb;">
+        <h4>🎓 Ingénieur 1 (TR1 + TR2)</h4>
+        <div class="params-row">
+            <label>Fonction (Validé par)</label>
+            <input type="text" id="sig-ing1-fct" placeholder="Chef de division sécurité et entretien">
+        </div>
+        <div class="params-row">
+            <label>Nom</label>
+            <input type="text" id="sig-ing1-nom" placeholder="S. Mansouri">
+        </div>
+        </div>
+
+        <div class="sig-eng-card" style="border-left-color:#7c3aed;">
+        <h4>🎓 Ingénieur 2 (TR3 + TR4)</h4>
+        <div class="params-row">
+            <label>Fonction (Validé par)</label>
+            <input type="text" id="sig-ing2-fct" placeholder="Chef de division sécurité et entretien">
+        </div>
+        <div class="params-row">
+            <label>Nom</label>
+            <input type="text" id="sig-ing2-nom" placeholder="A. Kadiri">
+        </div>
+        </div>
+    </div>
+
+    <!-- Entreprise -->
+    <div class="sig-eng-card" style="border-left-color:#16a34a;margin-top:14px;">
+        <h4>🏢 Entreprise (Accepté par)</h4>
+        <div class="params-grid-2col">
+        <div class="params-row">
+            <label>Texte (Accepté par)</label>
+            <input type="text" id="sig-ent-txt" placeholder="Le représentant de l'entreprise">
+        </div>
+        <div class="params-row">
+            <label>Nom</label>
+            <input type="text" id="sig-ent-nom" placeholder="M. Bennani">
+        </div>
+        <div class="params-row">
+            <label>Date d'acceptation</label>
+            <input type="date" id="sig-ent-date">
+        </div>
+        </div>
+    </div>
+    </div>
+
+        </div>
+
+        <!-- ═══ Section Logo (pleine largeur en bas) ═══ -->
+        <div class="params-section params-logo-section">
+          <h3 class="params-section-title">🖼️ Logo du projet</h3>
+
+          <div class="params-logo-row">
+            <div class="params-logo-upload">
+              <label for="param-logo" class="btn btn-secondary" style="cursor:pointer;">
+                📁 Choisir un fichier
+              </label>
+              <input type="file" id="param-logo" accept="image/*" hidden>
+              <button type="button" class="btn btn-danger btn-sm" id="btn-supprimer-logo" style="display:none;">
+                🗑️ Supprimer
+              </button>
+            </div>
+            <div id="param-logo-preview" class="params-logo-preview"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CATALOGUE -->
+    <section class="tab-content" id="tab-catalogue">
+      <div class="panel">
+        <h2>📚 Catalogue de référence — DE.xlsx</h2>
+        <div class="import-zone">
+          <p>Importer le fichier <strong>DE.xlsx</strong>.</p>
+          <input type="file" id="file-de" accept=".xlsx,.xls" hidden>
+          <button class="btn btn-primary" onclick="document.getElementById('file-de').click()">
+            📥 Importer DE.xlsx
+          </button>
+          <span id="de-status" class="status"></span>
+        </div>
+        <div class="filter-bar">
+          <input type="text" id="filtre-catalogue" placeholder="🔍 Rechercher N° ou libellé...">
+        </div>
+        <div class="table-scroll-fill">
+          <table class="table">
+            <thead>
+              <tr>
+                <th style="width:60px;">N°</th>
+                <th>Libellé des prix</th>
+                <th style="width:70px;">Unité</th>
+                <th style="width:110px;">Qts INITIALES</th>
+                <th style="width:120px;">P.U (DH)</th>
+                <th style="width:140px;">P.T (DH)</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-catalogue"></tbody>
+            <tfoot id="tfoot-catalogue"></tfoot>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMANDES -->
+    <section class="tab-content" id="tab-commandes">
+      <div class="panel">
+        <h2>📥 Importer une commande depuis Excel</h2>
+        <div class="import-zone">
+          <p>Importer un fichier <strong>COMMANDE type.xlsx</strong>. Le nom doit être unique.</p>
+          <input type="file" id="file-commande" accept=".xlsx,.xls" hidden>
+          <label style="font-size:13px;">
+            Nom :
+            <input type="text" id="import-nom" placeholder="Ex: commande25" style="padding:5px;width:130px;">
+          </label>
+          <label style="font-size:13px;">
+            Date :
+            <input type="date" id="import-date" style="padding:5px;">
+          </label>
+          <button class="btn btn-primary" onclick="document.getElementById('file-commande').click()">
+            📥 Importer
+          </button>
+          <span id="commande-status" class="status"></span>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>📋 Gestion des commandes enregistrées</h2>
+        <div id="liste-commandes-accordion"></div>
+      </div>
+
+      <div class="panel">
+        <h2>📑 Toutes les lignes (toutes commandes confondues)</h2>
+        <div class="filter-bar">
+          <select id="filtre-troncon">
+            <option value="">Tous les tronçons</option>
+            <option value="TR1">TR1</option><option value="TR2">TR2</option>
+            <option value="TR3">TR3</option><option value="TR4">TR4</option>
+          </select>
+          <input type="text" id="filtre-recherche"
+                 placeholder="🔍 Rechercher : PK, désignation, observations, dates, N° commande...">
+          <button class="btn btn-primary" id="btn-generer-finale">👁️ Aperçu & Export</button>
+        </div>
+        <div style="max-height:600px;overflow-y:auto;">
+          <table class="table" style="font-size:12px;">
+            <thead>
+              <tr>
+                <th style="width:110px;">N° Commande</th>
+                <th style="width:70px;">Tronçon</th>
+                <th style="width:90px;">PK</th>
+                <th style="width:60px;">Sens</th>
+                <th style="width:70px;">Côté</th>
+                <th>Désignation</th>
+                <th style="width:180px;">Observations</th>
+                <th style="width:60px;">Qté</th>
+                <th style="width:110px;">Type</th>
+                <th style="width:90px;">Changer</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-liste-commandes"></tbody>
+            <tfoot id="tfoot-liste-commandes"></tfoot>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- METRÉ -->
+    <section class="tab-content" id="tab-metre">
+      <div class="sub-tabs" id="subtabs-metre">
+        <button class="sub-tab active" data-subtab="metre-TR1" onclick="switchMetre('TR1')">📑 Metré TR1</button>
+        <button class="sub-tab" data-subtab="metre-TR2" onclick="switchMetre('TR2')">📑 Metré TR2</button>
+        <button class="sub-tab" data-subtab="metre-TR3" onclick="switchMetre('TR3')">📑 Metré TR3</button>
+        <button class="sub-tab" data-subtab="metre-TR4" onclick="switchMetre('TR4')">📑 Metré TR4</button>
+        <input type="file" id="file-metre-import" accept=".xlsx,.xls" hidden>
+        <button class="btn btn-primary btn-sm" onclick="document.getElementById('file-metre-import').click()" style="margin-left:auto;">
+            📥 Importer Excel
+        </button>
+    </div>
+      
+       
+      <div id="metre-content"></div>
+
+      <!-- ⬇️ Gestion des Metrés enregistrés -->
+      <div class="panel" style="margin-top:20px;">
+        <h2>📋 Gestion des Metrés enregistrés</h2>
+        <div class="filter-bar">
+          <select id="filtre-metre-troncon" onchange="rendreMetresEnregistres()">
+            <option value="">Tous les tronçons</option>
+            <option value="TR1">TR1</option><option value="TR2">TR2</option>
+            <option value="TR3">TR3</option><option value="TR4">TR4</option>
+          </select>
+          <input type="text" id="filtre-metre-recherche"
+                 placeholder="🔍 Rechercher (N°, date, tronçon...)"
+                 oninput="rendreMetresEnregistres()">
+        </div>
+        <div id="liste-metres-accordion"></div>
+      </div>
+    </section>
+
+    <!-- CONSTAT -->
+    <section class="tab-content" id="tab-constat">
+      <div class="sub-tabs" id="subtabs-constat">
+        <button class="sub-tab active" data-subtab="constat-TR1" onclick="switchConstat('TR1')">📑 Constat TR1</button>
+        <button class="sub-tab" data-subtab="constat-TR2" onclick="switchConstat('TR2')">📑 Constat TR2</button>
+        <button class="sub-tab" data-subtab="constat-TR3" onclick="switchConstat('TR3')">📑 Constat TR3</button>
+        <button class="sub-tab" data-subtab="constat-TR4" onclick="switchConstat('TR4')">📑 Constat TR4</button>
+        <button class="sub-tab" data-subtab="constat-CONS" onclick="switchConstat('CONS')">📑 Constat consolidé</button>
+        <input type="file" id="file-constat-import" accept=".xlsx,.xls" hidden>
+        <button class="btn btn-primary btn-sm" id="btn-import-constat" onclick="document.getElementById('file-constat-import').click()" style="margin-left:auto;">
+        📥 Importer Excel
+        </button>
+      </div>
+      
+     <div id="constat-content"></div>
+
+      <!-- ⬇️ Gestion des Constats enregistrés -->
+      <div class="panel" style="margin-top:20px;">
+        <h2>📋 Gestion des Constats enregistrés</h2>
+        <div class="filter-bar">
+          <select id="filtre-constat-troncon" onchange="rendreConstatsEnregistres()">
+            <option value="">Tous les tronçons</option>
+            <option value="TR1">TR1</option><option value="TR2">TR2</option>
+            <option value="TR3">TR3</option><option value="TR4">TR4</option>
+          </select>
+          <input type="text" id="filtre-constat-recherche"
+                 placeholder="🔍 Rechercher (N°, date, tronçon...)"
+                 oninput="rendreConstatsEnregistres()">
+        </div>
+        <div id="liste-constats-accordion"></div>
+      </div>
+    </section>
+
+    <!-- ATTACHEMENT (à construire) -->
+    <section class="tab-content" id="tab-attachement">
+      <div class="panel">
+        <h2>📄 Attachement</h2>
+        <p style="text-align:center;padding:40px;color:#94a3b8;">
+          🚧 Section en construction
+        </p>
+      </div>
+    </section>
+
+    <!-- DÉCOMPTES (à construire) -->
+    <section class="tab-content" id="tab-decomptes">
+      <div class="panel">
+        <h2>💰 Décomptes</h2>
+        <p style="text-align:center;padding:40px;color:#94a3b8;">
+          🚧 Section en construction
+        </p>
+      </div>
+    </section>
+
+    <!-- SUIVI DES PRIX -->
+    <section class="tab-content" id="tab-suivi">
+    <div id="suivi-content"></div>
+
+    <!-- ⬇️ Gestion des Suivis enregistrés -->
+    <div class="panel" style="margin-top:20px;">
+        <h2>📋 Gestion des Suivis des Prix enregistrés</h2>
+        <div class="filter-bar">
+      <button class="btn btn-primary btn-sm" onclick="ajouterSuiviManuel()">➕ Nouveau Suivi</button>
+      <select id="filtre-suivi-mois" onchange="rendreSuivisEnregistres()">
+            <option value="">Tous les mois</option>
+        </select>
+        <input type="text" id="filtre-suivi-recherche"
+                placeholder="🔍 Rechercher (N°, mois...)"
+                oninput="rendreSuivisEnregistres()">
+        </div>
+        <div id="liste-suivis-accordion"></div>
+    </div>
+    </section>
+    <!-- SUIVI DES SINISTRES -->
+    <section class="tab-content" id="tab-sinistres">
+        <!-- Sous-tabs -->
+        <div class="sub-tabs" id="subtabs-sinistres">
+            <button class="sub-tab active" data-subtab="sin-sinistres" onclick="switchSinistre('sin-sinistres')">🚨 Sinistres</button>
+            <button class="sub-tab" data-subtab="sin-photos" onclick="switchSinistre('sin-photos')">📷 Photos</button>
+            <button class="sub-tab" data-subtab="sin-gard" onclick="switchSinistre('sin-gard')">📄 Page de garde</button>
+            <button class="sub-tab" data-subtab="sin-etat" onclick="switchSinistre('sin-etat')">📋 État des sinistres</button>
+            <button class="sub-tab" data-subtab="sin-factures" onclick="switchSinistre('sin-factures')">🧾 Factures</button>
+        </div>
+
+        <!-- ═══ 1. SINISTRES (extraits des commandes) ═══ -->
+        <div id="sin-content-sinistres">
+            <div class="panel">
+            <h2>🚨 Liste des sinistres (extraite des commandes)</h2>
+            <div class="filter-bar">
+                <select id="sin-filtre-troncon" onchange="rendreSinistresListe()">
+                <option value="">Tous les tronçons</option>
+                <option value="TR1">TR1</option><option value="TR2">TR2</option>
+                <option value="TR3">TR3</option><option value="TR4">TR4</option>
+                </select>
+                <input type="text" id="sin-filtre-recherche"
+                    placeholder="🔍 Rechercher (PK, sens, observations, date...)"
+                    oninput="rendreSinistresListe()">
+                <button class="btn btn-secondary btn-sm" onclick="exportSinistresExcel()">📥 Excel</button>
+                <span id="sin-count" style="margin-left:auto;font-weight:600;color:#1e3a8a;"></span>
+            </div>
+            <div style="max-height:600px;overflow:auto;">
+                <table class="table" style="font-size:12px;">
+                <thead>
+                    <tr>
+                        <th style="width:70px;">Tronçon</th>
+                        <th style="width:90px;">PK</th>
+                        <th style="width:60px;">Sens</th>
+                        <th style="width:70px;">Côté</th>
+                        <th>Dégats infrastructure</th>
+                        <th style="width:100px;">Date du sinistre</th>
+                        <th style="width:80px;">Commande</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-sinistres"></tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+
+        <!-- ═══ 2. PHOTOS ═══ -->
+        <div id="sin-content-photos" style="display:none;">
+            <div class="panel">
+            <h2>📷 Photos des sinistres</h2>
+            <div class="filter-bar">
+                <input type="file" id="photos-folder-input" webkitdirectory directory multiple accept="image/*" hidden>
+                <button class="btn btn-primary" onclick="document.getElementById('photos-folder-input').click()">
+                📁 Charger le dossier "photo"
+                </button>
+                <button class="btn btn-secondary" onclick="viderPhotos()">🗑️ Vider les photos</button>
+                <span id="photos-count" style="font-weight:600;color:#1e3a8a;"></span>
+            </div>
+            <p class="hint">
+                ℹ️ Nommez vos fichiers : <strong>PK Sens Numéro.jpg</strong> (ex: <code>240800 AM1.jpg</code>, <code>240800 AM2.jpg</code>)
+            </p>
+            <div class="filter-bar" style="background:#f0f9ff;padding:12px;border-radius:8px;">
+                <label style="font-weight:700;color:#1e3a8a;">📅 Date du sinistre :</label>
+                <select id="photos-select-date" onchange="majSelectPkPhotos()"
+                        style="min-width:200px;padding:6px 10px;border-radius:6px;border:1px solid #cbd5e1;font-weight:600;">
+                <option value="">— Sélectionner une date —</option>
+                </select>
+                <label style="font-weight:700;color:#1e3a8a;">📍 PK :</label>
+                <select id="photos-select-pk" onchange="rendrePhotos()"
+                        style="min-width:220px;padding:6px 10px;border-radius:6px;border:1px solid #cbd5e1;font-weight:600;">
+                <option value="">— Sélectionner un PK —</option>
+                </select>
+            </div>
+            <div id="photos-grid"></div>
+            </div>
+        </div>
+
+        <!-- ═══ 3. PAGE DE GARDE ═══ -->
+        <div id="sin-content-gard" style="display:none;">
+            <div class="panel">
+            <h2>📄 Page de garde du sinistre</h2>
+            <div class="filter-bar">
+                <label style="font-weight:600;">🔍 Choisir un sinistre :</label>
+                <select id="gard-select-pk" onchange="rendrePageDeGarde()" style="min-width:400px;padding:6px;">
+                <option value="">— Sélectionner PK / Sens —</option>
+                </select>
+                <button class="btn btn-primary btn-sm" onclick="apercuPageDeGarde()">🖨️ Aperçu & Imprimer / PDF</button>
+            </div>
+            <div id="gard-content" class="page-garde"></div>
+            </div>
+        </div>
+
+        <!-- ═══ 4. ÉTAT DES SINISTRES ═══ -->
+        <div id="sin-content-etat" style="display:none;">
+            <div id="etat-sinistres-content"></div>
+            <div class="panel" style="margin-top:20px;">
+            <h2>📋 Gestion des États enregistrés</h2>
+            <div class="filter-bar">
+                <select id="filtre-etat-mois" onchange="rendreEtatsSinistresEnregistres()">
+                <option value="">Tous les mois</option>
+                </select>
+            </div>
+            <div id="liste-etats-accordion"></div>
+            </div>
+        </div>
+        <!-- ═══ 5. FACTURES ═══ -->
+        <div id="sin-content-factures" style="display:none;">
+            <div id="factures-content"></div>
+                <div class="panel" style="margin-top:20px;">
+                    <h2>📋 Gestion des Factures enregistrées</h2>
+                        <div class="filter-bar">
+                        <input type="text" id="filtre-facture-recherche"
+                                placeholder="🔍 Rechercher (N° facture, PK...)"
+                                oninput="rendreFacturesEnregistrees()">
+                        </div>
+                <div id="liste-factures-accordion"></div>
+            </div>
+        </div>
+    </section>
+    <!-- ÉQUIPEMENTS -->
+    <section class="tab-content" id="tab-equipements">
+            <div id="equipements-content"></div>
+            <div class="panel" style="margin-top:20px;">
+                <h2>📋 Gestion des Équipements enregistrés</h2>
+                <div class="filter-bar">
+                <select id="filtre-equip-mois" onchange="rendreEquipementsEnregistres()">
+                    <option value="">Tous les mois</option>
+                </select>
+                <input type="text" id="filtre-equip-recherche"
+                        placeholder="🔍 Rechercher (N°, mois...)"
+                        oninput="rendreEquipementsEnregistres()">
+                </div>
+                <div id="liste-equipements-accordion"></div>
+            </div>
+    </section>
+        
+
+    <!-- HISTORIQUE -->
+    <section class="tab-content" id="tab-historique">
+      <div class="panel">
+        <h2>🕒 Historique des modifications</h2>
+        <div class="filter-bar">
+          <button class="btn btn-danger btn-sm" id="btn-vider-historique">🗑️ Vider l'historique</button>
+        </div>
+        <table class="table">
+          <thead><tr>
+            <th style="width:180px;">Date & heure</th>
+            <th style="width:200px;">Action</th>
+            <th>Détails</th>
+          </tr></thead>
+          <tbody id="tbody-historique"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- EXPORT -->
+    <!-- EXPORT -->
+    <section class="tab-content" id="tab-export">
+    <div class="panel">
+        <h2>📤 Centre d'Export & Impression</h2>
+        <p class="hint">
+        📌 Sélectionnez une <strong>période</strong> et un <strong>tronçon</strong>, puis cliquez sur
+        <strong>👁️ Aperçu & Export</strong> dans la carte souhaitée.
+        </p>
+
+        <!-- Filtres globaux -->
+        <div class="export-filters-bar">
+        <div class="export-filter-item">
+            <label>📅 Du :</label>
+            <span id="export-picker-debut"></span>
+        </div>
+        <div class="export-filter-item">
+            <label>Au :</label>
+            <span id="export-picker-fin"></span>
+        </div>
+        <div class="export-filter-item">
+            <label>🛣️ Tronçon :</label>
+            <select id="export-filter-troncon">
+            <option value="">Tous</option>
+            <option value="TR1">TR1</option>
+            <option value="TR2">TR2</option>
+            <option value="TR3">TR3</option>
+            <option value="TR4">TR4</option>
+            </select>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="appliquerFiltresExport()">
+            🔄 Appliquer
+        </button>
+        </div>
+
+        <!-- Cartes d'export -->
+        <div class="export-grid-center" id="export-grid-center"></div>
+    </div>
+    </section>
+
+  </div>  <!-- /container -->
+
+    </main>  <!-- /content -->
+ </div>  <!-- /app-layout -->
+
+  <div class="modal" id="modal-apercu">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 id="apercu-titre">Aperçu</h2>
+        <div id="modal-actions">
+          <button class="btn btn-primary" id="btn-imprimer">🖨️ Imprimer / PDF</button>
+          <button class="btn btn-ghost" id="btn-fermer-apercu">✖ Fermer</button>
+        </div>
+      </div>
+      <div class="modal-body" id="apercu-body"></div>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="../shared/github-api.js"></script>   <!-- 🆕 -->
+  <script src="../shared/core.js"></script>
+  <script src="custom.js"></script>
+</body>
+</html>
