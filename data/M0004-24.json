@@ -45,7 +45,7 @@
     "ingenieurs": {
       "ing1": {
         "fonction": "Chef de division sécurité et entretien",
-        "nom": "Adallal qq"
+        "nom": "Adallal"
       },
       "ing2": {
         "fonction": "Chef de division sécurité et entretien",
@@ -7553,6 +7553,12 @@
     }
   ],
   "historique": [
+    {
+      "id": "mups6ae88pcgv",
+      "date": "2026-10-01T17:00:57.248Z",
+      "action": "MODIFICATION PARAMÈTRES",
+      "details": "Mise à jour des paramètres et signatures"
+    },
     {
       "id": "mups4lwr0s0z6",
       "date": "2026-10-01T16:59:38.859Z",
