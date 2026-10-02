@@ -91,5 +91,25 @@
       "observations": {},
       "quantitesMois": {}
     }
+  },
+  "config": {
+    "id": "M0007-25",
+    "nom": "Assistance au usager",
+    "couleur": "#7c3aed",
+    "sections": {
+      "dashboard": true,
+      "parametres": true,
+      "catalogue": true,
+      "commandes": true,
+      "metre": true,
+      "constat": true,
+      "attachement": false,
+      "decomptes": false,
+      "suivi": true,
+      "sinistres": true,
+      "equipements": true,
+      "historique": true,
+      "export": true
+    }
   }
 }
