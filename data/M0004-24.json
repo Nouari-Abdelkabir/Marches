@@ -7554,6 +7554,12 @@
   ],
   "historique": [
     {
+      "id": "mur7cxjmac0zv",
+      "date": "2026-10-02T16:53:47.602Z",
+      "action": "SAUVEGARDE ATTACHEMENT",
+      "details": "N°1 — Octobre 2026"
+    },
+    {
       "id": "mur75mwvql4yz",
       "date": "2026-10-02T16:48:07.232Z",
       "action": "SAUVEGARDE ATTACHEMENT",
@@ -9722,7 +9728,7 @@
           "unite": "ml",
           "qteInitiale": 20,
           "pu": 200,
-          "estAnterieure": 0,
+          "estAnterieure": 20,
           "metAnterieure": 0,
           "estMois": 1250,
           "metMois": 0,
@@ -12384,7 +12390,7 @@
       ],
       "createdAt": "2026-10-02T16:25:00.883Z",
       "_numero": 1,
-      "updatedAt": "2026-10-02T16:53:01.387Z",
+      "updatedAt": "2026-10-02T16:53:47.602Z",
       "fiches": [
         {
           "id": "fiche_mur7bxvu2plgz",
