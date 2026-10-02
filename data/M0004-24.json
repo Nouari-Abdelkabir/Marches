@@ -12414,14 +12414,14 @@
       ],
       "createdAt": "2026-10-02T16:25:00.883Z",
       "_numero": 1,
-      "updatedAt": "2026-10-02T17:30:58.817Z",
+      "updatedAt": "2026-10-02T17:37:52.515Z",
       "fiches": [
         {
-          "id": "fiche_mur8or5s379ar",
+          "id": "fiche_mur8xmdffzoxb",
           "prix": 1,
           "libelle": "Fourniture de lisse de glissière métallique droite simple de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
-          "numeroFiche": "1 / 26 / 1 / 1",
+          "numeroFiche": "1 / 26 / 10 / 3",
           "dateDebut": "2026-10-01",
           "dateFin": "2026-10-31",
           "prestationsTerminees": [],
@@ -12440,11 +12440,11 @@
           "feuillet": "1/1"
         },
         {
-          "id": "fiche_mur8or5tjh33g",
+          "id": "fiche_mur8xmdf35k3f",
           "prix": 2,
           "libelle": "Fourniture de lisse de glissière courbe de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
-          "numeroFiche": "2 / 26 / 1 / 1",
+          "numeroFiche": "2 / 26 / 10 / 3",
           "dateDebut": "2026-10-01",
           "dateFin": "2026-10-31",
           "prestationsTerminees": [],
@@ -12463,11 +12463,11 @@
           "feuillet": "1/1"
         },
         {
-          "id": "fiche_mur8or5t3tqlr",
+          "id": "fiche_mur8xmdfrdsje",
           "prix": 6,
           "libelle": "Fourniture de support avec massif en béton pour ITPC",
           "unite": "U",
-          "numeroFiche": "6 / 26 / 1 / 1",
+          "numeroFiche": "6 / 26 / 10 / 3",
           "dateDebut": "2026-10-01",
           "dateFin": "2026-10-31",
           "prestationsTerminees": [],
@@ -12486,11 +12486,11 @@
           "feuillet": "1/1"
         },
         {
-          "id": "fiche_mur8or5ttph68",
+          "id": "fiche_mur8xmdfhmqh9",
           "prix": 9,
           "libelle": "Pose de lisse de glissière métallique droite  simple de profil A pour glissière type GS4, GS2, GRC ou GCU (y compris support, écarteur et réflecteur)",
           "unite": "ml",
-          "numeroFiche": "9 / 26 / 1 / 1",
+          "numeroFiche": "9 / 26 / 10 / 3",
           "dateDebut": "2026-10-01",
           "dateFin": "2026-10-31",
           "prestationsTerminees": [],
