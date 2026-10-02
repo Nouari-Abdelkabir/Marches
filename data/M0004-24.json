@@ -7554,6 +7554,12 @@
   ],
   "historique": [
     {
+      "id": "mur9psr91n2ps",
+      "date": "2026-10-02T17:59:47.157Z",
+      "action": "SAUVEGARDE ATTACHEMENT",
+      "details": "N°1 — Octobre 2026"
+    },
+    {
       "id": "mur9g1e2gjffg",
       "date": "2026-10-02T17:52:11.786Z",
       "action": "MODIFICATION PARAMÈTRES",
@@ -12420,10 +12426,10 @@
       ],
       "createdAt": "2026-10-02T16:25:00.883Z",
       "_numero": 1,
-      "updatedAt": "2026-10-02T17:59:21.215Z",
+      "updatedAt": "2026-10-02T17:59:50.136Z",
       "fiches": [
         {
-          "id": "fiche_mur9p8qnut3kg",
+          "id": "fiche_mur9pv20xvjlg",
           "prix": 1,
           "libelle": "Fourniture de lisse de glissière métallique droite simple de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
@@ -12446,7 +12452,7 @@
           "feuillet": "1/1"
         },
         {
-          "id": "fiche_mur9p8qn8l0d0",
+          "id": "fiche_mur9pv20rg8n3",
           "prix": 2,
           "libelle": "Fourniture de lisse de glissière courbe de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
@@ -12469,7 +12475,7 @@
           "feuillet": "1/1"
         },
         {
-          "id": "fiche_mur9p8qnm2s12",
+          "id": "fiche_mur9pv20nb3cl",
           "prix": 6,
           "libelle": "Fourniture de support avec massif en béton pour ITPC",
           "unite": "U",
@@ -12492,7 +12498,7 @@
           "feuillet": "1/1"
         },
         {
-          "id": "fiche_mur9p8qnz3z4p",
+          "id": "fiche_mur9pv20l8wle",
           "prix": 9,
           "libelle": "Pose de lisse de glissière métallique droite  simple de profil A pour glissière type GS4, GS2, GRC ou GCU (y compris support, écarteur et réflecteur)",
           "unite": "ml",
@@ -12515,7 +12521,7 @@
           "feuillet": "1/1"
         },
         {
-          "id": "fiche_mur9p8qnolvo8",
+          "id": "fiche_mur9pv20cxhu8",
           "prix": 11,
           "libelle": "Réparation de glissière de sécurité simple",
           "unite": "ml",
