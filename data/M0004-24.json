@@ -45,11 +45,11 @@
     "ingenieurs": {
       "ing1": {
         "fonction": "Chef de division sécurité et entretien",
-        "nom": "Adallal"
+        "nom": "Ben Rbiaa"
       },
       "ing2": {
         "fonction": "Chef de division sécurité et entretien",
-        "nom": "Ben Rbiaa"
+        "nom": "Adallal"
       }
     },
     "entreprise": {
@@ -7554,6 +7554,12 @@
     }
   ],
   "historique": [
+    {
+      "id": "murjto2y15yfx",
+      "date": "2026-10-02T22:42:43.882Z",
+      "action": "MODIFICATION PARAMÈTRES",
+      "details": "Mise à jour des paramètres et signatures"
+    },
     {
       "id": "murjpnz0arnnk",
       "date": "2026-10-02T22:39:37.116Z",
