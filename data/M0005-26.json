@@ -91,5 +91,25 @@
       "observations": {},
       "quantitesMois": {}
     }
+  },
+  "config": {
+    "id": "M0005-26",
+    "nom": "Entretien des bâtiments",
+    "couleur": "#059669",
+    "sections": {
+      "dashboard": true,
+      "parametres": true,
+      "catalogue": true,
+      "commandes": true,
+      "metre": true,
+      "constat": true,
+      "attachement": false,
+      "decomptes": false,
+      "suivi": true,
+      "sinistres": false,
+      "equipements": false,
+      "historique": true,
+      "export": true
+    }
   }
 }
