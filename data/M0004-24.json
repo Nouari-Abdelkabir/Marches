@@ -12438,10 +12438,10 @@
       ],
       "createdAt": "2026-10-02T16:25:00.883Z",
       "_numero": 3,
-      "updatedAt": "2026-10-02T20:16:54.400Z",
+      "updatedAt": "2026-10-02T20:23:11.700Z",
       "fiches": [
         {
-          "id": "fiche_murem4xq4l9nl",
+          "id": "fiche_mureu82cm0yvc",
           "prix": 1,
           "libelle": "Fourniture de lisse de glissière métallique droite simple de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
@@ -12464,7 +12464,7 @@
           "feuillet": "1/1"
         },
         {
-          "id": "fiche_murem4xs5yhhq",
+          "id": "fiche_mureu82chxszj",
           "prix": 2,
           "libelle": "Fourniture de lisse de glissière courbe de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
@@ -12487,7 +12487,7 @@
           "feuillet": "1/1"
         },
         {
-          "id": "fiche_murem4xsg47t5",
+          "id": "fiche_mureu82cpivig",
           "prix": 6,
           "libelle": "Fourniture de support avec massif en béton pour ITPC",
           "unite": "U",
@@ -12510,7 +12510,7 @@
           "feuillet": "1/1"
         },
         {
-          "id": "fiche_murem4xs5u0hh",
+          "id": "fiche_mureu82czhpqf",
           "prix": 9,
           "libelle": "Pose de lisse de glissière métallique droite  simple de profil A pour glissière type GS4, GS2, GRC ou GCU (y compris support, écarteur et réflecteur)",
           "unite": "ml",
@@ -12533,7 +12533,7 @@
           "feuillet": "1/1"
         },
         {
-          "id": "fiche_murem4xscgjst",
+          "id": "fiche_mureu82cn1iqe",
           "prix": 11,
           "libelle": "Réparation de glissière de sécurité simple",
           "unite": "ml",
