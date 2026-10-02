@@ -9662,13 +9662,15 @@
       "commandes": true,
       "metre": true,
       "constat": true,
-      "attachement": false,
+      "attachement": true,
       "decomptes": false,
       "suivi": true,
       "sinistres": true,
       "equipements": true,
       "historique": true,
       "export": true
-    }
-  }
+    },
+    "metreFormat": "vertical"
+  },
+  "attachements": []
 }
