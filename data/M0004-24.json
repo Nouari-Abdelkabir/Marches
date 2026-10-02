@@ -9741,10 +9741,10 @@
           "qteInitiale": 20,
           "pu": 200,
           "estAnterieure": 0,
-          "metAnterieure": 0,
+          "metAnterieure": 20,
           "estMois": 1250,
           "metMois": 0,
-          "totale": 1250,
+          "totale": 1230,
           "observations": ""
         },
         {
