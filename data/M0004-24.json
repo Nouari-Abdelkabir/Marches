@@ -7554,6 +7554,12 @@
   ],
   "historique": [
     {
+      "id": "mur6cqu8frjwn",
+      "date": "2026-10-02T16:25:39.296Z",
+      "action": "SAUVEGARDE ATTACHEMENT",
+      "details": "N°1 — Octobre 2026"
+    },
+    {
       "id": "mupt0uj5x2db6",
       "date": "2026-10-01T17:24:43.025Z",
       "action": "SAUVEGARDE METRÉ",
@@ -12358,7 +12364,9 @@
           "observations": ""
         }
       ],
-      "createdAt": "2026-10-02T16:25:00.883Z"
+      "createdAt": "2026-10-02T16:25:00.883Z",
+      "_numero": 1,
+      "updatedAt": "2026-10-02T16:25:39.296Z"
     }
   ]
 }
