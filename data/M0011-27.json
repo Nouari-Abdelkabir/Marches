@@ -1,0 +1,115 @@
+{
+  "config": {
+    "id": "M0011-27",
+    "nom": "Test Sans Dossier",
+    "couleur": "#1e3a8a",
+    "sections": {
+      "dashboard": true,
+      "parametres": true,
+      "catalogue": true,
+      "commandes": true,
+      "metre": true,
+      "constat": true,
+      "attachement": false,
+      "decomptes": false,
+      "suivi": true,
+      "sinistres": false,
+      "equipements": false,
+      "historique": true,
+      "export": true
+    }
+  },
+  "marcheActif": "M0011-27",
+  "parametres": {
+    "mo": "La Société Nationale des Autoroutes du Maroc",
+    "moe": "Le Chef de division Viabilité et Sécurité",
+    "prestataire": "AIC",
+    "marche": "M0011/27",
+    "section": "س",
+    "objet": "Test création automatique",
+    "dateDebut": "",
+    "dateFin": "",
+    "logo": "",
+    "dressePar": "L'Adjoint Viabilité",
+    "dresseNom": "",
+    "validePar": "Le chef de division sécurité et entretien",
+    "valideNom": "",
+    "acceptePar": "Le représentant de l'entreprise",
+    "accepteNom": "",
+    "accepteDate": ""
+  },
+  "catalogue": [],
+  "commandes": [],
+  "historique": [],
+  "metresEnregistres": [],
+  "constatsEnregistres": [],
+  "suivisPrix": [],
+  "etatsSinistres": [],
+  "facturesSinistres": {},
+  "photoSinistres": {},
+  "equipementsEnregistres": [],
+  "facturesEnregistrees": [],
+  "factureAutoNumbers": {},
+  "metres": {
+    "TR1": {
+      "date": "2026-10-31",
+      "entrees": {},
+      "sinistres": {},
+      "fax": {},
+      "prestations": {}
+    },
+    "TR2": {
+      "date": "2026-10-31",
+      "entrees": {},
+      "sinistres": {},
+      "fax": {},
+      "prestations": {}
+    },
+    "TR3": {
+      "date": "2026-10-31",
+      "entrees": {},
+      "sinistres": {},
+      "fax": {},
+      "prestations": {}
+    },
+    "TR4": {
+      "date": "2026-10-31",
+      "entrees": {},
+      "sinistres": {},
+      "fax": {},
+      "prestations": {}
+    }
+  },
+  "constats": {
+    "TR1": {
+      "date": "2026-10-31",
+      "anterieures": {},
+      "observations": {},
+      "quantitesMois": {}
+    },
+    "TR2": {
+      "date": "2026-10-31",
+      "anterieures": {},
+      "observations": {},
+      "quantitesMois": {}
+    },
+    "TR3": {
+      "date": "2026-10-31",
+      "anterieures": {},
+      "observations": {},
+      "quantitesMois": {}
+    },
+    "TR4": {
+      "date": "2026-10-31",
+      "anterieures": {},
+      "observations": {},
+      "quantitesMois": {}
+    },
+    "CONS": {
+      "date": "2026-10-31",
+      "anterieures": {},
+      "observations": {},
+      "quantitesMois": {}
+    }
+  }
+}
