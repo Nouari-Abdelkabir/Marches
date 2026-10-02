@@ -7554,6 +7554,12 @@
   ],
   "historique": [
     {
+      "id": "mur7duwzzhbax",
+      "date": "2026-10-02T16:54:30.851Z",
+      "action": "SAUVEGARDE ATTACHEMENT",
+      "details": "N°1 — Octobre 2026"
+    },
+    {
       "id": "mur7db70mn2km",
       "date": "2026-10-02T16:54:05.292Z",
       "action": "SAUVEGARDE ATTACHEMENT",
@@ -12396,7 +12402,7 @@
       ],
       "createdAt": "2026-10-02T16:25:00.883Z",
       "_numero": 1,
-      "updatedAt": "2026-10-02T16:54:08.064Z",
+      "updatedAt": "2026-10-02T16:54:30.851Z",
       "fiches": [
         {
           "id": "fiche_mur7ddc0swinf",
