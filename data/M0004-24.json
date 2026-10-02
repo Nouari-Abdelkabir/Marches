@@ -9740,7 +9740,7 @@
           "unite": "ml",
           "qteInitiale": 20,
           "pu": 200,
-          "estAnterieure": 20,
+          "estAnterieure": 0,
           "metAnterieure": 0,
           "estMois": 1250,
           "metMois": 0,
