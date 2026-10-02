@@ -18,27 +18,27 @@
     "accepteDate": "2026-10-01",
     "signatures": {
       "TR1": {
-        "fonction": "Foughali",
-        "nom": "Elmoudene",
-        "remplacant": "",
+        "fonction": "conducteur sécurité et entretien",
+        "nom": "Foughali",
+        "remplacant": "Elmoudene",
         "enConge": false
       },
       "TR2": {
-        "fonction": "Elmoudene",
-        "nom": "Foughali",
-        "remplacant": "",
+        "fonction": "conducteur sécurité et entretien",
+        "nom": "Elmoudene",
+        "remplacant": "Foughali",
         "enConge": false
       },
       "TR3": {
-        "fonction": "Nouari",
-        "nom": "Khoubane",
-        "remplacant": "",
+        "fonction": "Adjoint sécurité et entretien",
+        "nom": "Nouari",
+        "remplacant": "Khoubane",
         "enConge": false
       },
       "TR4": {
-        "fonction": "Khoubane",
-        "nom": "Nouari",
-        "remplacant": "",
+        "fonction": "conducteur sécurité et entretien",
+        "nom": "Khoubane",
+        "remplacant": "Nouari",
         "enConge": false
       }
     },
@@ -7554,6 +7554,12 @@
     }
   ],
   "historique": [
+    {
+      "id": "murjvqkpaosp8",
+      "date": "2026-10-02T22:44:20.425Z",
+      "action": "MODIFICATION PARAMÈTRES",
+      "details": "Mise à jour des paramètres et signatures"
+    },
     {
       "id": "murjto2y15yfx",
       "date": "2026-10-02T22:42:43.882Z",
