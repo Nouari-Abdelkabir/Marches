@@ -12414,10 +12414,10 @@
       ],
       "createdAt": "2026-10-02T16:25:00.883Z",
       "_numero": 1,
-      "updatedAt": "2026-10-02T17:26:59.614Z",
+      "updatedAt": "2026-10-02T17:27:03.205Z",
       "fiches": [
         {
-          "id": "fiche_mur8h4jcqyn6j",
+          "id": "fiche_mur8jpd1xfwru",
           "prix": 1,
           "libelle": "Fourniture de lisse de glissière métallique droite simple de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
@@ -12440,7 +12440,7 @@
           "feuillet": "1/1"
         },
         {
-          "id": "fiche_mur8h4jcgons5",
+          "id": "fiche_mur8jpd1cdpe2",
           "prix": 2,
           "libelle": "Fourniture de lisse de glissière courbe de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
@@ -12463,7 +12463,7 @@
           "feuillet": "1/1"
         },
         {
-          "id": "fiche_mur8h4jcadc8r",
+          "id": "fiche_mur8jpd17oesh",
           "prix": 6,
           "libelle": "Fourniture de support avec massif en béton pour ITPC",
           "unite": "U",
@@ -12481,6 +12481,29 @@
           "quantiteAnterieure": 5,
           "quantiteDuMois": 45,
           "totalAttachement": 45,
+          "croquis": "",
+          "observations": "",
+          "feuillet": "1/1"
+        },
+        {
+          "id": "fiche_mur8jpd1i1n5d",
+          "prix": 9,
+          "libelle": "Pose de lisse de glissière métallique droite  simple de profil A pour glissière type GS4, GS2, GRC ou GCU (y compris support, écarteur et réflecteur)",
+          "unite": "ml",
+          "numeroFiche": "9 / 26 / 1 / 1",
+          "dateDebut": "2026-10-01",
+          "dateFin": "2026-10-31",
+          "prestationsTerminees": [],
+          "prestationsNonTerminees": [
+            {
+              "designation": "Pose de lisse de glissière métallique droite  simple de profil A pour glissière type GS4, GS2, GRC ou GCU (y compris support, écarteur et réflecteur)",
+              "metrees": 0,
+              "estimees": 550
+            }
+          ],
+          "quantiteAnterieure": 0,
+          "quantiteDuMois": 550,
+          "totalAttachement": 550,
           "croquis": "",
           "observations": "",
           "feuillet": "1/1"
