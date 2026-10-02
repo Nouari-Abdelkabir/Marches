@@ -56,7 +56,8 @@
       "texte": "",
       "nom": "",
       "date": ""
-    }
+    },
+    "entite": "CEMA"
   },
   "catalogue": [
     {
@@ -7553,6 +7554,12 @@
     }
   ],
   "historique": [
+    {
+      "id": "murjpnz0arnnk",
+      "date": "2026-10-02T22:39:37.116Z",
+      "action": "MODIFICATION PARAMÈTRES",
+      "details": "Mise à jour des paramètres et signatures"
+    },
     {
       "id": "muren0f489pr2",
       "date": "2026-10-02T20:17:35.200Z",
