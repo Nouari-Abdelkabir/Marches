@@ -9877,9 +9877,9 @@
           "pu": 79.56,
           "estAnterieure": 0,
           "metAnterieure": 0,
-          "estMois": 0,
+          "estMois": 60,
           "metMois": 0,
-          "totale": 0,
+          "totale": 60,
           "observations": ""
         },
         {
