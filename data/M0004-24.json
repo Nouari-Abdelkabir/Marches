@@ -9715,7 +9715,7 @@
           "unite": "ml",
           "qteInitiale": 54000,
           "pu": 200,
-          "estAnterieure": 0,
+          "estAnterieure": 2,
           "metAnterieure": 0,
           "estMois": 5,
           "metMois": 0,
