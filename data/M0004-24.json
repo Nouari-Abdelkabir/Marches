@@ -9798,7 +9798,7 @@
           "unite": "U",
           "qteInitiale": 300,
           "pu": 250,
-          "estAnterieure": 5,
+          "estAnterieure": 0,
           "metAnterieure": 5,
           "estMois": 50,
           "metMois": 0,
@@ -12408,10 +12408,10 @@
       ],
       "createdAt": "2026-10-02T16:25:00.883Z",
       "_numero": 1,
-      "updatedAt": "2026-10-02T17:24:32.353Z",
+      "updatedAt": "2026-10-02T17:25:02.904Z",
       "fiches": [
         {
-          "id": "fiche_mur8ggypbkxad",
+          "id": "fiche_mur8h4jcqyn6j",
           "prix": 1,
           "libelle": "Fourniture de lisse de glissière métallique droite simple de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
@@ -12434,7 +12434,7 @@
           "feuillet": "1/1"
         },
         {
-          "id": "fiche_mur8ggyp7nrx6",
+          "id": "fiche_mur8h4jcgons5",
           "prix": 2,
           "libelle": "Fourniture de lisse de glissière courbe de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
@@ -12457,7 +12457,7 @@
           "feuillet": "1/1"
         },
         {
-          "id": "fiche_mur8ggypnsm7y",
+          "id": "fiche_mur8h4jcadc8r",
           "prix": 6,
           "libelle": "Fourniture de support avec massif en béton pour ITPC",
           "unite": "U",
