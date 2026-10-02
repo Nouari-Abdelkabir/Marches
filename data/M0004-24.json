@@ -9676,28 +9676,135 @@
   },
   "metres": {
     "TR1": {
-      "date": "2026-10-31",
+      "date": "2026-06-30",
       "entrees": {},
       "sinistres": {},
       "fax": {},
       "prestations": {}
     },
     "TR2": {
-      "date": "2026-10-31",
+      "date": "2026-06-30",
       "entrees": {},
       "sinistres": {},
       "fax": {},
       "prestations": {}
     },
     "TR3": {
-      "date": "2026-10-31",
-      "entrees": {},
+      "date": "2026-06-30",
+      "entrees": {
+        "mumy674xe5ec2|mumy674tiuyua": {
+          "1": 28,
+          "5": 1,
+          "7": 6,
+          "8": 1,
+          "11": 32
+        },
+        "mumy674xe5ec2|mumy674tm6wn4": {
+          "1": 12,
+          "7": 3,
+          "8": 1,
+          "11": 12
+        },
+        "mumy674xe5ec2|mumy674tpj7bx": {},
+        "mumy674xe5ec2|mumy674tun4xt": {
+          "1": 24,
+          "7": 7,
+          "8": 2,
+          "11": 24
+        },
+        "mumy674xe5ec2|mumy674tmfcv8": {
+          "1": 200,
+          "5": 53,
+          "7": 53,
+          "8": 23,
+          "11": 200
+        },
+        "mumy674xe5ec2|mumy674ud1z77": {},
+        "mumy674xe5ec2|mumy674u80j3y": {},
+        "mumy674xe5ec2|mumy674u6axyi": {},
+        "mumy674xe5ec2|mumy674uyo3az": {},
+        "mumy674xe5ec2|mumy674uo1sov": {
+          "42": 3
+        },
+        "mumy674xe5ec2|mumy674ut70d2": {
+          "28": 1
+        },
+        "mumy674xe5ec2|mumy674ut8jlx": {},
+        "mumy674xe5ec2|mumy674uwpo8f": {},
+        "mumy674xe5ec2|mumy674u2ac6l": {},
+        "mumy674xe5ec2|mumy674u2zpod": {
+          "13": 0.01,
+          "121": 1
+        },
+        "mumy674xe5ec2|mumy674u5726e": {
+          "37": 1
+        },
+        "mumy674xe5ec2|mumy674ufq1ye": {
+          "1": 8,
+          "7": 2,
+          "8": 1,
+          "11": 12
+        },
+        "mumy674xe5ec2|mumy674ubq3ut": {
+          "1": 12,
+          "7": 3,
+          "8": 1,
+          "11": 12
+        },
+        "mumy674xe5ec2|mumy674u9uack": {
+          "1": 16,
+          "7": 4,
+          "8": 1,
+          "11": 20
+        },
+        "mumy674xe5ec2|mumy674ut9y5e": {
+          "1": 8,
+          "7": 2,
+          "11": 12
+        },
+        "mumy674xe5ec2|mumy674uyugli": {
+          "37": 1
+        },
+        "mumy674xe5ec2|mumy674u3znr4": {
+          "28": 1
+        },
+        "mumy674xe5ec2|mumy674uvl4th": {
+          "1": 16,
+          "7": 2,
+          "11": 16
+        },
+        "mumy674xe5ec2|mumy674ucwfzs": {
+          "1": 8,
+          "7": 2,
+          "11": 12
+        },
+        "mumy674xe5ec2|mumy674u23kee": {
+          "121": 1
+        },
+        "mumy674xe5ec2|mumy674u85jxm": {
+          "1": 28,
+          "7": 7,
+          "8": 2,
+          "11": 28
+        },
+        "mumy674xe5ec2|mumy674uupggl": {
+          "1": 116,
+          "5": 20,
+          "7": 31,
+          "8": 7,
+          "11": 120
+        },
+        "mumy674xe5ec2|mumy674u10s7x": {},
+        "mumy674xe5ec2|mumy674unciyj": {},
+        "mumy674xe5ec2|mumy674uhtb65": {},
+        "mumy674xe5ec2|mumy674u6ua1v": {}
+      },
       "sinistres": {},
       "fax": {},
       "prestations": {}
     },
     "TR4": {
-      "date": "2026-10-31",
+      "date": "2026-06-30",
       "entrees": {},
       "sinistres": {},
       "fax": {},
