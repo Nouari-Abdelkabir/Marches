@@ -9727,11 +9727,11 @@
           "unite": "ml",
           "qteInitiale": 54000,
           "pu": 200,
-          "estAnterieure": 2,
-          "metAnterieure": 0,
+          "estAnterieure": 0,
+          "metAnterieure": 2,
           "estMois": 5,
           "metMois": 0,
-          "totale": 5,
+          "totale": 3,
           "observations": ""
         },
         {
