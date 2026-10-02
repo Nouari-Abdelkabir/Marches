@@ -103,13 +103,15 @@
       "commandes": true,
       "metre": true,
       "constat": true,
-      "attachement": false,
+      "attachement": true,
       "decomptes": false,
       "suivi": true,
       "sinistres": false,
       "equipements": false,
       "historique": true,
       "export": true
-    }
-  }
+    },
+    "metreFormat": "vertical"
+  },
+  "attachements": []
 }
