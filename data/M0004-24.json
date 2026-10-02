@@ -9652,9 +9652,9 @@
     }
   },
   "config": {
-    "id": "M0005-26",
-    "nom": "Entretien des bâtiments",
-    "couleur": "#059669",
+    "id": "M0004-24",
+    "nom": "Entretien Axes Centre-Sud",
+    "couleur": "#1e3a8a",
     "sections": {
       "dashboard": true,
       "parametres": true,
@@ -9665,8 +9665,8 @@
       "attachement": false,
       "decomptes": false,
       "suivi": true,
-      "sinistres": false,
-      "equipements": false,
+      "sinistres": true,
+      "equipements": true,
       "historique": true,
       "export": true
     }
