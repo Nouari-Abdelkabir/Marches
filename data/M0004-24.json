@@ -12420,10 +12420,10 @@
       ],
       "createdAt": "2026-10-02T16:25:00.883Z",
       "_numero": 1,
-      "updatedAt": "2026-10-02T17:51:43.830Z",
+      "updatedAt": "2026-10-02T17:58:53.153Z",
       "fiches": [
         {
-          "id": "fiche_mur9fftiglvrg",
+          "id": "fiche_mur9on35f9kme",
           "prix": 1,
           "libelle": "Fourniture de lisse de glissière métallique droite simple de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
@@ -12446,7 +12446,7 @@
           "feuillet": "1/1"
         },
         {
-          "id": "fiche_mur9fftiyqeiy",
+          "id": "fiche_mur9on35txzkk",
           "prix": 2,
           "libelle": "Fourniture de lisse de glissière courbe de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
@@ -12469,7 +12469,7 @@
           "feuillet": "1/1"
         },
         {
-          "id": "fiche_mur9fftityl4w",
+          "id": "fiche_mur9on35qhp2j",
           "prix": 6,
           "libelle": "Fourniture de support avec massif en béton pour ITPC",
           "unite": "U",
@@ -12492,7 +12492,7 @@
           "feuillet": "1/1"
         },
         {
-          "id": "fiche_mur9fftiuws5d",
+          "id": "fiche_mur9on3590b3g",
           "prix": 9,
           "libelle": "Pose de lisse de glissière métallique droite  simple de profil A pour glissière type GS4, GS2, GRC ou GCU (y compris support, écarteur et réflecteur)",
           "unite": "ml",
@@ -12510,6 +12510,29 @@
           "quantiteAnterieure": 0,
           "quantiteDuMois": 550,
           "totalAttachement": 550,
+          "croquis": "",
+          "observations": "",
+          "feuillet": "1/1"
+        },
+        {
+          "id": "fiche_mur9on353ezh2",
+          "prix": 11,
+          "libelle": "Réparation de glissière de sécurité simple",
+          "unite": "ml",
+          "numeroFiche": "11 / 26 / 10 / 3",
+          "dateDebut": "2026-10-01",
+          "dateFin": "2026-10-31",
+          "prestationsTerminees": [],
+          "prestationsNonTerminees": [
+            {
+              "designation": "Réparation de glissière de sécurité simple",
+              "metrees": 0,
+              "estimees": 60
+            }
+          ],
+          "quantiteAnterieure": 0,
+          "quantiteDuMois": 60,
+          "totalAttachement": 60,
           "croquis": "",
           "observations": "",
           "feuillet": "1/1"
