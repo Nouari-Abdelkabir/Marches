@@ -7554,6 +7554,12 @@
   ],
   "historique": [
     {
+      "id": "mur9g1e2gjffg",
+      "date": "2026-10-02T17:52:11.786Z",
+      "action": "MODIFICATION PARAMÈTRES",
+      "details": "Mise à jour des paramètres et signatures"
+    },
+    {
       "id": "mur8jmlaiqxze",
       "date": "2026-10-02T17:26:59.614Z",
       "action": "SAUVEGARDE ATTACHEMENT",
