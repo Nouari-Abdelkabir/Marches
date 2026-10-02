@@ -12408,10 +12408,10 @@
       ],
       "createdAt": "2026-10-02T16:25:00.883Z",
       "_numero": 1,
-      "updatedAt": "2026-10-02T17:24:29.526Z",
+      "updatedAt": "2026-10-02T17:24:32.353Z",
       "fiches": [
         {
-          "id": "fiche_mur8fdu68hpr9",
+          "id": "fiche_mur8ggypbkxad",
           "prix": 1,
           "libelle": "Fourniture de lisse de glissière métallique droite simple de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
@@ -12426,15 +12426,15 @@
               "estimees": 5
             }
           ],
-          "quantiteAnterieure": 0,
-          "quantiteDuMois": 5,
-          "totalAttachement": 5,
+          "quantiteAnterieure": 2,
+          "quantiteDuMois": 3,
+          "totalAttachement": 3,
           "croquis": "",
           "observations": "",
           "feuillet": "1/1"
         },
         {
-          "id": "fiche_mur8fdu6m33op",
+          "id": "fiche_mur8ggyp7nrx6",
           "prix": 2,
           "libelle": "Fourniture de lisse de glissière courbe de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
@@ -12449,15 +12449,15 @@
               "estimees": 1250
             }
           ],
-          "quantiteAnterieure": 0,
-          "quantiteDuMois": 1250,
-          "totalAttachement": 1250,
+          "quantiteAnterieure": 20,
+          "quantiteDuMois": 1230,
+          "totalAttachement": 1230,
           "croquis": "",
           "observations": "",
           "feuillet": "1/1"
         },
         {
-          "id": "fiche_mur8fdu6f7c5s",
+          "id": "fiche_mur8ggypnsm7y",
           "prix": 6,
           "libelle": "Fourniture de support avec massif en béton pour ITPC",
           "unite": "U",
@@ -12472,9 +12472,9 @@
               "estimees": 50
             }
           ],
-          "quantiteAnterieure": 0,
-          "quantiteDuMois": 50,
-          "totalAttachement": 50,
+          "quantiteAnterieure": 5,
+          "quantiteDuMois": 45,
+          "totalAttachement": 45,
           "croquis": "",
           "observations": "",
           "feuillet": "1/1"
