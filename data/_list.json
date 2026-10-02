@@ -59,26 +59,6 @@
         "historique": true,
         "export": true
       }
-    },
-    "M0021-26": {
-      "nom": "Test Sans Dossier",
-      "couleur": "#1e3a8a",
-      "createdAt": "2026-10-02T10:00:06.024Z",
-      "sections": {
-        "dashboard": true,
-        "parametres": true,
-        "catalogue": true,
-        "commandes": true,
-        "metre": true,
-        "constat": true,
-        "attachement": false,
-        "decomptes": false,
-        "suivi": true,
-        "sinistres": false,
-        "equipements": false,
-        "historique": true,
-        "export": true
-      }
     }
   }
 }
