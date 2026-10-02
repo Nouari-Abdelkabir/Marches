@@ -12384,7 +12384,78 @@
       ],
       "createdAt": "2026-10-02T16:25:00.883Z",
       "_numero": 1,
-      "updatedAt": "2026-10-02T16:48:07.231Z"
+      "updatedAt": "2026-10-02T16:51:41.489Z",
+      "fiches": [
+        {
+          "id": "fiche_mur7a88h1tmjj",
+          "prix": 1,
+          "libelle": "Fourniture de lisse de glissière métallique droite simple de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
+          "unite": "ml",
+          "numeroFiche": "1 / 26 / 1 / 1",
+          "dateDebut": "2026-10-01",
+          "dateFin": "2026-10-31",
+          "prestationsTerminees": [],
+          "prestationsNonTerminees": [
+            {
+              "designation": "Fourniture de lisse de glissière métallique droite simple de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
+              "metrees": 0,
+              "estimees": 5
+            }
+          ],
+          "quantiteAnterieure": 0,
+          "quantiteDuMois": 5,
+          "totalAttachement": 5,
+          "croquis": "",
+          "observations": "",
+          "feuillet": "1/1"
+        },
+        {
+          "id": "fiche_mur7a88hsq128",
+          "prix": 2,
+          "libelle": "Fourniture de lisse de glissière courbe de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
+          "unite": "ml",
+          "numeroFiche": "2 / 26 / 1 / 1",
+          "dateDebut": "2026-10-01",
+          "dateFin": "2026-10-31",
+          "prestationsTerminees": [],
+          "prestationsNonTerminees": [
+            {
+              "designation": "Fourniture de lisse de glissière courbe de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
+              "metrees": 0,
+              "estimees": 1250
+            }
+          ],
+          "quantiteAnterieure": 0,
+          "quantiteDuMois": 1250,
+          "totalAttachement": 1250,
+          "croquis": "",
+          "observations": "",
+          "feuillet": "1/1"
+        },
+        {
+          "id": "fiche_mur7a88hrt7su",
+          "prix": 6,
+          "libelle": "Fourniture de support avec massif en béton pour ITPC",
+          "unite": "U",
+          "numeroFiche": "6 / 26 / 1 / 1",
+          "dateDebut": "2026-10-01",
+          "dateFin": "2026-10-31",
+          "prestationsTerminees": [],
+          "prestationsNonTerminees": [
+            {
+              "designation": "Fourniture de support avec massif en béton pour ITPC",
+              "metrees": 0,
+              "estimees": 50
+            }
+          ],
+          "quantiteAnterieure": 0,
+          "quantiteDuMois": 50,
+          "totalAttachement": 50,
+          "croquis": "",
+          "observations": "",
+          "feuillet": "1/1"
+        }
+      ]
     }
   ]
 }
