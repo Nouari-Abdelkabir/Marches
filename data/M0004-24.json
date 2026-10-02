@@ -7554,6 +7554,12 @@
   ],
   "historique": [
     {
+      "id": "muren0f489pr2",
+      "date": "2026-10-02T20:17:35.200Z",
+      "action": "SAUVEGARDE ATTACHEMENT",
+      "details": "N°2 — Septembre 2026"
+    },
+    {
       "id": "mur9q26ktl1ia",
       "date": "2026-10-02T17:59:59.372Z",
       "action": "SAUVEGARDE ATTACHEMENT",
@@ -12477,7 +12483,7 @@
         }
       ],
       "createdAt": "2026-10-02T16:25:00.883Z",
-      "_numero": 2,
+      "_numero": 3,
       "updatedAt": "2026-10-02T20:16:54.400Z",
       "fiches": [
         {
@@ -15312,9 +15318,9 @@
           "pu": 200,
           "estAnterieure": 0,
           "metAnterieure": 0,
-          "estMois": 0,
+          "estMois": 50,
           "metMois": 0,
-          "totale": 0,
+          "totale": 50,
           "observations": ""
         },
         {
@@ -15325,9 +15331,9 @@
           "pu": 300,
           "estAnterieure": 0,
           "metAnterieure": 0,
-          "estMois": 0,
+          "estMois": 60,
           "metMois": 0,
-          "totale": 0,
+          "totale": 60,
           "observations": ""
         },
         {
@@ -15403,9 +15409,9 @@
           "pu": 86.7,
           "estAnterieure": 0,
           "metAnterieure": 0,
-          "estMois": 0,
+          "estMois": 60,
           "metMois": 0,
-          "totale": 0,
+          "totale": 60,
           "observations": ""
         },
         {
@@ -17970,7 +17976,80 @@
           "observations": ""
         }
       ],
-      "createdAt": "2026-10-02T20:17:22.977Z"
+      "createdAt": "2026-10-02T20:17:22.977Z",
+      "updatedAt": "2026-10-02T20:17:38.567Z",
+      "_numero": 2,
+      "fiches": [
+        {
+          "id": "fiche_muren30ni32hw",
+          "prix": 2,
+          "libelle": "Fourniture de lisse de glissière courbe de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
+          "unite": "ml",
+          "numeroFiche": "2 / 26 / 9 / 2",
+          "dateDebut": "2026-09-01",
+          "dateFin": "2026-09-30",
+          "prestationsTerminees": [],
+          "prestationsNonTerminees": [
+            {
+              "designation": "Fourniture de lisse de glissière courbe de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
+              "metrees": 0,
+              "estimees": 50
+            }
+          ],
+          "quantiteAnterieure": 0,
+          "quantiteDuMois": 50,
+          "totalAttachement": 50,
+          "croquis": "",
+          "observations": "",
+          "feuillet": "1/1"
+        },
+        {
+          "id": "fiche_muren30nsnyo8",
+          "prix": 3,
+          "libelle": "Fourniture et pose d'élément de glissière pour fin de file",
+          "unite": "U",
+          "numeroFiche": "3 / 26 / 9 / 2",
+          "dateDebut": "2026-09-01",
+          "dateFin": "2026-09-30",
+          "prestationsTerminees": [],
+          "prestationsNonTerminees": [
+            {
+              "designation": "Fourniture et pose d'élément de glissière pour fin de file",
+              "metrees": 0,
+              "estimees": 60
+            }
+          ],
+          "quantiteAnterieure": 0,
+          "quantiteDuMois": 60,
+          "totalAttachement": 60,
+          "croquis": "",
+          "observations": "",
+          "feuillet": "1/1"
+        },
+        {
+          "id": "fiche_muren30nq35o7",
+          "prix": 9,
+          "libelle": "Pose de lisse de glissière métallique droite  simple de profil A pour glissière type GS4, GS2, GRC ou GCU (y compris support, écarteur et réflecteur)",
+          "unite": "ml",
+          "numeroFiche": "9 / 26 / 9 / 2",
+          "dateDebut": "2026-09-01",
+          "dateFin": "2026-09-30",
+          "prestationsTerminees": [],
+          "prestationsNonTerminees": [
+            {
+              "designation": "Pose de lisse de glissière métallique droite  simple de profil A pour glissière type GS4, GS2, GRC ou GCU (y compris support, écarteur et réflecteur)",
+              "metrees": 0,
+              "estimees": 60
+            }
+          ],
+          "quantiteAnterieure": 0,
+          "quantiteDuMois": 60,
+          "totalAttachement": 60,
+          "croquis": "",
+          "observations": "",
+          "feuillet": "1/1"
+        }
+      ]
     }
   ]
 }
