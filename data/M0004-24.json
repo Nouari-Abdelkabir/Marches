@@ -9882,10 +9882,10 @@
           "qteInitiale": 56000,
           "pu": 79.56,
           "estAnterieure": 12,
-          "metAnterieure": 0,
+          "metAnterieure": 12,
           "estMois": 60,
           "metMois": 0,
-          "totale": 60,
+          "totale": 48,
           "observations": ""
         },
         {
