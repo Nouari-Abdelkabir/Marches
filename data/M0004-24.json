@@ -7555,6 +7555,18 @@
   ],
   "historique": [
     {
+      "id": "mus83b0bwbjvh",
+      "date": "2026-10-03T10:02:04.283Z",
+      "action": "SAUVEGARDE ATTACHEMENT",
+      "details": "TR3 — N°1 — Octobre 2026"
+    },
+    {
+      "id": "mus839k46d8nl",
+      "date": "2026-10-03T10:02:02.404Z",
+      "action": "SAUVEGARDE ATTACHEMENT",
+      "details": "TR3 — N°1 — Octobre 2026"
+    },
+    {
       "id": "mus80uor6i2dk",
       "date": "2026-10-03T10:00:09.819Z",
       "action": "SAUVEGARDE ATTACHEMENT",
@@ -9885,11 +9897,11 @@
           "unite": "ml",
           "qteInitiale": 54000,
           "pu": 200,
-          "estAnterieure": 370,
+          "estAnterieure": 470,
           "metAnterieure": 0,
           "estMois": 20,
           "metMois": 50,
-          "totale": 390,
+          "totale": 490,
           "observations": ""
         },
         {
@@ -9898,11 +9910,11 @@
           "unite": "ml",
           "qteInitiale": 20,
           "pu": 200,
-          "estAnterieure": 20,
+          "estAnterieure": 80,
           "metAnterieure": 0,
           "estMois": 0,
           "metMois": 0,
-          "totale": 20,
+          "totale": 80,
           "observations": ""
         },
         {
@@ -9924,11 +9936,11 @@
           "unite": "ml",
           "qteInitiale": 800,
           "pu": 1400,
-          "estAnterieure": 50,
+          "estAnterieure": 110,
           "metAnterieure": 0,
           "estMois": 0,
           "metMois": 0,
-          "totale": 50,
+          "totale": 110,
           "observations": ""
         },
         {
@@ -15321,7 +15333,8 @@
       ],
       "fiches": [],
       "createdAt": "2026-10-03T08:49:02.320Z",
-      "_numero": 5
+      "_numero": 5,
+      "updatedAt": "2026-10-03T10:02:04.283Z"
     },
     {
       "id": "mus6clypz3mfn",
@@ -18026,7 +18039,7 @@
           "unite": "ml",
           "qteInitiale": 54000,
           "pu": 200,
-          "estAnterieure": 390,
+          "estAnterieure": 490,
           "metAnterieure": 50,
           "estMois": 0,
           "metMois": 50,
@@ -18039,7 +18052,7 @@
           "unite": "ml",
           "qteInitiale": 20,
           "pu": 200,
-          "estAnterieure": 20,
+          "estAnterieure": 80,
           "metAnterieure": 0,
           "estMois": 0,
           "metMois": 600,
@@ -18065,7 +18078,7 @@
           "unite": "ml",
           "qteInitiale": 800,
           "pu": 1400,
-          "estAnterieure": 50,
+          "estAnterieure": 110,
           "metAnterieure": 0,
           "estMois": 0,
           "metMois": 0,
