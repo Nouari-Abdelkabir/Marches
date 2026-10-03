@@ -3,7 +3,7 @@
     "M0004-24": {
       "nom": "Entretien Axes Centre-Sud",
       "couleur": "#1e3a8a",
-      "createdAt": "2026-10-02T09:28:12.710Z",
+      "createdAt": "2026-01-01T00:00:00.000Z",
       "sections": {
         "dashboard": true,
         "parametres": true,
@@ -11,7 +11,7 @@
         "commandes": true,
         "metre": true,
         "constat": true,
-        "attachement": false,
+        "attachement": true,
         "decomptes": false,
         "suivi": true,
         "sinistres": true,
@@ -23,7 +23,7 @@
     "M0005-26": {
       "nom": "Entretien des bâtiments",
       "couleur": "#059669",
-      "createdAt": "2026-10-02T09:28:12.710Z",
+      "createdAt": "2026-01-01T00:00:00.000Z",
       "sections": {
         "dashboard": true,
         "parametres": true,
@@ -31,7 +31,7 @@
         "commandes": true,
         "metre": true,
         "constat": true,
-        "attachement": false,
+        "attachement": true,
         "decomptes": false,
         "suivi": true,
         "sinistres": false,
@@ -43,7 +43,7 @@
     "M0007-25": {
       "nom": "Assistance au usager",
       "couleur": "#7c3aed",
-      "createdAt": "2026-10-02T09:28:12.710Z",
+      "createdAt": "2026-01-01T00:00:00.000Z",
       "sections": {
         "dashboard": true,
         "parametres": true,
@@ -51,7 +51,7 @@
         "commandes": true,
         "metre": true,
         "constat": true,
-        "attachement": false,
+        "attachement": true,
         "decomptes": false,
         "suivi": true,
         "sinistres": true,

@@ -1,4 +1,24 @@
 {
+  "config": {
+    "id": "M0007-25",
+    "nom": "Assistance aux ussagers",
+    "couleur": "#059669",
+    "sections": {
+      "dashboard": true,
+      "parametres": true,
+      "catalogue": true,
+      "commandes": true,
+      "metre": true,
+      "constat": true,
+      "attachement": true,
+      "decomptes": false,
+      "suivi": true,
+      "sinistres": false,
+      "equipements": false,
+      "historique": true,
+      "export": true
+    }
+  },
   "marcheActif": "M0007-25",
   "parametres": {
     "mo": "",
@@ -31,87 +51,15 @@
   "facturesEnregistrees": [],
   "factureAutoNumbers": {},
   "metres": {
-    "TR1": {
-      "date": "2026-10-31",
-      "entrees": {},
-      "sinistres": {},
-      "fax": {},
-      "prestations": {}
-    },
-    "TR2": {
-      "date": "2026-10-31",
-      "entrees": {},
-      "sinistres": {},
-      "fax": {},
-      "prestations": {}
-    },
-    "TR3": {
-      "date": "2026-10-31",
-      "entrees": {},
-      "sinistres": {},
-      "fax": {},
-      "prestations": {}
-    },
-    "TR4": {
-      "date": "2026-10-31",
-      "entrees": {},
-      "sinistres": {},
-      "fax": {},
-      "prestations": {}
-    }
+    "TR1": { "date": "", "entrees": {}, "sinistres": {}, "fax": {}, "prestations": {} },
+    "TR2": { "date": "", "entrees": {}, "sinistres": {}, "fax": {}, "prestations": {} },
+    "TR3": { "date": "", "entrees": {}, "sinistres": {}, "fax": {}, "prestations": {} },
+    "TR4": { "date": "", "entrees": {}, "sinistres": {}, "fax": {}, "prestations": {} }
   },
   "constats": {
-    "TR1": {
-      "date": "2026-10-31",
-      "anterieures": {},
-      "observations": {},
-      "quantitesMois": {}
-    },
-    "TR2": {
-      "date": "2026-10-31",
-      "anterieures": {},
-      "observations": {},
-      "quantitesMois": {}
-    },
-    "TR3": {
-      "date": "2026-10-31",
-      "anterieures": {},
-      "observations": {},
-      "quantitesMois": {}
-    },
-    "TR4": {
-      "date": "2026-10-31",
-      "anterieures": {},
-      "observations": {},
-      "quantitesMois": {}
-    },
-    "CONS": {
-      "date": "2026-10-31",
-      "anterieures": {},
-      "observations": {},
-      "quantitesMois": {}
-    }
-  },
-  "config": {
-    "id": "M0007-25",
-    "nom": "Assistance au usager",
-    "couleur": "#7c3aed",
-    "sections": {
-      "dashboard": true,
-      "parametres": true,
-      "catalogue": true,
-      "commandes": true,
-      "metre": true,
-      "constat": true,
-      "attachement": true,
-      "decomptes": false,
-      "suivi": true,
-      "sinistres": true,
-      "equipements": true,
-      "historique": true,
-      "export": true
-    },
-    "metreFormat": "vertical"
-  },
-  "attachements": []
+    "TR1": { "date": "", "anterieures": {}, "observations": {} },
+    "TR2": { "date": "", "anterieures": {}, "observations": {} },
+    "TR3": { "date": "", "anterieures": {}, "observations": {} },
+    "TR4": { "date": "", "anterieures": {}, "observations": {} }
+  }
 }
