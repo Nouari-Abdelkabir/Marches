@@ -375,6 +375,8 @@ async function chargerDonneesAsync() {
   if (!d.facturesEnregistrees) d.facturesEnregistrees = [];
   if (!d.factureAutoNumbers) d.factureAutoNumbers = {};
 
+  if (!d.attachements) d.attachements = [];
+
   initMetres(d);
   initConstats(d);
   return d;
@@ -465,6 +467,8 @@ document.querySelectorAll('.tab').forEach(tab => {
     if (t === 'commandes')     rendreListeCommandes();
     if (t === 'metre')         switchMetre(currentMetreTR);
     if (t === 'constat')       switchConstat(currentConstatTR);
+    if (t === 'attachement')   switchAttachement();
+    if (t === 'decomptes')     { /* à construire */ }
     if (t === 'suivi')         switchSuivi();
     if (t === 'sinistres')     switchSinistre('sin-sinistres');
     if (t === 'equipements')   switchEquipements();
@@ -483,6 +487,8 @@ function chargerFormParametres() {
   document.getElementById('param-mo').value = p.mo || '';
   document.getElementById('param-moe').value = p.moe || '';
   document.getElementById('param-prestataire').value = p.prestataire || '';
+  const entiteEl = document.getElementById('param-entite');
+  if (entiteEl) entiteEl.value = p.entite || '';
   document.getElementById('param-marche').value = p.marche || '';
   document.getElementById('param-section').value = p.section || '';
   document.getElementById('param-objet').value = p.objet || '';
@@ -566,6 +572,7 @@ document.getElementById('btn-save-parametres').addEventListener('click', () => {
   p.mo = document.getElementById('param-mo').value.trim();
   p.moe = document.getElementById('param-moe').value.trim();
   p.prestataire = document.getElementById('param-prestataire').value.trim();
+  p.entite = (document.getElementById('param-entite')?.value || '').trim();
   p.marche = document.getElementById('param-marche').value.trim();
   p.section = document.getElementById('param-section').value.trim();
   p.objet = document.getElementById('param-objet').value.trim();
@@ -2369,6 +2376,9 @@ document.getElementById('btn-export-json').onclick = () => {
   a.href = URL.createObjectURL(blob);
   a.download = `sauvegarde_${new Date().toISOString().slice(0,10)}.json`;
   a.click();
+  /* ✅ تسجيل تاريخ التصدير */
+  localStorage.setItem('last_export', Date.now().toString());
+  notifier('💾 نسخة احتياطية محفوظة', 'success');
 };
 document.getElementById('btn-import-json').onclick = () => document.getElementById('file-json').click();
 /* ═══════════════════════════════════════════════════════════
@@ -3065,7 +3075,7 @@ window.ajouterSuiviManuel = function() {
    ═══════════════════════════════════════════════════════════ */
 /* PHOTOS : maintenant stockées dans DATA.photoSinistres (base64, persistantes) */
 let currentSinistreSubTab = 'sin-sinistres';
-let currentMoisEtatSinistre = new Date().toISOString().slice(0,7);
+//let currentMoisEtatSinistre = new Date().toISOString().slice(0,7);
 
 /* ═══ SWITCH SUB-TABS ═══ */
 window.switchSinistre = function(sub) {
@@ -3757,7 +3767,7 @@ window.rendreEtatSinistres = function() {
   const numero = numeroEtatSinistrePourPeriode(moisDebut, moisFin);
 
   /* Si working copy absente ou période changée → construire */
-   if (!etatWorking ||
+  if (!etatWorking ||
       etatWorking.moisDebut !== moisDebut ||
       etatWorking.moisFin   !== moisFin ||
       (etatWorking.troncon || '') !== (currentEtatTR || '')) {
@@ -3766,7 +3776,11 @@ window.rendreEtatSinistres = function() {
   }
 
   const etat = etatWorking;
-  const sinistresPeriode = extraireSinistresPourPeriode(moisDebut, moisFin);
+  /* ✅ CORRECTION : filtrer selon le TR sélectionné */
+  const sinistresPeriodeBrut = extraireSinistresPourPeriode(moisDebut, moisFin);
+  const sinistresPeriode = currentEtatTR
+    ? sinistresPeriodeBrut.filter(s => s.troncon === currentEtatTR)
+    : sinistresPeriodeBrut;
 
   /* Indicateur d'état : nouveau vs chargé vs modifié */
   const isNew = !etat._existant;
@@ -4296,9 +4310,9 @@ window.debugSinistres = function() {
   console.log('📅 Répartition par mois :');
   console.table(parMois);
 
-  console.log(`🎯 Mois courant (État) : ${currentMoisEtatSinistre}`);
-  const duMois = extraireSinistresPourMois(currentMoisEtatSinistre);
-  console.log(`✅ Sinistres du mois courant : ${duMois.length}`);
+  /* Utiliser la période actuelle de l'État des sinistres */
+  const duMois = extraireSinistresPourPeriode(currentEtatDebut, currentEtatFin);
+  console.log(`✅ Sinistres entre ${formatMoisFR(currentEtatDebut)} et ${formatMoisFR(currentEtatFin)} : ${duMois.length}`);
   if (duMois.length > 0) {
     console.table(duMois.map(s => ({ pk: s.pk, date: s.date, sens: s.sens })));
   }
@@ -4307,7 +4321,6 @@ window.debugSinistres = function() {
   console.log('   Object.keys(debugSinistres())');
   return parMois;
 };
-
 
 /* ═══════════════════════════════════════════════════════════
    📅 SÉLECTEUR DE MOIS (Année + Mois) — Anti-erreur de saisie
@@ -5608,18 +5621,37 @@ window.imprimerFacture = function() {
    ⚙️ MENU SETTINGS (Header)
    ═══════════════════════════════════════════════════════════ */
 window.toggleSettingsMenu = function(e) {
-  if (e) e.stopPropagation();
+  if (e) {
+    e.stopPropagation();
+    e.preventDefault();
+  }
   const menu = document.getElementById('settings-dropdown');
-  if (menu) menu.classList.toggle('open');
+  if (!menu) return;
+  
+  const estOuvert = menu.classList.contains('open');
+  menu.classList.toggle('open');
+  
+  console.log('⚙️ Menu', estOuvert ? 'fermé' : 'ouvert');
 };
 
-/* Fermer le menu si on clique ailleurs */
-document.addEventListener('click', (e) => {
+/* ═══════════════════════════════════════════════════════════
+   🖱️ FERMER LE MENU AU CLIC EXTÉRIEUR
+   (Utilise 'mousedown' pour éviter les conflits avec 'click')
+   ═══════════════════════════════════════════════════════════ */
+document.addEventListener('mousedown', (e) => {
   const menu = document.getElementById('settings-dropdown');
   const btn = document.getElementById('btn-settings-menu');
-  if (menu && btn && !menu.contains(e.target) && !btn.contains(e.target)) {
-    menu.classList.remove('open');
-  }
+  
+  if (!menu || !btn) return;
+  
+  /* Si le clic est DANS le menu → ne rien faire */
+  if (menu.contains(e.target)) return;
+  
+  /* Si le clic est sur le bouton ⚙️ → ne rien faire (déjà géré) */
+  if (btn.contains(e.target)) return;
+  
+  /* Sinon → fermer le menu */
+  menu.classList.remove('open');
 });
 
 /* ═══════════════════════════════════════════════════════════
@@ -6874,12 +6906,16 @@ function rendreExportCentre() {
     const m = moisDeDate(x.date);
     return m >= d && m <= f;
   }).length;
+  const nbAttachements = (DATA.attachements || []).filter(a => {
+  return a.mois >= d && a.mois <= f;
+  }).length;
 
   const cards = [
     { key:'catalogue',   icon:'📚', titre:'Catalogue (DE)', count:`${nbCat} prix`,                color:'#1e3a8a' },
     { key:'commandes',   icon:'📝', titre:'Commandes',      count:`${nbCmd} commande(s)`,         color:'#0891b2' },
     { key:'metre',       icon:'📑', titre:'Metré',          count:`${nbMetre} enregistré(s)`,     color:'#3b82f6' },
     { key:'constat',     icon:'📋', titre:'Constats',       count:`${nbConstat} enregistré(s)`,   color:'#f59e0b' },
+    { key:'attachements', icon:'📄', titre:'Attachements',  count:`${nbAttachements} enregistré(s)`, color:'#c2410c' },  /* 🆕 */
     { key:'suivi',       icon:'💰', titre:'Suivi des Prix', count:`${nbSuivi} suivi(s)`,          color:'#16a34a' },
     { key:'equipements', icon:'🏗️', titre:'Équipements',    count:`${nbEquip} enregistré(s)`,     color:'#5b21b6' },
     { key:'sinistres',   icon:'🚨', titre:'Sinistres',      count:`${nbSin} sinistre(s)`,         color:'#b91c1c' },
@@ -7079,6 +7115,62 @@ window.apercuExport = function(key) {
     nomFichier = `Constat_${d}_${f}${tr ? '_' + tr : ''}.xls`;
   }
 
+  /* ═══ 4.5. ATTACHEMENTS ═══ */
+  else if (key === 'attachements') {
+    const attList = (DATA.attachements || []).filter(a =>
+      a.mois >= d && a.mois <= f
+    ).sort((a, b) => a.mois.localeCompare(b.mois));
+
+    if (attList.length === 0) {
+      notifier('⚠️ Aucun Attachement dans cette période', 'danger');
+      return;
+    }
+
+    /* Rassembler toutes les fiches */
+    const toutesFiches = [];
+    attList.forEach(att => {
+      if (att.fiches && att.fiches.length > 0) {
+        att.fiches.forEach(f => {
+          toutesFiches.push({ fiche: f, att: att });
+        });
+      }
+    });
+
+    if (toutesFiches.length === 0) {
+      notifier('⚠️ Aucune fiche générée — ouvrez Attachement et cliquez sur "Générer"', 'danger');
+      return;
+    }
+
+    titre = `Attachements — ${toutesFiches.length} fiche(s) sur ${attList.length} mois`;
+    nomFichier = `Attachements_${d}_${f}.xls`;
+
+    /* Bouton aperçu */
+    html = `
+      <div style="padding:16px;text-align:center;">
+        <h3 style="color:#c2410c;margin-bottom:16px;">
+          📄 ${toutesFiches.length} fiche(s) d'Attachement
+        </h3>
+        <p style="color:#64748b;margin-bottom:20px;">
+          ${attList.length} mois : ${attList.map(a => formatMoisFR(a.mois)).join(' • ')}
+        </p>
+        <div style="display:inline-block;padding:16px 32px;background:#fff7ed;
+                    border:2px dashed #c2410c;border-radius:12px;">
+          <p style="font-weight:700;color:#c2410c;">
+            Cliquez sur "Aperçu & Imprimer" pour ouvrir les fiches
+          </p>
+        </div>
+      </div>
+    `;
+
+    /* Ouvrir directement l'aperçu des fiches */
+    setTimeout(() => {
+      ouvrirApercuToutesFichesFiltrees(toutesFiches, attList);
+    }, 300);
+
+    return;
+  }
+
+
   /* ═══ 5. SUIVI DES PRIX ═══ */
   else if (key === 'suivi') {
     /* Utiliser la période du Suivi */
@@ -7272,16 +7364,198 @@ if (headerNom && window.MARCHE_NOM) {
 }
 
 /* ═══════════════════════════════════════════════════════════
+   📤 ENVOI DES DONNÉES AU DIRECTEUR (par Email)
+   ═══════════════════════════════════════════════════════════ */
+
+const ADMIN_EMAIL = 'nouari.abdelkabir@adm.co.ma';
+
+window.envoyerDonneesAuDirecteur = function() {
+  /* ─── 1. Nom de l'utilisateur ─── */
+  let userName = localStorage.getItem('user_name');
+  if (!userName) {
+    userName = prompt('👤 Votre nom (une seule fois) :');
+    if (!userName || !userName.trim()) return;
+    userName = userName.trim();
+    localStorage.setItem('user_name', userName);
+  }
+
+  /* ─── 2. Informations du fichier ─── */
+  const dateJour = new Date().toISOString().slice(0, 10);
+  const nomFichier = `Donnees_${userName.replace(/\s/g, '_')}_${ID_MARCHE}_${dateJour}.json`;
+  const jsonData = JSON.stringify(DATA, null, 2);
+  const tailleKo = (jsonData.length / 1024).toFixed(1);
+
+  /* ─── 3. Statistiques rapides ─── */
+  const nbCommandes    = (DATA.commandes || []).length;
+  const nbMetres       = (DATA.metresEnregistres || []).length;
+  const nbConstats     = (DATA.constatsEnregistres || []).length;
+  const nbAttachements = (DATA.attachements || []).length;
+
+  /* ─── 4. Confirmation ─── */
+  const confirmation = confirm(
+    `📤 ENVOI DES DONNÉES AU DIRECTEUR\n` +
+    `━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+    `👤 Utilisateur : ${userName}\n` +
+    `📅 Date : ${dateJour}\n` +
+    `📦 Taille : ${tailleKo} Ko\n\n` +
+    `📊 Contenu des données :\n` +
+    `   • ${nbCommandes} commande(s)\n` +
+    `   • ${nbMetres} metré(s)\n` +
+    `   • ${nbConstats} constat(s)\n` +
+    `   • ${nbAttachements} attachement(s)\n\n` +
+    `📧 Votre messagerie va s'ouvrir\n` +
+    `   pour envoyer le fichier à :\n` +
+    `   ${ADMIN_EMAIL}\n\n` +
+    `⚠️ Étapes après l'ouverture :\n` +
+    `   1. Joindre le fichier (attach)\n` +
+    `   2. Cliquer sur "Envoyer"\n\n` +
+    `Voulez-vous continuer ?`
+  );
+  
+  if (!confirmation) return;
+
+  /* ─── 5. Téléchargement automatique ─── */
+  const blob = new Blob([jsonData], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = nomFichier;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+
+  notifier(`✅ Fichier téléchargé : ${nomFichier}`, 'success');
+
+  /* ─── 6. Ouverture de la messagerie ─── */
+  setTimeout(() => {
+    const subject = encodeURIComponent(
+      `[${ID_MARCHE}] Données de ${userName} - ${dateJour}`
+    );
+    
+    const body = encodeURIComponent(
+      `Bonjour,\n\n` +
+      `Je vous envoie mes données concernant le marché ${ID_MARCHE}.\n\n` +
+      `━━━━━━━━━━━━━━━━━━━━━━━\n` +
+      `👤 Utilisateur : ${userName}\n` +
+      `📅 Date : ${dateJour}\n` +
+      `📦 Fichier : ${nomFichier}\n` +
+      `━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+      `📊 Contenu :\n` +
+      `   • ${nbCommandes} commande(s)\n` +
+      `   • ${nbMetres} metré(s)\n` +
+      `   • ${nbConstats} constat(s)\n` +
+      `   • ${nbAttachements} attachement(s)\n\n` +
+      `⚠️ Le fichier est en pièce jointe.\n\n` +
+      `Cordialement,\n` +
+      `${userName}`
+    );
+    
+    window.location.href = `mailto:${ADMIN_EMAIL}?subject=${subject}&body=${body}`;
+    
+    /* ─── 7. Instructions finales ─── */
+    setTimeout(() => {
+      alert(
+        `✅ Votre messagerie est ouverte !\n\n` +
+        `━━━━━━━━━━━━━━━━━━━━━━━\n` +
+        `📌 Étapes restantes :\n` +
+        `━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+        `1️⃣  Dans la fenêtre de messagerie :\n` +
+        `    • Cliquez sur 📎 (Joindre)\n` +
+        `    • Choisissez le dossier "Téléchargements"\n` +
+        `    • Sélectionnez le fichier :\n` +
+        `      ${nomFichier}\n\n` +
+        `2️⃣  Cliquez sur "Envoyer"\n\n` +
+        `━━━━━━━━━━━━━━━━━━━━━━━\n` +
+        `✅ Terminé !\n\n` +
+        `Merci 🙏`
+      );
+    }, 1500);
+  }, 1000);
+
+  /* ─── 8. Nettoyage ─── */
+  setTimeout(() => URL.revokeObjectURL(url), 5000);
+};
+
+
+/* ═══════════════════════════════════════════════════════════
+   🎯 BINDING DES BOUTONS DU MENU SETTINGS
+   ═══════════════════════════════════════════════════════════ */
+function binderBoutonsSettings() {
+  /* 💾 Sauvegarder */
+  const btnSave = document.getElementById('btn-sauvegarder');
+  if (btnSave) {
+    btnSave.onclick = (e) => {
+      e.stopPropagation();                    /* ← Empêche la fermeture du menu */
+      sauvegarderDonnees();
+      document.getElementById('settings-dropdown').classList.remove('open');
+    };
+    console.log('✅ btn-sauvegarder lié');
+  }
+
+  /* 💾 Export JSON */
+  const btnExport = document.getElementById('btn-export-json');
+  if (btnExport) {
+    btnExport.onclick = (e) => {
+      e.stopPropagation();
+      const blob = new Blob([JSON.stringify(DATA, null, 2)], { type: 'application/json' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `sauvegarde_${ID_MARCHE}_${new Date().toISOString().slice(0,10)}.json`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+      localStorage.setItem('last_export', Date.now().toString());
+      notifier('💾 نسخة احتياطية محفوظة', 'success');
+      document.getElementById('settings-dropdown').classList.remove('open');
+    };
+    console.log('✅ btn-export-json lié');
+  }
+
+  /* 📥 Import JSON */
+  const btnImport = document.getElementById('btn-import-json');
+  if (btnImport) {
+    btnImport.onclick = (e) => {
+      e.stopPropagation();
+      document.getElementById('file-json').click();
+      /* Ne pas fermer le menu ici — l'utilisateur va sélectionner un fichier */
+    };
+    console.log('✅ btn-import-json lié');
+  }
+}
+/* ═══════════════════════════════════════════════════════════
    🚀 INITIALISATION ASYNC
    ═══════════════════════════════════════════════════════════ */
 (async function initApp() {
+
   console.log('🚀 Démarrage de l\'application...');
 
   try {
     DATA = await chargerDonneesAsync();
   } catch (e) {
     console.error('❌ Erreur chargement:', e);
-    console.warn('⚠️ Utilisation des données par défaut');
+  }
+/* ✅ ربط أزرار القائمة */
+  binderBoutonsSettings();
+  /* ═══════════════════════════════════════════════════════
+     🆕 Charger la config depuis DATA.config (dans data/*.json)
+     ═══════════════════════════════════════════════════════ */
+  if (DATA && DATA.config) {
+    window.MARCHE_CONFIG = DATA.config;
+    window.MARCHE_SECTIONS = DATA.config.sections || MARCHE_SECTIONS_DEFAUT;
+    window.MARCHE_NOM = DATA.config.nom || ID_MARCHE;
+    window.MARCHE_COULEUR = DATA.config.couleur || '#1e3a8a';
+    console.log('✅ Config chargée:', DATA.config);
+  } else {
+    window.MARCHE_SECTIONS = MARCHE_SECTIONS_DEFAUT;
+    window.MARCHE_NOM = ID_MARCHE;
+    window.MARCHE_COULEUR = '#1e3a8a';
+    console.warn('⚠️ Pas de config dans data/*.json — défauts utilisés');
+  }
+
+  /* Mettre à jour le titre dans le header */
+  const headerNomEl = document.getElementById('header-marche-nom');
+  if (headerNomEl) {
+    headerNomEl.textContent = ID_MARCHE + ' — ' + (window.MARCHE_NOM || '');
   }
 
   /* Période */
@@ -7313,6 +7587,7 @@ if (headerNom && window.MARCHE_NOM) {
     ['Historique',            () => rendreHistorique()],
     ['Mois Metré',            () => changerMoisMetre(currentMoisMetre)],
     ['Mois Constat',          () => changerMoisConstat(currentMoisConstat)],
+    ['Attachement',    () => initAttachement()],
     ['Switch Metré',          () => switchMetre('TR1')],
     ['Switch Constat',        () => switchConstat('TR1')]
   ];
@@ -7357,3 +7632,1399 @@ function appliquerSectionsVisibles() {
     if (dash) dash.click();
   }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   ☁️ GESTION DU PAT GITHUB (Modal)
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── Ouvrir la fenêtre ─── */
+window.ouvrirModalPAT = function(e) {
+  if (e) e.stopPropagation();
+  document.getElementById('settings-dropdown').classList.remove('open');
+
+  /* Rafraîchir le status */
+  actualiserStatusPAT();
+
+  /* Vider le champ */
+  document.getElementById('pat-input').value = '';
+  document.getElementById('pat-message').style.display = 'none';
+
+  /* Ouvrir le modal */
+  document.getElementById('modal-pat').classList.add('open');
+  setTimeout(() => document.getElementById('pat-input').focus(), 100);
+};
+
+/* ─── Fermer ─── */
+window.fermerModalPAT = function() {
+  document.getElementById('modal-pat').classList.remove('open');
+};
+
+/* ─── Actualiser le status affiché ─── */
+function actualiserStatusPAT() {
+  const el = document.getElementById('pat-status-actuel');
+  const btnLogout = document.getElementById('btn-github-logout');
+  const btnConnexion = document.getElementById('btn-github-connexion');
+
+  if (typeof ghHasToken === 'function' && ghHasToken()) {
+    const t = ghGetToken();
+    el.innerHTML = `
+      <div style="color:#16a34a;font-weight:700;">✅ Connecté à GitHub</div>
+      <div style="color:#64748b;font-size:11px;margin-top:4px;font-family:monospace;">
+        ${t.slice(0, 10)}...${t.slice(-4)}
+      </div>
+    `;
+    el.style.background = '#dcfce7';
+    if (btnLogout) btnLogout.style.display = 'block';
+    if (btnConnexion) btnConnexion.textContent = '🔄 Changer de compte';
+  } else {
+    el.innerHTML = `<div style="color:#dc2626;font-weight:700;">❌ Non connecté</div>`;
+    el.style.background = '#fee2e2';
+    if (btnLogout) btnLogout.style.display = 'none';
+    if (btnConnexion) btnConnexion.textContent = '☁️ Connexion GitHub';
+  }
+}
+
+/* ─── Sauvegarder le PAT ─── */
+window.sauvegarderPAT = async function() {
+  const input = document.getElementById('pat-input');
+  const msg = document.getElementById('pat-message');
+  const btn = document.getElementById('btn-pat-save');
+
+  const token = input.value.trim();
+
+  /* Validation */
+  if (!token) {
+    return afficherMsgPAT('⚠️ Token vide', 'error');
+  }
+  if (!token.startsWith('ghp_')) {
+    return afficherMsgPAT('❌ Le token doit commencer par ghp_', 'error');
+  }
+  if (token.length !== 40) {
+    return afficherMsgPAT('❌ Le token doit faire 40 caractères (actuel : ' + token.length + ')', 'error');
+  }
+
+  /* Désactiver le bouton */
+  btn.disabled = true;
+  btn.textContent = '⏳ Test en cours...';
+  afficherMsgPAT('⏳ Vérification du token...', 'info');
+
+  try {
+    /* Test du token */
+    const r = await fetch('https://api.github.com/user', {
+      headers: { 'Authorization': 'Bearer ' + token }
+    });
+
+    if (!r.ok) {
+      btn.disabled = false;
+      btn.textContent = '✅ Enregistrer';
+      return afficherMsgPAT('❌ Token invalide (erreur ' + r.status + ')', 'error');
+    }
+
+    const user = await r.json();
+    console.log('✅ PAT valide pour:', user.login);
+
+    /* Sauvegarder */
+    localStorage.setItem('github_pat', token);
+
+    /* Rafraîchir status */
+    actualiserStatusPAT();
+
+    /* Succès */
+    afficherMsgPAT('✅ Connecté en tant que ' + user.login + ' !', 'success');
+
+    setTimeout(() => {
+      fermerModalPAT();
+      notifier('☁️ Connecté à GitHub — Rechargement...', 'success');
+      setTimeout(() => location.reload(), 1200);
+    }, 1500);
+
+  } catch (e) {
+    btn.disabled = false;
+    btn.textContent = '✅ Enregistrer';
+    afficherMsgPAT('❌ Erreur réseau : ' + e.message, 'error');
+  }
+};
+
+/* ─── Afficher un message dans le modal ─── */
+function afficherMsgPAT(texte, type) {
+  const msg = document.getElementById('pat-message');
+  msg.textContent = texte;
+  msg.style.display = 'block';
+
+  const colors = {
+    info:    { bg: '#dbeafe', color: '#1e40af' },
+    success: { bg: '#dcfce7', color: '#166534' },
+    error:   { bg: '#fee2e2', color: '#991b1b' }
+  };
+
+  const c = colors[type] || colors.info;
+  msg.style.background = c.bg;
+  msg.style.color = c.color;
+}
+
+/* ─── Se déconnecter ─── */
+window.deconnecterGitHub = function() {
+  if (!confirm('⚠️ Se déconnecter de GitHub ?\n\nLes sauvegardes ne seront plus synchronisées automatiquement.')) return;
+
+  localStorage.removeItem('github_pat');
+  document.getElementById('settings-dropdown').classList.remove('open');
+  notifier('🚪 Déconnecté de GitHub', 'info');
+  setTimeout(() => location.reload(), 1000);
+};
+
+/* ─── Mettre à jour l'état du bouton au démarrage ─── */
+(function initGitHubButton() {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', actualiserStatusPAT);
+  } else {
+    setTimeout(actualiserStatusPAT, 100);
+  }
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   📄 ATTACHEMENT — Gestion des attachements mensuels
+   ═══════════════════════════════════════════════════════════ */
+
+let currentMoisAttachement = new Date().toISOString().slice(0,7);
+let currentAttachementTR = 'TR1';
+
+window.switchAttachement = function(tr) {
+  /* Si tr n'est pas passé, garder l'actuel */
+  if (tr) currentAttachementTR = tr;
+
+  /* Mettre à jour les sub-tabs */
+  document.querySelectorAll('#subtabs-attachement .sub-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.subtab === 'att-' + currentAttachementTR);
+  });
+
+  rendreAttachement();
+  rendreAttachementsEnregistres();
+};
+
+/* ─── Initialisation au démarrage ─── */
+function initAttachement() {
+  console.log('📄 Initialisation Attachement');
+  switchAttachement('TR1');
+}
+
+window.changerMoisAttachement = function(mois) {
+  if (!mois) return;
+  currentMoisAttachement = mois;
+  rendreAttachement();
+  rendreAttachementsEnregistres();
+};
+
+window.changerMoisAttachementPicker = function() {
+  const v = getMonthPickerValue('attachement-mois');
+  if (v) changerMoisAttachement(v);
+};
+
+/* ─── Numérotation ─── */
+function numeroAttachementPourMois(mois, tr) {
+  if (!mois) return 1;
+  const list = [...new Set((DATA.attachements || [])
+    .filter(a => a.troncon === tr)
+    .map(a => a.mois))];
+  if (!list.includes(mois)) list.push(mois);
+  list.sort();
+  return list.indexOf(mois) + 1;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   📅 Mois précédent dans les Attachements (même TR)
+   ═══════════════════════════════════════════════════════════ */
+function getMoisPrecedentAttachement(mois, tr) {
+  if (!mois) return null;
+  const list = [...new Set((DATA.attachements || [])
+    .filter(a => a.troncon === tr && a.mois && a.mois < mois)
+    .map(a => a.mois))].sort();
+  return list.length > 0 ? list[list.length - 1] : null;
+}
+
+/* ─── Rendu principal (CORRIGÉ) ─── */
+function rendreAttachement() {
+  const cont = document.getElementById('attachement-content');
+  if (!cont) return;
+
+  const tr = currentAttachementTR;
+  const mois = currentMoisAttachement;
+  const numero = numeroAttachementPourMois(mois, tr);
+  const periodeTxt = formatMoisFR(mois);
+
+  /* ─── Détecter si c'est le DERNIER mois (basé sur dateFin) ─── */
+  const dateFin = (DATA.parametres && DATA.parametres.dateFin) || '';
+  const moisFin = dateFin ? dateFin.slice(0, 7) : '';
+  const estDernierMois = (moisFin && mois === moisFin);
+
+  /* ─── Récupérer l'attachement actuel ─── */
+  const att = (DATA.attachements || []).find(a => a.mois === mois && a.troncon === tr);
+
+  /* ─── Toolbar ─── */
+  const toolbar = `
+    <div class="metre-toolbar" style="background:#fff7ed;padding:12px 16px;border-radius:8px;
+         margin-bottom:14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+         border:2px solid #fed7aa;">
+      <label style="font-weight:700;color:#c2410c;">📅 Mois :</label>
+      ${htmlMonthPicker('attachement-mois', mois, 'changerMoisAttachementPicker')}
+      <span style="font-weight:700;color:#c2410c;font-size:14px;">${periodeTxt}</span>
+      <span style="background:#c2410c;color:#fff;padding:5px 14px;border-radius:12px;
+                   font-weight:700;font-size:13px;">
+        ${tr} — Att N°${numero}
+      </span>
+      ${estDernierMois 
+        ? `<span style="background:#dc2626;color:#fff;padding:4px 12px;border-radius:10px;font-size:12px;font-weight:700;">
+             🏁 DERNIER MOIS (Met Mois actif)
+           </span>`
+        : `<span style="background:#16a34a;color:#fff;padding:4px 12px;border-radius:10px;font-size:12px;font-weight:700;">
+             📅 Mois normal (Est Mois actif)
+           </span>`}
+      <button class="btn btn-secondary btn-sm" onclick="ouvrirApercuDetail()"
+              style="margin-left:auto;">👁️ Aperçu Détail</button>
+      <button class="btn btn-warning btn-sm" onclick="genererFiches()">
+        📄 Générer les Attachements
+      </button>
+      <button class="btn btn-primary btn-sm" onclick="sauvegarderAttachement()">
+        💾 Enregistrer
+      </button>
+    </div>
+  `;
+
+  /* ─── Cas 1 : Aucune donnée pour ce mois ─── */
+  if (!att || !att.lignes || att.lignes.length === 0) {
+    cont.innerHTML = toolbar + `
+      <div class="panel">
+        <p style="text-align:center;padding:30px;color:#64748b;">
+          Aucune ligne pour <strong>${periodeTxt}</strong> — ${tr}.<br>
+          <span style="font-size:12px;">
+            Cliquez sur le bouton ci-dessous pour charger les prix du catalogue.
+          </span>
+        </p>
+        <div style="text-align:center;padding:12px;">
+          <button class="btn btn-primary" onclick="initialiserAttachementDepuisCatalogue()">
+            📋 Charger les prix du catalogue
+          </button>
+        </div>
+      </div>`;
+    return;
+  }
+
+  /* ─── Cas 2 : Données existent → on les traite ─── */
+  const lignes = att.lignes;
+
+  /* Recalculer les colonnes (5) Est Ant et (9) Totales */
+  lignes.forEach(l => {
+    /* (5) Est Ant = Cumul des Est Mois des mois précédents */
+    l.estAnterieure = calculerCumulAvant(mois, tr, l.prix);
+
+    /* (6) Met Ant : toujours 0 */
+    l.metAnterieure = 0;
+
+    /* (9) Totales : selon le type de mois */
+    if (estDernierMois) {
+      /* Dernier mois : Est Ant + Met Mois */
+      l.totale = (l.estAnterieure || 0) + (l.metMois || 0);
+    } else {
+      /* Mois normal : Est Ant + Est Mois */
+      l.totale = (l.estAnterieure || 0) + (l.estMois || 0);
+    }
+  });
+
+  /* ─── Total général ─── */
+  let totalMontant = 0;
+  lignes.forEach(l => {
+    totalMontant += (l.totale || 0) * (l.pu || 0);
+  });
+
+  /* ─── Tableau HTML ─── */
+  const html = toolbar + `
+    <div class="panel">
+      <div style="overflow-x:auto;">
+        <table class="constat-table" style="font-size:11px;">
+          <thead>
+            <tr>
+              <th style="width:50px;">N°</th>
+              <th>Désignation</th>
+              <th style="width:50px;">Unité</th>
+              <th style="width:70px;">Qté Init</th>
+              <th style="width:70px;">PU</th>
+              <th style="width:75px;background:#e2e8f0;color:#475569;">(5) Est Ant 🔒</th>
+              <th style="width:75px;background:#e2e8f0;color:#475569;">(6) Met Ant 🔒</th>
+              <th style="width:85px;${estDernierMois ? 'background:#e2e8f0;color:#94a3b8;' : 'background:#dcfce7;color:#166534;'}">
+                (7) Est Mois
+              </th>
+              <th style="width:85px;${estDernierMois ? 'background:#fee2e2;color:#991b1b;' : 'background:#e2e8f0;color:#94a3b8;'}">
+                (8) Met Mois
+              </th>
+              <th style="width:80px;background:#fef3c7;color:#92400e;">(9) Totales</th>
+              <th style="width:100px;">Montant</th>
+              <th style="width:120px;">Observations</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${lignes.map((l, i) => {
+              const montant = (l.totale || 0) * (l.pu || 0);
+              return `
+                <tr>
+                  <td style="text-align:center;font-weight:700;">${l.prix}</td>
+                  <td style="font-size:10px;">${l.libelle}</td>
+                  <td style="text-align:center;">${l.unite}</td>
+                  <td class="num">${l.qteInitiale || 0}</td>
+                  <td class="num">${(l.pu || 0).toFixed(2)}</td>
+                  <td class="num" style="background:#f8fafc;color:#64748b;font-weight:600;"
+                      title="Calculé automatiquement depuis le mois précédent">
+                    ${(l.estAnterieure || 0).toFixed(2)}
+                  </td>
+                  <td class="num" style="background:#f8fafc;color:#64748b;font-weight:600;"
+                      title="Toujours 0">
+                    ${(l.metAnterieure || 0).toFixed(2)}
+                  </td>
+                  <td style="background:${estDernierMois ? '#f1f5f9' : '#fff'};">
+                    ${estDernierMois
+                      ? `<span style="display:block;padding:4px;text-align:right;color:#94a3b8;">—</span>`
+                      : `<input type="number" min="0" step="0.01" value="${l.estMois || ''}"
+                           onchange="setAttachementQte(${i}, 'estMois', this.value)"
+                           style="background:#fff;">`}
+                  </td>
+                  <td style="background:${estDernierMois ? '#fff' : '#f1f5f9'};">
+                    ${estDernierMois
+                      ? `<input type="number" min="0" step="0.01" value="${l.metMois || ''}"
+                           onchange="setAttachementQte(${i}, 'metMois', this.value)"
+                           style="background:#fff;">`
+                      : `<span style="display:block;padding:4px;text-align:right;color:#94a3b8;">—</span>`}
+                  </td>
+                  <td class="num" style="font-weight:700;color:#c2410c;background:#fef3c7;">
+                    ${(l.totale || 0).toFixed(2)}
+                  </td>
+                  <td class="num" style="font-weight:700;">${montant.toFixed(2)}</td>
+                  <td><input type="text" value="${(l.observations || '').replace(/"/g,'&quot;')}"
+                        onchange="setAttachementObs(${i}, this.value)" style="font-size:10px;"></td>
+                </tr>
+              `;
+            }).join('')}
+          </tbody>
+          <tfoot>
+            <tr class="total-row">
+              <td colspan="10" style="text-align:right;">TOTAL ${tr}</td>
+              <td class="num" style="font-weight:700;font-size:13px;">${totalMontant.toFixed(2)}</td>
+              <td></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  `;
+  cont.innerHTML = html;
+}
+
+/* ─── Initialiser depuis le catalogue ─── */
+window.initialiserAttachementDepuisCatalogue = function() {
+  const tr = currentAttachementTR;
+  const mois = currentMoisAttachement;
+
+  if (!DATA.catalogue || DATA.catalogue.length === 0) {
+    notifier('⚠️ Catalogue vide — importez DE.xlsx d\'abord', 'danger');
+    return;
+  }
+
+  if (!DATA.attachements) DATA.attachements = [];
+
+  let att = DATA.attachements.find(a => a.mois === mois && a.troncon === tr);
+  if (!att) {
+    att = {
+      id: uid(),
+      numero: numeroAttachementPourMois(mois, tr),
+      mois: mois,
+      troncon: tr,
+      dateReference: getFinDeMois(mois),
+      lignes: [],
+      fiches: [],
+      createdAt: new Date().toISOString()
+    };
+    DATA.attachements.push(att);
+  }
+
+  /* ─── Récupérer l'attachement précédent ─── */
+  /* ─── Créer les lignes avec Ant calculées depuis le DÉBUT ─── */
+  att.lignes = DATA.catalogue.map(p => {
+    const estAnt = calculerCumulAvant(mois, tr, p.numero);
+
+    return {
+      prix: p.numero,
+      libelle: p.libelle,
+      unite: p.unite,
+      qteInitiale: p.qteInitiale || 0,
+      pu: p.prixUnitaire || 0,
+      estAnterieure: estAnt,
+      metAnterieure: 0,     /* ← toujours 0 */
+      estMois: 0,
+      metMois: 0,
+      totale: estAnt,       /* ← initial = Est Ant */
+      observations: ''
+    };
+  });
+
+  sauvegarderDonnees(true);
+  rendreAttachement();
+  notifier(`✅ ${att.lignes.length} prix chargés pour ${tr}`, 'success');
+};
+
+
+/* ─── Modification d'une quantité (SANS re-render complet) ─── */
+/* ─── Modification d'une quantité ─── */
+window.setAttachementQte = function(index, field, value) {
+  const tr = currentAttachementTR;
+  const mois = currentMoisAttachement;
+  const att = (DATA.attachements || []).find(a => a.mois === mois && a.troncon === tr);
+  if (!att || !att.lignes[index]) return;
+
+  /* ─── Déterminer si c'est le dernier mois ─── */
+  const dateFin = (DATA.parametres && DATA.parametres.dateFin) || '';
+  const moisFin = dateFin ? dateFin.slice(0, 7) : '';
+  const estDernierMois = (moisFin && mois === moisFin);
+
+  /* ─── Bloquer les champs interdits ─── */
+  if (field === 'estMois' && estDernierMois) {
+    notifier('⚠️ Utilisez (8) Met Mois pour le dernier mois', 'danger');
+    rendreAttachement();
+    return;
+  }
+  if (field === 'metMois' && !estDernierMois) {
+    notifier('⚠️ (8) Met Mois est réservé au dernier mois', 'danger');
+    rendreAttachement();
+    return;
+  }
+
+  /* ─── Mettre à jour la valeur ─── */
+  const val = parseFloat(value) || 0;
+  att.lignes[index][field] = val;
+
+  /* ─── Recalculer (5), (6) et (9) ─── */
+  const l = att.lignes[index];
+  l.estAnterieure = calculerCumulAvant(mois, tr, l.prix);
+  l.metAnterieure = 0;
+
+  if (estDernierMois) {
+    l.totale = (l.estAnterieure || 0) + (l.metMois || 0);
+  } else {
+    l.totale = (l.estAnterieure || 0) + (l.estMois || 0);
+  }
+
+  sauvegarderDonnees(true);
+  rendreAttachement();
+};
+
+// ✅ احتفظ بهذه النسخة فقط (الأولى)
+window.setAttachementObs = function(index, value) {
+  const tr = currentAttachementTR;
+  const mois = currentMoisAttachement;
+  const att = (DATA.attachements || []).find(a => a.mois === mois && a.troncon === tr);
+  if (!att || !att.lignes[index]) return;
+
+  att.lignes[index].observations = value;
+  sauvegarderDonnees(true);
+};
+
+
+/* ─── Sauvegarder ─── */
+window.sauvegarderAttachement = function() {
+  const tr = currentAttachementTR;
+  const mois = currentMoisAttachement;
+  const att = (DATA.attachements || []).find(a => a.mois === mois && a.troncon === tr);
+
+  if (!att) {
+    notifier('⚠️ Rien à sauvegarder', 'danger');
+    return;
+  }
+
+  /* ─── Vérifier : dernier mois → Met Mois rempli ─── */
+  const dateFin = (DATA.parametres && DATA.parametres.dateFin) || '';
+  const moisFin = dateFin ? dateFin.slice(0, 7) : '';
+  const estDernierMois = (moisFin && mois === moisFin);
+
+  if (estDernierMois) {
+    const aMetMois = att.lignes.some(l => (l.metMois || 0) > 0);
+    if (!aMetMois) {
+      notifier('⚠️ Dernier mois — remplissez (8) Met Mois', 'danger');
+      return;
+    }
+  } else {
+    const aEstMois = att.lignes.some(l => (l.estMois || 0) > 0);
+    if (!aEstMois) {
+      notifier('⚠️ Remplissez (7) Est Mois', 'danger');
+      return;
+    }
+  }
+
+  att.updatedAt = new Date().toISOString();
+  logHistorique('SAUVEGARDE ATTACHEMENT', `${tr} — N°${att.numero} — ${formatMoisFR(mois)}`);
+  sauvegarderDonnees(true);
+  notifier(`💾 Attachement ${tr} N°${att.numero} enregistré`, 'success');
+  rendreAttachementsEnregistres();
+};
+
+/* ─── Aperçu (placeholder) ─── */
+window.apercuAttachement = function() {
+  notifier('👁️ Aperçu — à venir dans la Phase 2', 'info');
+};
+
+/* ─── Liste enregistrés ─── */
+window.rendreAttachementsEnregistres = function() {
+  const cont = document.getElementById('liste-attachements-accordion');
+  if (!cont) return;
+
+  const filtreTR = document.getElementById('filtre-attachement-troncon')?.value || '';
+  const rech = (document.getElementById('filtre-attachement-recherche')?.value || '').toLowerCase();
+
+  let list = (DATA.attachements || []).slice();
+  list.forEach(a => {
+    a._numero = numeroAttachementPourMois(a.mois, a.troncon);
+  });
+  list.sort((a, b) => {
+    const cmpDate = (b.mois || '').localeCompare(a.mois || '');
+    if (cmpDate !== 0) return cmpDate;
+    return (a.troncon || '').localeCompare(b.troncon || '');
+  });
+
+  if (filtreTR) list = list.filter(a => a.troncon === filtreTR);
+  if (rech) {
+    list = list.filter(a =>
+      [String(a._numero), formatMoisFR(a.mois), a.troncon, a.dateReference]
+        .join(' ').toLowerCase().includes(rech));
+  }
+
+  if (list.length === 0) {
+    cont.innerHTML = '<p style="text-align:center;padding:20px;color:#64748b;">Aucun Attachement enregistré.</p>';
+    return;
+  }
+
+  cont.innerHTML = list.map(a => {
+    const total = (a.lignes || []).reduce((s, l) => s + ((l.totale || 0) * (l.pu || 0)), 0);
+    const trColor = { TR1: '#1e40af', TR2: '#166534', TR3: '#92400e', TR4: '#9d174d' }[a.troncon] || '#c2410c';
+    return `
+      <div class="cmd-item">
+        <div class="cmd-item-header">
+          <div class="cmd-item-title">
+            <strong>Attachement ${a.troncon} N°${a._numero}</strong>
+            <span style="background:${trColor};color:#fff;padding:2px 10px;border-radius:10px;font-size:11px;font-weight:600;">
+              📄 Attachement
+            </span>
+            <span>📅 ${formatMoisFR(a.mois)}</span>
+            <span class="badge badge-tr1">${(a.lignes || []).length} ligne(s)</span>
+            <span style="color:#c2410c;font-weight:700;">
+              Total : ${total.toLocaleString('fr-FR', {minimumFractionDigits:2})} DH
+            </span>
+          </div>
+          <div style="display:flex;gap:6px;">
+            <button class="btn-icon" title="Charger" onclick="chargerAttachement('${a.id}')">📂</button>
+            <button class="btn-icon danger" title="Supprimer" onclick="supprimerAttachement('${a.id}')">🗑️</button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+/* ─── Charger ─── */
+window.chargerAttachement = function(id) {
+  const a = (DATA.attachements || []).find(x => x.id === id);
+  if (!a) return;
+  currentMoisAttachement = a.mois;
+  currentAttachementTR = a.troncon;
+  switchAttachement(a.troncon);
+  notifier(`📂 Attachement ${a.troncon} N°${numeroAttachementPourMois(a.mois, a.troncon)} chargé`, 'success');
+};
+
+/* ─── Supprimer ─── */
+window.supprimerAttachement = function(id) {
+  const a = (DATA.attachements || []).find(x => x.id === id);
+  if (!a) return;
+  const num = numeroAttachementPourMois(a.mois, a.troncon);
+  if (!confirm(`Supprimer Attachement ${a.troncon} N°${num} (${formatMoisFR(a.mois)}) ?`)) return;
+
+  DATA.attachements = DATA.attachements.filter(x => x.id !== id);
+  logHistorique('SUPPRESSION ATTACHEMENT', `${a.troncon} — N°${num}`);
+  sauvegarderDonnees(true);
+  rendreAttachementsEnregistres();
+  notifier('🗑️ Attachement supprimé', 'success');
+};
+
+/* ─── Init structure ─── */
+function initAttachements(d) {
+  if (!d.attachements) d.attachements = [];
+}
+
+/* ═══════════════════════════════════════════════════════════
+   📄 GÉNÉRATION DES FICHES D'ATTACHEMENT
+   ═══════════════════════════════════════════════════════════ */
+window.genererFiches = function() {
+  /* ═══ VÉRIFICATION IMMÉDIATE ═══ */
+  console.log('═══════════════════════════════════════');
+  console.log('🖱️ genererFiches() EXÉCUTÉE');
+  console.log('═══════════════════════════════════════');
+  console.log('TR actif:', currentAttachementTR);
+  console.log('Mois actif:', currentMoisAttachement);
+
+  const tr = currentAttachementTR;
+  const mois = currentMoisAttachement;
+
+  /* ─── Récupérer l'attachement ─── */
+  const att = (DATA.attachements || []).find(a => 
+    a.mois === mois && a.troncon === tr
+  );
+
+  console.log('Attachement trouvé:', !!att);
+
+  if (!att) {
+    notifier('⚠️ Aucun attachement pour ce mois', 'danger');
+    return;
+  }
+
+  if (!att.lignes || att.lignes.length === 0) {
+    notifier('⚠️ Tableau vide', 'danger');
+    return;
+  }
+
+  /* ─── Détecter dernier mois ─── */
+  const dateFin = (DATA.parametres && DATA.parametres.dateFin) || '';
+  const moisFin = dateFin ? dateFin.slice(0, 7) : '';
+  const estDernierMois = (moisFin && mois === moisFin);
+
+  console.log('Date fin:', dateFin);
+  console.log('Mois fin:', moisFin);
+  console.log('Est dernier mois:', estDernierMois);
+
+  /* ─── Filtrer ─── */
+  const lignesActives = att.lignes.filter(l => {
+    if (estDernierMois) return (l.metMois || 0) > 0;
+    return (l.estMois || 0) > 0;
+  });
+
+  console.log('Lignes actives:', lignesActives.length);
+
+  if (lignesActives.length === 0) {
+    notifier(`⚠️ Aucune ligne active pour ${tr}`, 'danger');
+    return;
+  }
+
+  /* ─── Confirmation ─── */
+  /* Confirmation optionnelle — désactivée pour éviter blocage */
+  console.log(`📄 Génération de ${lignesActives.length} fiche(s) pour ${tr}`);
+  /* if (!confirm(...)) return;  ← Supprimé */
+
+  /* ─── Générer les fiches ─── */
+  att.fiches = lignesActives.map(l => {
+    const qteMois = estDernierMois 
+      ? (l.metMois || 0) 
+      : (l.estMois || 0);
+
+    return {
+      id: 'fiche_' + uid(),
+      prix: l.prix,
+      libelle: l.libelle,
+      unite: l.unite,
+      numeroFiche: calculerNumeroFiche(l.prix, att.mois),
+      dateDebut: att.mois + '-01',
+      dateFin: getFinDeMois(att.mois),
+      prestationsTerminees: [],
+      prestationsNonTerminees: [{
+        designation: l.libelle,
+        metrees: qteMois,
+        estimees: 0
+      }],
+      quantiteAnterieure: l.estAnterieure || 0,
+      quantiteDuMois: qteMois,
+      totalAttachement: l.totale || 0,
+      croquis: '',
+      observations: l.observations || '',
+      feuillet: '1/1',
+      estDernierMois: estDernierMois
+    };
+  });
+
+  console.log('✅ Fiches créées:', att.fiches.length);
+  console.log('   Prix:', att.fiches.map(f => f.prix).join(', '));
+
+  att.updatedAt = new Date().toISOString();
+  sauvegarderDonnees(true);
+  rendreAttachement();
+
+  notifier(`✅ ${att.fiches.length} fiche(s) ${tr} générée(s)`, 'success');
+
+  /* ─── Ouvrir la liste ─── */
+  setTimeout(() => {
+    console.log('⏱️ Ouverture de la liste...');
+    ouvrirListeFiches();
+  }, 300);
+};
+/* ─── Générer le N° de fiche au format "2 / 7 / 2 / 1" ─── */
+function generateNumeroFiche(att, prix) {
+  /* Format: [N° Prix] / [Année] / [N° Attachement] / [Feuillet] */
+  const annee = att.mois.slice(2, 4);
+  return `${prix} / ${annee} / ${att.numero} / 1`;
+}
+
+/* ─── Afficher la liste des fiches ─── */
+function ouvrirListeFiches() {
+  const tr = currentAttachementTR;
+  const mois = currentMoisAttachement;
+  const att = (DATA.attachements || []).find(a => a.mois === mois && a.troncon === tr);
+
+  if (!att || !att.fiches || att.fiches.length === 0) {
+    notifier('⚠️ Aucune fiche générée', 'info');
+    return;
+  }
+
+  const modal = document.getElementById('modal-apercu');
+  if (!modal) return;
+
+  document.getElementById('apercu-titre').textContent =
+    `📄 ${tr} — ${att.fiches.length} fiche(s) — ${formatMoisFR(mois)}`;
+
+  const html = `
+    <div style="padding:16px;">
+      <p style="margin-bottom:16px;color:#64748b;">
+        <strong>${att.fiches.length}</strong> fiche(s) ${tr} — cliquez pour voir :
+      </p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;">
+        ${att.fiches.map(f => `
+          <div style="border:1px solid #e2e8f0;border-radius:8px;padding:12px;background:#fff;
+                       cursor:pointer;transition:all 0.15s;"
+               onmouseover="this.style.boxShadow='0 4px 12px rgba(0,0,0,0.1)'"
+               onmouseout="this.style.boxShadow='none'"
+               onclick="apercuFicheAttachement('${f.id}')">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <strong style="color:#c2410c;font-size:15px;">N° ${f.prix}</strong>
+              <span style="font-size:11px;color:#64748b;">${f.numeroFiche}</span>
+            </div>
+            <div style="font-size:12px;color:#334155;margin-bottom:6px;line-height:1.3;
+                        max-height:36px;overflow:hidden;">
+              ${f.libelle}
+            </div>
+            <div style="font-size:11px;color:#64748b;">
+              ${f.unite} — Qté : <strong style="color:#1e3a8a;">${f.quantiteDuMois.toFixed(2)}</strong>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+
+  document.getElementById('apercu-body').innerHTML = html;
+
+  const actions = document.getElementById('modal-actions');
+  actions.innerHTML = `
+    <button class="btn btn-primary" id="btn-print-all-fiches">🖨️ Imprimer toutes les ${att.fiches.length} fiches</button>
+    <button class="btn btn-ghost" id="btn-close-fiches">✖ Fermer</button>
+  `;
+  document.getElementById('btn-print-all-fiches').onclick = () => imprimerToutesFiches();
+  document.getElementById('btn-close-fiches').onclick = () => fermerModale();
+
+  modal.classList.add('open');
+}
+
+/* ─── Aperçu d'une fiche ─── */
+window.apercuFicheAttachement = function(ficheId) {
+  const tr = currentAttachementTR;
+  const mois = currentMoisAttachement;
+  const att = (DATA.attachements || []).find(a => a.mois === mois && a.troncon === tr);
+  if (!att) return;
+
+  const fiche = att.fiches.find(f => f.id === ficheId);
+  if (!fiche) return;
+
+  const html = genererFicheHTML(fiche, att);
+
+  document.getElementById('apercu-titre').textContent =
+    `📄 ${tr} — Fiche Prix N°${fiche.prix}`;
+  document.getElementById('apercu-body').innerHTML = html;
+
+  const actions = document.getElementById('modal-actions');
+  actions.innerHTML = `
+    <button class="btn btn-primary" id="btn-print-fiche">🖨️ Imprimer / PDF</button>
+    <button class="btn btn-secondary" id="btn-back-fiches">← Retour à la liste</button>
+    <button class="btn btn-ghost" id="btn-close-fiche">✖ Fermer</button>
+  `;
+  document.getElementById('btn-print-fiche').onclick = () => imprimerFiche(ficheId);
+  document.getElementById('btn-back-fiches').onclick = () => ouvrirListeFiches();
+  document.getElementById('btn-close-fiche').onclick = () => fermerModale();
+};
+
+
+/* ─── Générer le HTML d'une fiche (format officiel — VERSION FINALE v2) ─── */
+/* ─── Générer le HTML d'une fiche (format officiel — VERSION FINALE v3) ─── */
+function genererFicheHTML(fiche, att) {
+  const p = DATA.parametres || {};
+  const dateDebut = formatDateFR(fiche.dateDebut);
+  const dateFin = formatDateFR(fiche.dateFin);
+
+  /* ═══ Déterminer si c'est le dernier mois ═══ */
+  const dateFinParam = (p.dateFin || '').slice(0, 7);
+  const estDernierMois = (dateFinParam && att.mois === dateFinParam);
+
+  /* ═══ Récupérer la ligne correspondante dans le tableau ═══ */
+  const ligneTableau = (att.lignes || []).find(l => l.prix === fiche.prix) || {};
+
+  /* ═══ Récupérer les valeurs brutes ═══ */
+  const estMoisVal = parseFloat(ligneTableau.estMois) || 0;
+  const metMoisVal = parseFloat(ligneTableau.metMois) || 0;
+  const estAntVal  = parseFloat(ligneTableau.estAnterieure) || 0;
+  const totaleVal  = parseFloat(ligneTableau.totale) || 0;
+
+  /* ═══ Unité ═══ */
+  const unite = fiche.unite || '';
+
+  /* ═══════════════════════════════════════════════════════════
+     RÈGLES MÉTIER
+     ═══════════════════════════════════════════════════════════ */
+  
+  /* Quantité active du mois
+     → Mois normal : (7) Est Mois
+     → Dernier mois : (8) Met Mois */
+  const qteMoisActive = estDernierMois ? metMoisVal : estMoisVal;
+
+  /* 1- Prestations terminées → affichée uniquement en dernier mois */
+  const qtePrestationsTerminees = estDernierMois ? metMoisVal : 0;
+
+  /* Récap Antérieur → TOUJOURS (5) Est Ant */
+  const totalAnterieur = estAntVal;
+
+  /* ═══ Récupérer les signatures depuis Paramètres ═══ */
+  const sig = getSignaturesPourTR(att.troncon);
+
+  /* ═══ Helper : afficher valeur + unité ═══ */
+  const afficherQteAvecUnite = (val) => {
+    const v = parseFloat(val) || 0;
+    return `${v.toFixed(2)}${unite ? ' ' + unite : ''}`;
+  };
+
+  return `
+    <div class="attachement-fiche">
+      <!-- ═══ En-tête ═══ -->
+      <div class="fiche-entete">
+        <div class="fiche-code">PRS-S05-ER40a-02.0404</div>
+        <div class="fiche-numero">N° Attachement: <strong>${fiche.numeroFiche}</strong></div>
+        ${p.logo ? `<img src="${p.logo}" class="fiche-logo" alt="Logo">` : ''}
+      </div>
+
+      <div class="fiche-titre">ATTACHEMENT DES PRESTATIONS</div>
+
+      <!-- ═══ Infos générales ═══ -->
+      <table class="fiche-infos">
+        <tr>
+          <td><strong>MAITRE D'OUVRAGES :</strong> ${p.mo || ''}</td>
+          <td><strong>MARCHE N° :</strong> ${p.marche || ''}</td>
+        </tr>
+        <tr>
+          <td><strong>Maître d'Œuvre :</strong> ${p.moe || ''}</td>
+          <td><strong>OBJET :</strong> ${p.objet || ''}</td>
+        </tr>
+        <tr>
+          <td><strong>ENTITÉ :</strong> ${p.entite || ''}</td>
+          <td><strong>PRESTATAIRE :</strong> ${p.prestataire || ''}</td>
+        </tr>
+      </table>
+
+      <!-- ═══ Prix ═══ -->
+      <table class="fiche-prix">
+        <tr>
+          <td style="width:90px;"><strong>N° PRIX :</strong></td>
+          <td style="width:60px;text-align:center;"><strong>${fiche.prix}</strong></td>
+          <td style="width:70px;"><strong>UNITÉ :</strong></td>
+          <td style="width:60px;text-align:center;">${unite}</td>
+          <td style="width:140px;"><strong>NATURE DES TRAVAUX :</strong></td>
+          <td>${fiche.libelle}</td>
+        </tr>
+      </table>
+
+      <!-- ═══ Période ═══ -->
+      <div class="fiche-periode">
+        <strong>TRAVAUX EXECUTES Du ${dateDebut} Au : ${dateFin}</strong>
+      </div>
+
+      <!-- ═══ Croquis ═══ -->
+      <div class="fiche-section-titre">CROQUIS-CALCULS-QUANTITES</div>
+
+      <!-- ═══════════════════════════════════════════════════════════
+           1- Prestations terminées
+           → Affichée UNIQUEMENT en dernier mois (avec unité)
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="fiche-prestation">
+        <strong>1- Prestations terminées</strong>
+        <div class="fiche-prestation-body" style="min-height:80px;">
+          ${estDernierMois
+            ? `<div class="fiche-qte-centre">
+                 <strong>${afficherQteAvecUnite(qtePrestationsTerminees)}</strong>
+               </div>`
+            : `<div style="min-height:60px;"></div>`}
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════════
+           2- Prestations non terminées
+           → Affichée en mois NORMAL uniquement (avec unité, même si 0)
+           → Cachée en dernier mois
+           ═══════════════════════════════════════════════════════════ -->
+      <div class="fiche-prestation">
+        <strong>2 – Prestations non terminées – quantités Métrées / Estimées</strong>
+        <div class="fiche-prestation-body" style="min-height:50px;">
+          <div style="padding:6px;font-size:11.5px;">${fiche.libelle}</div>
+          ${!estDernierMois
+            ? `<div class="fiche-qte-centre" style="border-top:1px solid #cbd5e1;padding-top:10px;">
+                 <strong>Total&nbsp;&nbsp;&nbsp; ${afficherQteAvecUnite(qteMoisActive)}</strong>
+               </div>`
+            : `<div style="border-top:1px solid #cbd5e1;padding:10px;min-height:30px;"></div>`}
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════════
+           RÉCAPITULATIF
+           ═══════════════════════════════════════════════════════════ -->
+      <table class="fiche-recap">
+        <tr>
+          <!-- Colonne gauche -->
+          <td style="width:50%;vertical-align:top;padding:10px;">
+            <strong>RÉCAPITULATIF DE L'ATTACHEMENT :</strong>
+            <div style="margin-top:10px;font-size:11px;line-height:1.8;">
+              
+              <!-- 1- Prestations terminées : dernier mois uniquement -->
+              <div style="display:flex;justify-content:space-between;">
+                <span>1- Prestations terminées :</span>
+                <strong>${estDernierMois ? afficherQteAvecUnite(qtePrestationsTerminees) : ''}</strong>
+              </div>
+              
+              <!-- 2- Prestations non terminées -->
+              <div style="margin-top:6px;">2- Prestations non terminées :</div>
+              <div style="padding-left:24px;">
+                <div style="display:flex;justify-content:space-between;">
+                  <span>Métrées :</span>
+                  <strong>${afficherQteAvecUnite(qteMoisActive)}</strong>
+                </div>
+                <div style="display:flex;justify-content:space-between;">
+                  <span>Estimées :</span>
+                  <span>0.00${unite ? ' ' + unite : ''}</span>
+                </div>
+              </div>
+              
+              <!-- TOTAL DE L'ATTACHEMENT = (9) Totales -->
+              <div style="margin-top:14px;padding-top:8px;border-top:1px solid #cbd5e1;display:flex;justify-content:space-between;">
+                <strong>TOTAL DE L'ATTACHEMENT :</strong>
+                <strong>${afficherQteAvecUnite(totaleVal)}</strong>
+              </div>
+              
+              <!-- QUANTITÉ DU MOIS = qteMoisActive -->
+              <div style="margin-top:6px;display:flex;justify-content:space-between;">
+                <strong>QUANTITÉ DU MOIS :</strong>
+                <strong style="color:#c2410c;">${afficherQteAvecUnite(qteMoisActive)}</strong>
+              </div>
+              
+            </div>
+          </td>
+          
+          <!-- Colonne droite : Récap Antérieur
+               → TOUJOURS (5) Est Ant (avec unité, même si 0) -->
+          <td style="width:50%;vertical-align:top;padding:10px;border-left:1px solid #000;">
+            <strong>RÉCAPITULATIF DES PRESTATIONS ANTÉRIEURES :</strong>
+            <div style="margin-top:10px;text-align:center;font-size:12px;">
+              <div style="margin-top:80px;">
+                <span>Total</span>
+                <strong style="margin-left:20px;">${afficherQteAvecUnite(totalAnterieur)}</strong>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+      <!-- ═══ Pièces justificatives ═══ -->
+      <div style="border:1px solid #000;padding:6px 10px;margin-bottom:10px;font-size:11px;">
+        <strong>PIECES JUSTIFICATIFS ANNEXEES :</strong>
+      </div>
+
+      <!-- ═══ Signatures ═══ -->
+      <table class="fiche-signatures">
+        <tr>
+          <td style="width:50%;padding:8px;vertical-align:top;">
+            <div><strong>DRESSE PAR :</strong> ${sig.dressePar || '________________'}</div>
+            ${sig.dresseNom ? `<div style="margin-top:4px;">Nom : ${sig.dresseNom}</div>` : ''}
+            <div style="margin-top:20px;">LE : ................................ SIGNATURE :</div>
+          </td>
+          <td style="width:50%;padding:8px;vertical-align:top;border-left:1px solid #000;">
+            <div><strong>ACCEPTE PAR LE REPRESENTANT DU PRESTATAIRE :</strong></div>
+            <div style="margin-top:4px;">${sig.acceptePar || "Le représentant de l'entreprise"}</div>
+            ${sig.accepteNom ? `<div style="margin-top:4px;">Nom : ${sig.accepteNom}</div>` : ''}
+            <div style="margin-top:14px;">LE : ${sig.accepteDate ? formatDateFR(sig.accepteDate) : '................................'} SIGNATURE :</div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" style="padding:8px;border-top:1px solid #000;">
+            <div><strong>VERIFIE PAR :</strong> ${sig.validePar || '________________'}</div>
+            ${sig.valideNom ? `<div style="margin-top:4px;">Nom : ${sig.valideNom}</div>` : ''}
+            <div style="margin-top:14px;">LE : ................................ SIGNATURE :</div>
+          </td>
+        </tr>
+      </table>
+
+      <!-- ═══ Note bas de page ═══ -->
+      <div class="fiche-note">
+        N.B Les attachements ne sont pris en compte dans les décomptes qu'autant qu'ils ont été admis par
+        le Maître d'Œuvre désigné par le marché (article n°:56 § 7 du CCAG).
+      </div>
+    </div>
+  `;
+}
+
+
+/* ─── Imprimer une fiche ─── */
+window.imprimerFiche = function(ficheId) {
+  document.body.classList.add('printing-modal', 'printing-fiche');
+  setTimeout(() => {
+    window.print();
+    setTimeout(() => document.body.classList.remove('printing-modal', 'printing-fiche'), 500);
+  }, 100);
+};
+
+/* ─── Imprimer TOUTES les fiches en une seule fois ─── */
+window.imprimerToutesFiches = function() {
+  const mois = currentMoisAttachement;
+  const att = (DATA.attachements || []).find(a => a.mois === mois);
+
+  if (!att || !att.fiches || att.fiches.length === 0) {
+    notifier('⚠️ Aucune fiche à imprimer', 'danger');
+    return;
+  }
+
+  console.log(`🖨️ Préparation de ${att.fiches.length} fiche(s)...`);
+
+  /* ─── 1. Générer le HTML de toutes les fiches ─── */
+  const htmlFiches = att.fiches.map((f, i) => {
+    console.log(`   • Fiche ${i+1}/${att.fiches.length} — Prix ${f.prix}`);
+    return `<div class="fiche-page">${genererFicheHTML(f, att)}</div>`;
+  }).join('');
+
+  /* ─── 2. Injecter dans le modal ─── */
+  document.getElementById('apercu-titre').textContent =
+    `🖨️ ${att.fiches.length} fiche(s) prête(s) à imprimer`;
+  document.getElementById('apercu-body').innerHTML = `
+    <div class="print-all-container">${htmlFiches}</div>
+  `;
+
+  /* ─── 3. Vérifier ─── */
+  const nbPages = document.querySelectorAll('.print-all-container .fiche-page').length;
+  console.log(`   ✅ ${nbPages} fiche(s) dans le DOM`);
+
+  /* ─── 4. Ouvrir le modal ─── */
+  document.getElementById('modal-apercu').classList.add('open');
+
+  /* ─── 5. Boutons ─── */
+  const actions = document.getElementById('modal-actions');
+  actions.innerHTML = `
+    <button class="btn btn-primary" id="btn-launch-print" style="background:#16a34a;">
+      🖨️ Lancer l'impression (${nbPages} pages)
+    </button>
+    <button class="btn btn-ghost" id="btn-cancel-print">✖ Annuler</button>
+  `;
+
+  document.getElementById('btn-launch-print').onclick = () => {
+    document.body.classList.add('printing-modal', 'printing-all-fiches');
+    setTimeout(() => {
+      window.print();
+      setTimeout(() => {
+        document.body.classList.remove('printing-modal', 'printing-all-fiches');
+      }, 1500);
+    }, 500);
+  };
+
+  document.getElementById('btn-cancel-print').onclick = () => fermerModale();
+
+  notifier(`✅ ${nbPages} fiche(s) prêtes`, 'success');
+};
+
+/* ═══════════════════════════════════════════════════════════
+   👁️ APERÇU DÉTAIL — Filtre : uniquement les prix avec Totale > 0
+   ═══════════════════════════════════════════════════════════ */
+window.ouvrirApercuDetail = function() {
+  const tr = currentAttachementTR;
+  const mois = currentMoisAttachement;
+  const att = (DATA.attachements || []).find(a => a.mois === mois && a.troncon === tr);
+
+  if (!att || !att.lignes || att.lignes.length === 0) {
+    notifier('⚠️ Aucune donnée à afficher', 'danger');
+    return;
+  }
+
+  const lignesActives = att.lignes.filter(l => (l.totale || 0) > 0);
+
+  if (lignesActives.length === 0) {
+    notifier('⚠️ Aucune quantité > 0', 'danger');
+    return;
+  }
+
+  const periodeTxt = formatMoisFR(mois);
+  const numero = numeroAttachementPourMois(mois, tr);
+
+  let totalMontant = 0;
+  lignesActives.forEach(l => {
+    totalMontant += (l.totale || 0) * (l.pu || 0);
+  });
+
+  const entete = `
+    <div class="metre-entete-print">
+      <div class="entete-ligne-unique">
+        ${DATA.parametres.logo ? `<img src="${DATA.parametres.logo}" class="entete-logo">` : ''}
+        <div class="entete-titres">
+          <span class="num">ATTACHEMENT ${tr} N° ${numero}</span>
+          <span class="date">${periodeTxt}</span>
+        </div>
+      </div>
+      <table class="entete-infos">
+        <tr>
+          <td><span class="lbl">MAITRE D'OUVRAGE :</span> ${DATA.parametres.mo || ''}</td>
+          <td><span class="lbl">MARCHE N° :</span> ${DATA.parametres.marche || ''}</td>
+        </tr>
+        <tr>
+          <td><span class="lbl">MAITRE D'ŒUVRE :</span> ${DATA.parametres.moe || ''}</td>
+          <td><span class="lbl">Objet :</span> ${DATA.parametres.objet || ''}</td>
+        </tr>
+        <tr>
+          <td><span class="lbl">PRESTATAIRE :</span> ${DATA.parametres.prestataire || ''}</td>
+          <td><span class="lbl">Tronçon :</span> ${tr}</td>
+        </tr>
+      </table>
+    </div>
+  `;
+
+  const table = `
+    <table class="constat-table-print" style="font-size:10px;">
+      <thead>
+        <tr>
+          <th style="width:45px;">N°</th>
+          <th>Désignation</th>
+          <th style="width:45px;">Unité</th>
+          <th style="width:60px;">Qté Init</th>
+          <th style="width:70px;">PU</th>
+          <th style="width:60px;">(6) Met Ant</th>
+          <th style="width:60px;">(8) Met Mois</th>
+          <th style="width:70px;">(9) Totales</th>
+          <th style="width:90px;">Montant</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${lignesActives.map(l => {
+          const montant = (l.totale || 0) * (l.pu || 0);
+          return `
+            <tr>
+              <td style="text-align:center;font-weight:700;">${l.prix}</td>
+              <td style="font-size:9px;">${l.libelle}</td>
+              <td style="text-align:center;">${l.unite}</td>
+              <td style="text-align:right;">${l.qteInitiale || 0}</td>
+              <td style="text-align:right;">${(l.pu || 0).toFixed(2)}</td>
+              <td style="text-align:right;">${(l.metAnterieure || 0).toFixed(2)}</td>
+              <td style="text-align:right;font-weight:700;color:#c2410c;">${(l.metMois || 0).toFixed(2)}</td>
+              <td style="text-align:right;font-weight:700;">${(l.totale || 0).toFixed(2)}</td>
+              <td style="text-align:right;font-weight:700;color:#15803d;">${montant.toFixed(2)}</td>
+            </tr>
+          `;
+        }).join('')}
+      </tbody>
+      <tfoot>
+        <tr class="total-row">
+          <td colspan="8" style="text-align:right;">TOTAL ${tr} (${lignesActives.length} prix)</td>
+          <td style="text-align:right;font-weight:700;">${totalMontant.toFixed(2)}</td>
+        </tr>
+      </tfoot>
+    </table>
+  `;
+
+  document.getElementById('apercu-titre').textContent =
+    `👁️ Aperçu Détail ${tr} — N°${numero}`;
+  document.getElementById('apercu-body').innerHTML = `
+    <div style="background:#fff;padding:20px;">
+      ${entete}${table}
+    </div>
+  `;
+
+  const actions = document.getElementById('modal-actions');
+  actions.innerHTML = `
+    <button class="btn btn-primary" id="btn-print-detail">🖨️ Imprimer / PDF</button>
+    <button class="btn btn-ghost" id="btn-close-detail">✖ Fermer</button>
+  `;
+  document.getElementById('btn-print-detail').onclick = () => {
+    document.body.classList.add('printing-modal');
+    setTimeout(() => {
+      window.print();
+      setTimeout(() => document.body.classList.remove('printing-modal'), 500);
+    }, 100);
+  };
+  document.getElementById('btn-close-detail').onclick = () => fermerModale();
+
+  document.getElementById('modal-apercu').classList.add('open');
+};
+
+/* ═══════════════════════════════════════════════════════════
+   🔢 Calcul du N° de fiche : [Prix] / [Année] / [Mois] / [Séquence]
+   ═══════════════════════════════════════════════════════════ */
+function calculerNumeroFiche(prix, moisAttachement) {
+  const p = DATA.parametres || {};
+
+  /* 1. Année (2 derniers chiffres) */
+  const annee = moisAttachement.slice(2, 4);  /* "2026-10" → "26" */
+
+  /* 2. Numéro du mois (1-12) */
+  const moisNum = parseInt(moisAttachement.slice(5, 7), 10);
+
+  /* 3. Séquence : nombre de mois depuis dateDebut */
+  let sequence = 1;
+  if (p.dateDebut) {
+    const [startY, startM] = p.dateDebut.split('-').map(Number);
+    const [attY, attM] = moisAttachement.split('-').map(Number);
+    sequence = (attY - startY) * 12 + (attM - startM) + 1;
+    if (sequence < 1) sequence = 1;
+  }
+
+  return `${prix} / ${annee} / ${moisNum} / ${sequence}`;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   📄 APERÇU TOUTES FICHES (depuis Export)
+   Affiche N fiches (de plusieurs attachements) dans le modal
+   ═══════════════════════════════════════════════════════════ */
+window.ouvrirApercuToutesFichesFiltrees = function(fichesList, attList) {
+  const totalFiches = fichesList.length;
+  const totalMois = attList.length;
+
+  console.log(`📄 Ouverture aperçu : ${totalFiches} fiche(s) sur ${totalMois} mois`);
+
+  /* Construire toutes les fiches en HTML */
+  const htmlFiches = fichesList.map((item, i) => {
+    return `<div class="fiche-page${i === totalFiches - 1 ? ' last-page' : ''}">${genererFicheHTML(item.fiche, item.att)}</div>`;
+  }).join('');
+
+  /* Injecter dans le modal */
+  document.getElementById('apercu-titre').textContent =
+    `📄 ${totalFiches} fiche(s) d'Attachement — ${totalMois} mois`;
+
+  document.getElementById('apercu-body').innerHTML = `
+    <div class="print-all-container">${htmlFiches}</div>
+  `;
+
+  /* Boutons */
+  const actions = document.getElementById('modal-actions');
+  actions.innerHTML = `
+    <button class="btn btn-primary" id="btn-print-all" style="background:#c2410c;">
+      🖨️ Imprimer les ${totalFiches} fiche(s)
+    </button>
+    <button class="btn btn-ghost" id="btn-close-all">✖ Fermer</button>
+  `;
+
+  document.getElementById('btn-print-all').onclick = () => {
+    console.log('🖨️ Impression en cours...');
+    document.body.classList.add('printing-modal', 'printing-all-fiches');
+    setTimeout(() => {
+      window.print();
+      setTimeout(() => {
+        document.body.classList.remove('printing-modal', 'printing-all-fiches');
+      }, 1500);
+    }, 500);
+  };
+
+  document.getElementById('btn-close-all').onclick = () => fermerModale();
+
+  /* Ouvrir */
+  document.getElementById('modal-apercu').classList.add('open');
+
+  notifier(`✅ ${totalFiches} fiche(s) prête(s)`, 'success');
+};
+
+/* ═══════════════════════════════════════════════════════════
+   📅 GÉNÉRER TOUS LES MOIS ENTRE DEUX DATES
+   Ex: "2026-01" → "2026-04" = ["2026-01", "2026-02", "2026-03", "2026-04"]
+   ═══════════════════════════════════════════════════════════ */
+function genererTousLesMois(moisDebut, moisFin) {
+  if (!moisDebut || !moisFin) return [];
+  const result = [];
+  const [yStart, mStart] = moisDebut.split('-').map(Number);
+  const [yEnd, mEnd] = moisFin.split('-').map(Number);
+
+  let y = yStart, m = mStart;
+  while (y < yEnd || (y === yEnd && m <= mEnd)) {
+    result.push(`${y}-${String(m).padStart(2, '0')}`);
+    m++;
+    if (m > 12) { m = 1; y++; }
+  }
+  return result;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   📊 CUMUL DES EST MOIS PRÉCÉDENTS
+   (Utilisé pour (5) Est Ant)
+   ═══════════════════════════════════════════════════════════ */
+function calculerCumulAvant(mois, tr, prix) {
+  const p = DATA.parametres || {};
+  const moisDebut = (p.dateDebut || '').slice(0, 7);
+
+  if (!moisDebut || moisDebut >= mois) {
+    return 0;   /* Premier mois ou dateDebut non défini */
+  }
+
+  /* Tous les mois entre début et (mois - 1) */
+  const moisPrecedents = genererTousLesMois(moisDebut, mois).slice(0, -1);
+
+  let cumul = 0;
+  moisPrecedents.forEach(m => {
+    const att = (DATA.attachements || []).find(a => a.mois === m && a.troncon === tr);
+    if (!att) return;   /* Mois vide → contribution 0 */
+
+    const ligne = att.lignes.find(l => l.prix === prix);
+    if (!ligne) return;
+
+    /* Cumul = Est Mois OU Met Mois (selon le type du mois précédent) */
+    const estDernier = estDernierMoisDe(m, tr);
+    const valeur = estDernier 
+      ? (ligne.metMois || 0)     /* Si le mois précédent était "dernier" */
+      : (ligne.estMois || 0);    /* Sinon */
+    
+    cumul += valeur;
+  });
+
+  return cumul;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   🏁 VÉRIFIER SI UN MOIS EST LE DERNIER
+   ═══════════════════════════════════════════════════════════ */
+function estDernierMoisDe(mois, tr) {
+  const dateFin = (DATA.parametres && DATA.parametres.dateFin) || '';
+  const moisFin = dateFin ? dateFin.slice(0, 7) : '';
+  return (moisFin && mois === moisFin);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   👋 MESSAGE DE BIENVENUE (premier lancement)
+   ═══════════════════════════════════════════════════════════ */
+function verifierPremierLancement() {
+  if (localStorage.getItem('bienvenue_vue')) return;
+  
+  setTimeout(() => {
+    alert(
+      `👋 Bienvenue !\n\n` +
+      `━━━━━━━━━━━━━━━━━━━━━━━\n` +
+      `Cette application fonctionne localement\n` +
+      `sur votre ordinateur.\n` +
+      `━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
+      `📌 Comment ça marche ?\n\n` +
+      `1️⃣  Commencez par remplir les paramètres\n` +
+      `    (⚙️ → Paramètres)\n\n` +
+      `2️⃣  Importez le catalogue (DE.xlsx)\n\n` +
+      `3️⃣  Importez les commandes (Excel)\n\n` +
+      `4️⃣  Remplissez les Metrés et Attachements\n\n` +
+      `━━━━━━━━━━━━━━━━━━━━━━━\n` +
+      `📤 Quand vous avez terminé :\n` +
+      `Cliquez sur "📤 Envoyer mes données"\n` +
+      `pour envoyer vos données au directeur\n` +
+      `━━━━━━━━━━━━━━━━━━━━━━━`
+    );
+    localStorage.setItem('bienvenue_vue', '1');
+  }, 1500);
+}
+
+/* Appel de la fonction */
+verifierPremierLancement();
