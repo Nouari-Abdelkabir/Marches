@@ -1595,6 +1595,12 @@
   "commandes": [],
   "historique": [
     {
+      "id": "musrzbmwwqif0",
+      "date": "2026-10-03T19:18:50.792Z",
+      "action": "IMPORT DE.xlsx",
+      "details": "194 prix importés"
+    },
+    {
       "id": "musryjm1o1o13",
       "date": "2026-10-03T19:18:14.473Z",
       "action": "IMPORT DE.xlsx",
