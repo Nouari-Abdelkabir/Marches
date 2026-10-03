@@ -20865,7 +20865,7 @@
       ],
       "fiches": [
         {
-          "id": "fiche_musdjfo766ytn",
+          "id": "fiche_musgcuadl4nw7",
           "prix": 1,
           "libelle": "Fourniture de lisse de glissière métallique droite simple de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
@@ -20889,7 +20889,7 @@
           "estDernierMois": true
         },
         {
-          "id": "fiche_musdjfo7blof0",
+          "id": "fiche_musgcuajkfcl2",
           "prix": 2,
           "libelle": "Fourniture de lisse de glissière courbe de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
@@ -20913,7 +20913,7 @@
           "estDernierMois": true
         },
         {
-          "id": "fiche_musdjfo7d41ap",
+          "id": "fiche_musgcuakdbjbc",
           "prix": 3,
           "libelle": "Fourniture et pose d'élément de glissière pour fin de file",
           "unite": "U",
@@ -20938,7 +20938,7 @@
         }
       ],
       "createdAt": "2026-10-03T09:15:42.409Z",
-      "updatedAt": "2026-10-03T12:34:34.903Z",
+      "updatedAt": "2026-10-03T13:53:26.108Z",
       "_numero": 12
     },
     {
