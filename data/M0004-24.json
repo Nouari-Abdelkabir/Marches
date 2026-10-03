@@ -7555,6 +7555,18 @@
   ],
   "historique": [
     {
+      "id": "musd4u2gsv1p2",
+      "date": "2026-10-03T12:23:13.720Z",
+      "action": "SAUVEGARDE ATTACHEMENT",
+      "details": "TR3 — N°1 — Janvier 2026"
+    },
+    {
+      "id": "musd4n1dhhj10",
+      "date": "2026-10-03T12:23:04.609Z",
+      "action": "SAUVEGARDE ATTACHEMENT",
+      "details": "TR3 — N°2 — Février 2026"
+    },
+    {
       "id": "musbwk666z7lp",
       "date": "2026-10-03T11:48:48.030Z",
       "action": "SAUVEGARDE ATTACHEMENT",
@@ -23569,9 +23581,9 @@
           "pu": 300,
           "estAnterieure": 0,
           "metAnterieure": 0,
-          "estMois": 0,
+          "estMois": 80,
           "metMois": 0,
-          "totale": 0,
+          "totale": 80,
           "observations": ""
         },
         {
@@ -26216,7 +26228,7 @@
       ],
       "fiches": [],
       "createdAt": "2026-10-03T09:34:42.335Z",
-      "updatedAt": "2026-10-03T09:47:15.831Z",
+      "updatedAt": "2026-10-03T12:23:13.720Z",
       "_numero": 1
     },
     {
@@ -26234,9 +26246,9 @@
           "pu": 200,
           "estAnterieure": 120,
           "metAnterieure": 0,
-          "estMois": 2050,
+          "estMois": 200,
           "metMois": 0,
-          "totale": 2170,
+          "totale": 320,
           "observations": ""
         },
         {
@@ -28907,7 +28919,7 @@
       ],
       "fiches": [
         {
-          "id": "fiche_muscs7429ljqh",
+          "id": "fiche_musd3vbcpvfdn",
           "prix": 1,
           "libelle": "Fourniture de lisse de glissière métallique droite simple de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
@@ -28931,7 +28943,7 @@
           "estDernierMois": false
         },
         {
-          "id": "fiche_muscs742plptj",
+          "id": "fiche_musd3vbc08oc2",
           "prix": 4,
           "libelle": "Fourniture et pose de chevron métallique pour musoir de rayon inférieur à 2m",
           "unite": "ml",
@@ -28955,7 +28967,7 @@
           "estDernierMois": false
         },
         {
-          "id": "fiche_muscs742moz61",
+          "id": "fiche_musd3vbcim3xj",
           "prix": 6,
           "libelle": "Fourniture de support avec massif en béton pour ITPC",
           "unite": "U",
@@ -28980,7 +28992,7 @@
         }
       ],
       "createdAt": "2026-10-03T09:36:12.886Z",
-      "updatedAt": "2026-10-03T12:13:24.098Z",
+      "updatedAt": "2026-10-03T12:23:04.608Z",
       "_numero": 2
     },
     {
