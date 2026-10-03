@@ -7555,6 +7555,12 @@
   ],
   "historique": [
     {
+      "id": "mus5bgstby8oz",
+      "date": "2026-10-03T08:44:26.189Z",
+      "action": "SAUVEGARDE ATTACHEMENT",
+      "details": "TR3 — N°1 — Novembre 2026"
+    },
+    {
       "id": "murko88m24zl6",
       "date": "2026-10-02T23:06:29.686Z",
       "action": "SAUVEGARDE ATTACHEMENT",
@@ -20828,9 +20834,9 @@
           "pu": 200,
           "estAnterieure": 0,
           "metAnterieure": 0,
-          "estMois": 0,
+          "estMois": 56,
           "metMois": 0,
-          "totale": 0,
+          "totale": 56,
           "observations": ""
         },
         {
@@ -20854,9 +20860,9 @@
           "pu": 300,
           "estAnterieure": 0,
           "metAnterieure": 0,
-          "estMois": 0,
+          "estMois": 56,
           "metMois": 0,
-          "totale": 0,
+          "totale": 56,
           "observations": ""
         },
         {
@@ -20880,9 +20886,9 @@
           "pu": 285,
           "estAnterieure": 0,
           "metAnterieure": 0,
-          "estMois": 0,
+          "estMois": 56,
           "metMois": 0,
-          "totale": 0,
+          "totale": 56,
           "observations": ""
         },
         {
@@ -23500,7 +23506,9 @@
         }
       ],
       "fiches": [],
-      "createdAt": "2026-10-03T08:44:14.454Z"
+      "createdAt": "2026-10-03T08:44:14.454Z",
+      "updatedAt": "2026-10-03T08:44:26.189Z",
+      "_numero": 1
     }
   ]
 }
