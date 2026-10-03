@@ -20865,7 +20865,7 @@
       ],
       "fiches": [
         {
-          "id": "fiche_musdh4amxlr1i",
+          "id": "fiche_musdjfo766ytn",
           "prix": 1,
           "libelle": "Fourniture de lisse de glissière métallique droite simple de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
@@ -20889,7 +20889,7 @@
           "estDernierMois": true
         },
         {
-          "id": "fiche_musdh4am8fo9n",
+          "id": "fiche_musdjfo7blof0",
           "prix": 2,
           "libelle": "Fourniture de lisse de glissière courbe de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
@@ -20913,7 +20913,7 @@
           "estDernierMois": true
         },
         {
-          "id": "fiche_musdh4amegjay",
+          "id": "fiche_musdjfo7d41ap",
           "prix": 3,
           "libelle": "Fourniture et pose d'élément de glissière pour fin de file",
           "unite": "U",
@@ -20938,7 +20938,7 @@
         }
       ],
       "createdAt": "2026-10-03T09:15:42.409Z",
-      "updatedAt": "2026-10-03T12:32:46.846Z",
+      "updatedAt": "2026-10-03T12:34:34.903Z",
       "_numero": 12
     },
     {
@@ -29107,7 +29107,7 @@
       ],
       "fiches": [
         {
-          "id": "fiche_musd5s0xtbg36",
+          "id": "fiche_musdiswebv3s2",
           "prix": 1,
           "libelle": "Fourniture de lisse de glissière métallique droite simple de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
@@ -29131,7 +29131,7 @@
           "estDernierMois": false
         },
         {
-          "id": "fiche_musd5s0xzcgv9",
+          "id": "fiche_musdiswfwstza",
           "prix": 4,
           "libelle": "Fourniture et pose de chevron métallique pour musoir de rayon inférieur à 2m",
           "unite": "ml",
@@ -29155,7 +29155,7 @@
           "estDernierMois": false
         },
         {
-          "id": "fiche_musd5s0x4nj2s",
+          "id": "fiche_musdiswfjz1ez",
           "prix": 6,
           "libelle": "Fourniture de support avec massif en béton pour ITPC",
           "unite": "U",
@@ -29179,7 +29179,7 @@
           "estDernierMois": false
         },
         {
-          "id": "fiche_musd5s0xiuf74",
+          "id": "fiche_musdiswfhqusd",
           "prix": 7,
           "libelle": "Fourniture d'écarteur pour glissière simple",
           "unite": "U",
@@ -29204,7 +29204,7 @@
         }
       ],
       "createdAt": "2026-10-03T09:36:12.886Z",
-      "updatedAt": "2026-10-03T12:23:57.729Z",
+      "updatedAt": "2026-10-03T12:34:05.391Z",
       "_numero": 2
     },
     {
