@@ -54,15 +54,65 @@
   "factureAutoNumbers": {},
   "attachements": [],
   "metres": {
-    "TR1": { "date": "", "entrees": {}, "sinistres": {}, "fax": {}, "prestations": {} },
-    "TR2": { "date": "", "entrees": {}, "sinistres": {}, "fax": {}, "prestations": {} },
-    "TR3": { "date": "", "entrees": {}, "sinistres": {}, "fax": {}, "prestations": {} },
-    "TR4": { "date": "", "entrees": {}, "sinistres": {}, "fax": {}, "prestations": {} }
+    "TR1": {
+      "date": "2026-10-31",
+      "entrees": {},
+      "sinistres": {},
+      "fax": {},
+      "prestations": {}
+    },
+    "TR2": {
+      "date": "2026-10-31",
+      "entrees": {},
+      "sinistres": {},
+      "fax": {},
+      "prestations": {}
+    },
+    "TR3": {
+      "date": "2026-10-31",
+      "entrees": {},
+      "sinistres": {},
+      "fax": {},
+      "prestations": {}
+    },
+    "TR4": {
+      "date": "2026-10-31",
+      "entrees": {},
+      "sinistres": {},
+      "fax": {},
+      "prestations": {}
+    }
   },
   "constats": {
-    "TR1": { "date": "", "anterieures": {}, "observations": {} },
-    "TR2": { "date": "", "anterieures": {}, "observations": {} },
-    "TR3": { "date": "", "anterieures": {}, "observations": {} },
-    "TR4": { "date": "", "anterieures": {}, "observations": {} }
+    "TR1": {
+      "date": "2026-10-31",
+      "anterieures": {},
+      "observations": {},
+      "quantitesMois": {}
+    },
+    "TR2": {
+      "date": "2026-10-31",
+      "anterieures": {},
+      "observations": {},
+      "quantitesMois": {}
+    },
+    "TR3": {
+      "date": "2026-10-31",
+      "anterieures": {},
+      "observations": {},
+      "quantitesMois": {}
+    },
+    "TR4": {
+      "date": "2026-10-31",
+      "anterieures": {},
+      "observations": {},
+      "quantitesMois": {}
+    },
+    "CONS": {
+      "date": "2026-10-31",
+      "anterieures": {},
+      "observations": {},
+      "quantitesMois": {}
+    }
   }
 }
