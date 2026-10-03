@@ -7555,6 +7555,12 @@
   ],
   "historique": [
     {
+      "id": "musd7rb5i7t5t",
+      "date": "2026-10-03T12:25:30.113Z",
+      "action": "SAUVEGARDE ATTACHEMENT",
+      "details": "TR3 — N°4 — Avril 2026"
+    },
+    {
       "id": "musd6r2xr0pxl",
       "date": "2026-10-03T12:24:43.161Z",
       "action": "SAUVEGARDE ATTACHEMENT",
@@ -31929,11 +31935,11 @@
           "unite": "ml",
           "qteInitiale": 54000,
           "pu": 200,
-          "estAnterieure": 2220,
+          "estAnterieure": 370,
           "metAnterieure": 0,
-          "estMois": 0,
+          "estMois": 120,
           "metMois": 0,
-          "totale": 2220,
+          "totale": 490,
           "observations": ""
         },
         {
@@ -31955,11 +31961,11 @@
           "unite": "U",
           "qteInitiale": 100,
           "pu": 300,
-          "estAnterieure": 0,
+          "estAnterieure": 80,
           "metAnterieure": 0,
           "estMois": 0,
           "metMois": 0,
-          "totale": 0,
+          "totale": 80,
           "observations": ""
         },
         {
@@ -31981,11 +31987,11 @@
           "unite": "U",
           "qteInitiale": 11000,
           "pu": 285,
-          "estAnterieure": 0,
+          "estAnterieure": 100,
           "metAnterieure": 0,
           "estMois": 0,
           "metMois": 0,
-          "totale": 0,
+          "totale": 100,
           "observations": ""
         },
         {
@@ -31994,11 +32000,11 @@
           "unite": "U",
           "qteInitiale": 300,
           "pu": 250,
-          "estAnterieure": 25,
+          "estAnterieure": 125,
           "metAnterieure": 0,
           "estMois": 0,
           "metMois": 0,
-          "totale": 25,
+          "totale": 125,
           "observations": ""
         },
         {
@@ -32007,11 +32013,11 @@
           "unite": "U",
           "qteInitiale": 11000,
           "pu": 65,
-          "estAnterieure": 0,
+          "estAnterieure": 20,
           "metAnterieure": 0,
           "estMois": 0,
           "metMois": 0,
-          "totale": 0,
+          "totale": 20,
           "observations": ""
         },
         {
@@ -34602,9 +34608,35 @@
           "observations": ""
         }
       ],
-      "fiches": [],
+      "fiches": [
+        {
+          "id": "fiche_musd7rq1iag0z",
+          "prix": 1,
+          "libelle": "Fourniture de lisse de glissière métallique droite simple de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
+          "unite": "ml",
+          "numeroFiche": "1 / 26 / 4 / 4",
+          "dateDebut": "2026-04-01",
+          "dateFin": "2026-04-30",
+          "prestationsTerminees": [],
+          "prestationsNonTerminees": [
+            {
+              "designation": "Fourniture de lisse de glissière métallique droite simple de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
+              "metrees": 120,
+              "estimees": 0
+            }
+          ],
+          "quantiteAnterieure": 370,
+          "quantiteDuMois": 120,
+          "totalAttachement": 490,
+          "croquis": "",
+          "observations": "",
+          "feuillet": "1/1",
+          "estDernierMois": false
+        }
+      ],
       "createdAt": "2026-10-03T09:47:44.844Z",
-      "_numero": 4
+      "_numero": 4,
+      "updatedAt": "2026-10-03T12:25:30.649Z"
     },
     {
       "id": "mus850ezf44xn",
@@ -37310,11 +37342,11 @@
           "unite": "ml",
           "qteInitiale": 54000,
           "pu": 200,
-          "estAnterieure": 2220,
+          "estAnterieure": 510,
           "metAnterieure": 0,
           "estMois": 0,
           "metMois": 0,
-          "totale": 2220,
+          "totale": 510,
           "observations": ""
         },
         {
@@ -37336,11 +37368,11 @@
           "unite": "U",
           "qteInitiale": 100,
           "pu": 300,
-          "estAnterieure": 0,
+          "estAnterieure": 80,
           "metAnterieure": 0,
           "estMois": 0,
           "metMois": 0,
-          "totale": 0,
+          "totale": 80,
           "observations": ""
         },
         {
@@ -37362,11 +37394,11 @@
           "unite": "U",
           "qteInitiale": 11000,
           "pu": 285,
-          "estAnterieure": 0,
+          "estAnterieure": 100,
           "metAnterieure": 0,
           "estMois": 0,
           "metMois": 0,
-          "totale": 0,
+          "totale": 100,
           "observations": ""
         },
         {
@@ -37375,11 +37407,11 @@
           "unite": "U",
           "qteInitiale": 300,
           "pu": 250,
-          "estAnterieure": 25,
+          "estAnterieure": 125,
           "metAnterieure": 0,
           "estMois": 0,
           "metMois": 0,
-          "totale": 25,
+          "totale": 125,
           "observations": ""
         },
         {
@@ -37388,11 +37420,11 @@
           "unite": "U",
           "qteInitiale": 11000,
           "pu": 65,
-          "estAnterieure": 0,
+          "estAnterieure": 20,
           "metAnterieure": 0,
           "estMois": 0,
           "metMois": 0,
-          "totale": 0,
+          "totale": 20,
           "observations": ""
         },
         {
