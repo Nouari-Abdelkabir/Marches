@@ -12674,7 +12674,7 @@
       ],
       "fiches": [
         {
-          "id": "fiche_mus6dlj0rh8of",
+          "id": "fiche_musgu676wmit5",
           "prix": 1,
           "libelle": "Fourniture de lisse de glissière métallique droite simple de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
@@ -12685,19 +12685,20 @@
           "prestationsNonTerminees": [
             {
               "designation": "Fourniture de lisse de glissière métallique droite simple de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
-              "metrees": 50,
-              "estimees": 56
+              "metrees": 20,
+              "estimees": 0
             }
           ],
-          "quantiteAnterieure": 0,
-          "quantiteDuMois": 56,
-          "totalAttachement": 56,
+          "quantiteAnterieure": 580,
+          "quantiteDuMois": 20,
+          "totalAttachement": 600,
           "croquis": "",
           "observations": "",
-          "feuillet": "1/1"
+          "feuillet": "1/1",
+          "estDernierMois": false
         },
         {
-          "id": "fiche_mus6dlj0ur0mm",
+          "id": "fiche_musgu676atr8s",
           "prix": 3,
           "libelle": "Fourniture et pose d'élément de glissière pour fin de file",
           "unite": "U",
@@ -12708,19 +12709,20 @@
           "prestationsNonTerminees": [
             {
               "designation": "Fourniture et pose d'élément de glissière pour fin de file",
-              "metrees": 0,
-              "estimees": 65
+              "metrees": 50,
+              "estimees": 0
             }
           ],
-          "quantiteAnterieure": 0,
-          "quantiteDuMois": 65,
-          "totalAttachement": 65,
+          "quantiteAnterieure": 80,
+          "quantiteDuMois": 50,
+          "totalAttachement": 130,
           "croquis": "",
           "observations": "",
-          "feuillet": "1/1"
+          "feuillet": "1/1",
+          "estDernierMois": false
         },
         {
-          "id": "fiche_mus6dlj0czp73",
+          "id": "fiche_musgu67647m75",
           "prix": 5,
           "libelle": "Fourniture de support U100 ou C100 pour glissière type GS4 ou GS2",
           "unite": "U",
@@ -12731,20 +12733,21 @@
           "prestationsNonTerminees": [
             {
               "designation": "Fourniture de support U100 ou C100 pour glissière type GS4 ou GS2",
-              "metrees": 0,
-              "estimees": 56
+              "metrees": 56,
+              "estimees": 0
             }
           ],
-          "quantiteAnterieure": 0,
+          "quantiteAnterieure": 100,
           "quantiteDuMois": 56,
-          "totalAttachement": 56,
+          "totalAttachement": 156,
           "croquis": "",
           "observations": "",
-          "feuillet": "1/1"
+          "feuillet": "1/1",
+          "estDernierMois": false
         }
       ],
       "createdAt": "2026-10-03T08:44:14.454Z",
-      "updatedAt": "2026-10-03T12:26:43.991Z",
+      "updatedAt": "2026-10-03T14:06:54.690Z",
       "_numero": 11
     },
     {
@@ -15435,7 +15438,7 @@
       ],
       "fiches": [
         {
-          "id": "fiche_musd8ujr7zibk",
+          "id": "fiche_musgtc9vcb585",
           "prix": 1,
           "libelle": "Fourniture de lisse de glissière métallique droite simple de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
@@ -15459,7 +15462,7 @@
           "estDernierMois": false
         },
         {
-          "id": "fiche_musd8ujszdiug",
+          "id": "fiche_musgtc9vl260o",
           "prix": 4,
           "libelle": "Fourniture et pose de chevron métallique pour musoir de rayon inférieur à 2m",
           "unite": "ml",
@@ -15485,7 +15488,7 @@
       ],
       "createdAt": "2026-10-03T08:49:02.320Z",
       "_numero": 10,
-      "updatedAt": "2026-10-03T12:26:20.968Z"
+      "updatedAt": "2026-10-03T14:06:15.907Z"
     },
     {
       "id": "mus6clypz3mfn",
@@ -20865,7 +20868,7 @@
       ],
       "fiches": [
         {
-          "id": "fiche_musgcuadl4nw7",
+          "id": "fiche_musgtpa299hv9",
           "prix": 1,
           "libelle": "Fourniture de lisse de glissière métallique droite simple de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
@@ -20889,7 +20892,7 @@
           "estDernierMois": true
         },
         {
-          "id": "fiche_musgcuajkfcl2",
+          "id": "fiche_musgtpa2l5ugv",
           "prix": 2,
           "libelle": "Fourniture de lisse de glissière courbe de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
@@ -20913,7 +20916,7 @@
           "estDernierMois": true
         },
         {
-          "id": "fiche_musgcuakdbjbc",
+          "id": "fiche_musgtpa28f704",
           "prix": 3,
           "libelle": "Fourniture et pose d'élément de glissière pour fin de file",
           "unite": "U",
@@ -20938,7 +20941,7 @@
         }
       ],
       "createdAt": "2026-10-03T09:15:42.409Z",
-      "updatedAt": "2026-10-03T13:53:26.108Z",
+      "updatedAt": "2026-10-03T14:06:32.762Z",
       "_numero": 12
     },
     {
@@ -26319,7 +26322,7 @@
       ],
       "fiches": [
         {
-          "id": "fiche_musdhv8vxlfbg",
+          "id": "fiche_musgo1gc3hhyo",
           "prix": 1,
           "libelle": "Fourniture de lisse de glissière métallique droite simple de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
@@ -26343,7 +26346,7 @@
           "estDernierMois": false
         },
         {
-          "id": "fiche_musdhv8vvevwx",
+          "id": "fiche_musgo1gcgqyiz",
           "prix": 2,
           "libelle": "Fourniture de lisse de glissière courbe de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
@@ -26367,7 +26370,7 @@
           "estDernierMois": false
         },
         {
-          "id": "fiche_musdhv8v6bb2i",
+          "id": "fiche_musgo1gchvzmo",
           "prix": 3,
           "libelle": "Fourniture et pose d'élément de glissière pour fin de file",
           "unite": "U",
@@ -26391,7 +26394,7 @@
           "estDernierMois": false
         },
         {
-          "id": "fiche_musdhv8vuv4fd",
+          "id": "fiche_musgo1gcx11i6",
           "prix": 4,
           "libelle": "Fourniture et pose de chevron métallique pour musoir de rayon inférieur à 2m",
           "unite": "ml",
@@ -26416,7 +26419,7 @@
         }
       ],
       "createdAt": "2026-10-03T09:34:42.335Z",
-      "updatedAt": "2026-10-03T12:33:21.776Z",
+      "updatedAt": "2026-10-03T14:02:08.604Z",
       "_numero": 1
     },
     {
