@@ -7555,6 +7555,12 @@
   ],
   "historique": [
     {
+      "id": "mus97aqfmy740",
+      "date": "2026-10-03T10:33:10.167Z",
+      "action": "SAUVEGARDE ATTACHEMENT",
+      "details": "TR3 — N°3 — Décembre 2026"
+    },
+    {
       "id": "mus85r82od8f5",
       "date": "2026-10-03T10:03:58.610Z",
       "action": "SAUVEGARDE ATTACHEMENT",
@@ -18057,11 +18063,11 @@
           "unite": "ml",
           "qteInitiale": 54000,
           "pu": 200,
-          "estAnterieure": 490,
-          "metAnterieure": 50,
+          "estAnterieure": 2290,
+          "metAnterieure": 0,
           "estMois": 0,
           "metMois": 50,
-          "totale": 100,
+          "totale": 2340,
           "observations": ""
         },
         {
@@ -18074,7 +18080,7 @@
           "metAnterieure": 0,
           "estMois": 0,
           "metMois": 600,
-          "totale": 600,
+          "totale": 680,
           "observations": ""
         },
         {
@@ -18087,7 +18093,7 @@
           "metAnterieure": 0,
           "estMois": 0,
           "metMois": 520,
-          "totale": 520,
+          "totale": 570,
           "observations": ""
         },
         {
@@ -18096,11 +18102,11 @@
           "unite": "ml",
           "qteInitiale": 800,
           "pu": 1400,
-          "estAnterieure": 110,
+          "estAnterieure": 162,
           "metAnterieure": 0,
           "estMois": 0,
           "metMois": 0,
-          "totale": 0,
+          "totale": 162,
           "observations": ""
         },
         {
@@ -18113,7 +18119,7 @@
           "metAnterieure": 0,
           "estMois": 0,
           "metMois": 0,
-          "totale": 0,
+          "totale": 56,
           "observations": ""
         },
         {
@@ -18126,7 +18132,7 @@
           "metAnterieure": 0,
           "estMois": 0,
           "metMois": 0,
-          "totale": 0,
+          "totale": 25,
           "observations": ""
         },
         {
@@ -20732,7 +20738,7 @@
       ],
       "fiches": [],
       "createdAt": "2026-10-03T09:15:42.409Z",
-      "updatedAt": "2026-10-03T10:00:09.819Z",
+      "updatedAt": "2026-10-03T10:33:10.167Z",
       "_numero": 12
     },
     {
