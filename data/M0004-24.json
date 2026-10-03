@@ -7554,6 +7554,12 @@
   ],
   "historique": [
     {
+      "id": "muslex3wtsbhf",
+      "date": "2026-10-03T16:15:01.148Z",
+      "action": "SAUVEGARDE ATTACHEMENT",
+      "details": "TR3 — N°1 — Septembre 2026"
+    },
+    {
       "id": "mupr34v47fg6s",
       "date": "2026-10-01T16:30:30.496Z",
       "action": "MODIFICATION PARAMÈTRES",
@@ -9651,9 +9657,9 @@
           "pu": 200,
           "estAnterieure": 0,
           "metAnterieure": 0,
-          "estMois": 0,
+          "estMois": 50,
           "metMois": 0,
-          "totale": 0,
+          "totale": 50,
           "observations": ""
         },
         {
@@ -12322,8 +12328,35 @@
           "observations": ""
         }
       ],
-      "fiches": [],
-      "createdAt": "2026-10-03T16:14:55.751Z"
+      "fiches": [
+        {
+          "id": "fiche_muslexlwi3l25",
+          "prix": 1,
+          "libelle": "Fourniture de lisse de glissière métallique droite simple de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
+          "unite": "ml",
+          "numeroFiche": "1 / 26 / 9 / 2",
+          "dateDebut": "2026-09-01",
+          "dateFin": "2026-09-30",
+          "prestationsTerminees": [],
+          "prestationsNonTerminees": [
+            {
+              "designation": "Fourniture de lisse de glissière métallique droite simple de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
+              "metrees": 50,
+              "estimees": 0
+            }
+          ],
+          "quantiteAnterieure": 0,
+          "quantiteDuMois": 50,
+          "totalAttachement": 50,
+          "croquis": "",
+          "observations": "",
+          "feuillet": "1/1",
+          "estDernierMois": false
+        }
+      ],
+      "createdAt": "2026-10-03T16:14:55.751Z",
+      "updatedAt": "2026-10-03T16:15:01.796Z",
+      "_numero": 1
     }
   ]
 }
