@@ -12358,5 +12358,414 @@
       "updatedAt": "2026-10-03T16:15:01.796Z",
       "_numero": 1
     }
-  ]
+  ],
+  "colonnes": {
+    "TR3": {
+      "2026-09": [
+        {
+          "id": "c_1",
+          "pk": "mumjpuzbouji8",
+          "sens": "mumjpuz6enhzh",
+          "label": "mumjpuzbouji8 mumjpuz6enhzh/undefined"
+        },
+        {
+          "id": "c_2",
+          "pk": "mumjpuzbouji8",
+          "sens": "mumjpuz72483u",
+          "label": "mumjpuzbouji8 mumjpuz72483u/undefined"
+        },
+        {
+          "id": "c_3",
+          "pk": "mumjpuzbouji8",
+          "sens": "mumjpuz6gusx0",
+          "label": "mumjpuzbouji8 mumjpuz6gusx0/undefined"
+        }
+      ],
+      "2026-06": [
+        {
+          "id": "c_1",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674tiuyua",
+          "label": "mumy674xe5ec2 mumy674tiuyua/undefined"
+        },
+        {
+          "id": "c_2",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674tm6wn4",
+          "label": "mumy674xe5ec2 mumy674tm6wn4/undefined"
+        },
+        {
+          "id": "c_3",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674tpj7bx",
+          "label": "mumy674xe5ec2 mumy674tpj7bx/undefined"
+        },
+        {
+          "id": "c_4",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674tun4xt",
+          "label": "mumy674xe5ec2 mumy674tun4xt/undefined"
+        },
+        {
+          "id": "c_5",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674tmfcv8",
+          "label": "mumy674xe5ec2 mumy674tmfcv8/undefined"
+        },
+        {
+          "id": "c_6",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674ud1z77",
+          "label": "mumy674xe5ec2 mumy674ud1z77/undefined"
+        },
+        {
+          "id": "c_7",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674u80j3y",
+          "label": "mumy674xe5ec2 mumy674u80j3y/undefined"
+        },
+        {
+          "id": "c_8",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674u6axyi",
+          "label": "mumy674xe5ec2 mumy674u6axyi/undefined"
+        },
+        {
+          "id": "c_9",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674uyo3az",
+          "label": "mumy674xe5ec2 mumy674uyo3az/undefined"
+        },
+        {
+          "id": "c_10",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674uo1sov",
+          "label": "mumy674xe5ec2 mumy674uo1sov/undefined"
+        },
+        {
+          "id": "c_11",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674ut70d2",
+          "label": "mumy674xe5ec2 mumy674ut70d2/undefined"
+        },
+        {
+          "id": "c_12",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674ut8jlx",
+          "label": "mumy674xe5ec2 mumy674ut8jlx/undefined"
+        },
+        {
+          "id": "c_13",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674uwpo8f",
+          "label": "mumy674xe5ec2 mumy674uwpo8f/undefined"
+        },
+        {
+          "id": "c_14",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674u2ac6l",
+          "label": "mumy674xe5ec2 mumy674u2ac6l/undefined"
+        },
+        {
+          "id": "c_15",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674u2zpod",
+          "label": "mumy674xe5ec2 mumy674u2zpod/undefined"
+        },
+        {
+          "id": "c_16",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674u5726e",
+          "label": "mumy674xe5ec2 mumy674u5726e/undefined"
+        },
+        {
+          "id": "c_17",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674ufq1ye",
+          "label": "mumy674xe5ec2 mumy674ufq1ye/undefined"
+        },
+        {
+          "id": "c_18",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674ubq3ut",
+          "label": "mumy674xe5ec2 mumy674ubq3ut/undefined"
+        },
+        {
+          "id": "c_19",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674u9uack",
+          "label": "mumy674xe5ec2 mumy674u9uack/undefined"
+        },
+        {
+          "id": "c_20",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674ut9y5e",
+          "label": "mumy674xe5ec2 mumy674ut9y5e/undefined"
+        },
+        {
+          "id": "c_21",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674uyugli",
+          "label": "mumy674xe5ec2 mumy674uyugli/undefined"
+        },
+        {
+          "id": "c_22",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674u3znr4",
+          "label": "mumy674xe5ec2 mumy674u3znr4/undefined"
+        },
+        {
+          "id": "c_23",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674uvl4th",
+          "label": "mumy674xe5ec2 mumy674uvl4th/undefined"
+        },
+        {
+          "id": "c_24",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674ucwfzs",
+          "label": "mumy674xe5ec2 mumy674ucwfzs/undefined"
+        },
+        {
+          "id": "c_25",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674u23kee",
+          "label": "mumy674xe5ec2 mumy674u23kee/undefined"
+        },
+        {
+          "id": "c_26",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674u85jxm",
+          "label": "mumy674xe5ec2 mumy674u85jxm/undefined"
+        },
+        {
+          "id": "c_27",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674uupggl",
+          "label": "mumy674xe5ec2 mumy674uupggl/undefined"
+        },
+        {
+          "id": "c_28",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674u10s7x",
+          "label": "mumy674xe5ec2 mumy674u10s7x/undefined"
+        },
+        {
+          "id": "c_29",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674unciyj",
+          "label": "mumy674xe5ec2 mumy674unciyj/undefined"
+        },
+        {
+          "id": "c_30",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674uhtb65",
+          "label": "mumy674xe5ec2 mumy674uhtb65/undefined"
+        },
+        {
+          "id": "c_31",
+          "pk": "mumy674xe5ec2",
+          "sens": "mumy674u6ua1v",
+          "label": "mumy674xe5ec2 mumy674u6ua1v/undefined"
+        }
+      ]
+    },
+    "TR1": {
+      "2026-09": [
+        {
+          "id": "c_1",
+          "pk": "mumjpuzbouji8",
+          "sens": "mumjpuz39qqjs",
+          "label": "mumjpuzbouji8 mumjpuz39qqjs/undefined"
+        },
+        {
+          "id": "c_2",
+          "pk": "mumjpuzbouji8",
+          "sens": "mumjpuz5pb9pw",
+          "label": "mumjpuzbouji8 mumjpuz5pb9pw/undefined"
+        },
+        {
+          "id": "c_3",
+          "pk": "mumjpuzbouji8",
+          "sens": "mumjpuz4dd7ei",
+          "label": "mumjpuzbouji8 mumjpuz4dd7ei/undefined"
+        },
+        {
+          "id": "c_4",
+          "pk": "mumjpuzbouji8",
+          "sens": "mumjpuz5vrc58",
+          "label": "mumjpuzbouji8 mumjpuz5vrc58/undefined"
+        },
+        {
+          "id": "c_5",
+          "pk": "mumjpuzbouji8",
+          "sens": "mumjpuz4j0dil",
+          "label": "mumjpuzbouji8 mumjpuz4j0dil/undefined"
+        },
+        {
+          "id": "c_6",
+          "pk": "mumjpuzbouji8",
+          "sens": "mumjpuz3ai5ih",
+          "label": "mumjpuzbouji8 mumjpuz3ai5ih/undefined"
+        },
+        {
+          "id": "c_7",
+          "pk": "mumjpuzbouji8",
+          "sens": "mumjpuz3y5iah",
+          "label": "mumjpuzbouji8 mumjpuz3y5iah/undefined"
+        }
+      ]
+    },
+    "TR4": {
+      "2026-09": [
+        {
+          "id": "c_1",
+          "pk": "mumjpuzbouji8",
+          "sens": "mumjpuz8yhqwc",
+          "label": "mumjpuzbouji8 mumjpuz8yhqwc/undefined"
+        },
+        {
+          "id": "c_2",
+          "pk": "mumjpuzbouji8",
+          "sens": "mumjpuz73pxed",
+          "label": "mumjpuzbouji8 mumjpuz73pxed/undefined"
+        }
+      ]
+    }
+  },
+  "lignes": {
+    "TR3": {
+      "2026-09": {
+        "1": {
+          "c_1": 20,
+          "c_2": 200,
+          "c_3": 20
+        },
+        "5": {
+          "c_1": 2,
+          "c_3": 2
+        },
+        "6": {
+          "c_1": 5,
+          "c_3": 5
+        },
+        "7": {
+          "c_1": 5
+        },
+        "11": {
+          "c_1": 20,
+          "c_2": 200,
+          "c_3": 24
+        }
+      },
+      "2026-06": {
+        "1": {
+          "c_1": 28,
+          "c_2": 12,
+          "c_4": 24,
+          "c_5": 200,
+          "c_17": 8,
+          "c_18": 12,
+          "c_19": 16,
+          "c_20": 8,
+          "c_23": 16,
+          "c_24": 8,
+          "c_26": 28,
+          "c_27": 116
+        },
+        "5": {
+          "c_1": 1,
+          "c_5": 53,
+          "c_27": 20
+        },
+        "7": {
+          "c_1": 6,
+          "c_2": 3,
+          "c_4": 7,
+          "c_5": 53,
+          "c_17": 2,
+          "c_18": 3,
+          "c_19": 4,
+          "c_20": 2,
+          "c_23": 2,
+          "c_24": 2,
+          "c_26": 7,
+          "c_27": 31
+        },
+        "8": {
+          "c_1": 1,
+          "c_2": 1,
+          "c_4": 2,
+          "c_5": 23,
+          "c_17": 1,
+          "c_18": 1,
+          "c_19": 1,
+          "c_26": 2,
+          "c_27": 7
+        },
+        "11": {
+          "c_1": 32,
+          "c_2": 12,
+          "c_4": 24,
+          "c_5": 200,
+          "c_17": 12,
+          "c_18": 12,
+          "c_19": 20,
+          "c_20": 12,
+          "c_23": 16,
+          "c_24": 12,
+          "c_26": 28,
+          "c_27": 120
+        },
+        "13": {
+          "c_15": 0.01
+        },
+        "28": {
+          "c_11": 1,
+          "c_22": 1
+        },
+        "37": {
+          "c_16": 1,
+          "c_21": 1
+        },
+        "42": {
+          "c_10": 3
+        },
+        "121": {
+          "c_15": 1,
+          "c_25": 1
+        }
+      }
+    },
+    "TR1": {
+      "2026-09": {
+        "1": {
+          "c_1": 20,
+          "c_2": 20,
+          "c_3": 20,
+          "c_4": 20,
+          "c_5": 20
+        },
+        "5": {
+          "c_2": 2
+        },
+        "11": {
+          "c_1": 20,
+          "c_2": 20,
+          "c_7": 30
+        },
+        "18": {
+          "c_6": 60
+        }
+      }
+    },
+    "TR4": {
+      "2026-09": {
+        "205": {
+          "c_2": 250
+        }
+      }
+    }
+  },
+  "_migre": true
 }
