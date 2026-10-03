@@ -28828,7 +28828,7 @@
       ],
       "fiches": [
         {
-          "id": "fiche_mus9w0h1l63u2",
+          "id": "fiche_musa3cxbifh3r",
           "prix": 1,
           "libelle": "Fourniture de lisse de glissière métallique droite simple de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
           "unite": "ml",
@@ -28852,7 +28852,7 @@
           "estDernierMois": false
         },
         {
-          "id": "fiche_mus9w0h1ude9m",
+          "id": "fiche_musa3cxb72ch8",
           "prix": 4,
           "libelle": "Fourniture et pose de chevron métallique pour musoir de rayon inférieur à 2m",
           "unite": "ml",
@@ -28876,7 +28876,7 @@
           "estDernierMois": false
         },
         {
-          "id": "fiche_mus9w0h1s1zrh",
+          "id": "fiche_musa3cxbcarow",
           "prix": 6,
           "libelle": "Fourniture de support avec massif en béton pour ITPC",
           "unite": "U",
@@ -28901,7 +28901,7 @@
         }
       ],
       "createdAt": "2026-10-03T09:36:12.886Z",
-      "updatedAt": "2026-10-03T10:52:23.269Z",
+      "updatedAt": "2026-10-03T10:58:06.000Z",
       "_numero": 2
     },
     {
