@@ -85,75 +85,193 @@
   </footer>
 
   <!-- ═══ MODAL NOUVEAU MARCHÉ ═══ -->
-  <div class="modal-home" id="modal-nouveau-marche">
-    <div class="modal-home-content">
-      <div class="modal-home-header">
-        <h2>➕ Nouveau Marché</h2>
-        <button onclick="fermerModalNouveau()" class="btn-close-modal">✖</button>
-      </div>
+<div class="modal-home" id="modal-nouveau-marche">
+  <div class="modal-home-content modal-large">
+    <div class="modal-home-header">
+      <h2>➕ Nouveau Marché</h2>
+      <button onclick="fermerModalNouveau()" class="btn-close-modal">✖</button>
+    </div>
 
-      <div class="modal-home-body">
-        <div class="form-row">
-          <label>N° du marché *</label>
-          <input type="text" id="new-marche-num" placeholder="ex: M0008/26" autocomplete="off">
-          <small style="color:#64748b;font-size:11px;">Format recommandé : MXXXX/YY</small>
+    <div class="modal-home-body">
+
+      <div class="form-section">
+        <h3 class="form-section-title">📋 Informations de base</h3>
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label>N° du marché *</label>
+            <input type="text" id="new-marche-num" placeholder="ex: M0010/27">
+          </div>
+          <div class="form-row">
+            <label>Nom / Description *</label>
+            <input type="text" id="new-marche-nom" placeholder="ex: Entretien Nord">
+          </div>
         </div>
-
         <div class="form-row">
-          <label>Nom / Description *</label>
-          <input type="text" id="new-marche-nom" placeholder="ex: Entretien Axe Nord" autocomplete="off">
-        </div>
-
-        <div class="form-row">
-          <label>Couleur de la carte</label>
+          <label>Couleur</label>
           <div class="color-picker">
             <input type="radio" name="new-marche-color" value="#1e3a8a" id="col-1" checked>
             <label for="col-1" style="background:#1e3a8a;"></label>
-
             <input type="radio" name="new-marche-color" value="#059669" id="col-2">
             <label for="col-2" style="background:#059669;"></label>
-
             <input type="radio" name="new-marche-color" value="#dc2626" id="col-3">
             <label for="col-3" style="background:#dc2626;"></label>
-
             <input type="radio" name="new-marche-color" value="#7c3aed" id="col-4">
             <label for="col-4" style="background:#7c3aed;"></label>
-
             <input type="radio" name="new-marche-color" value="#ea580c" id="col-5">
             <label for="col-5" style="background:#ea580c;"></label>
-
             <input type="radio" name="new-marche-color" value="#0891b2" id="col-6">
             <label for="col-6" style="background:#0891b2;"></label>
           </div>
         </div>
+      </div>
 
-        <div class="form-row">
-          <label>Création</label>
-          <div class="radio-group">
-            <label class="radio-option">
-              <input type="radio" name="new-marche-type" value="vide" checked>
-              <span>🆕 Vide (paramètres par défaut)</span>
-            </label>
-            <label class="radio-option">
-              <input type="radio" name="new-marche-type" value="copie">
-              <span>📋 Copier depuis un marché existant</span>
-            </label>
+      <div class="form-section">
+        <h3 class="form-section-title">📅 Période</h3>
+        <div class="form-grid-2">
+          <div class="form-row">
+            <label>Date de début</label>
+            <input type="date" id="new-marche-debut">
+          </div>
+          <div class="form-row">
+            <label>Date de fin</label>
+            <input type="date" id="new-marche-fin">
           </div>
         </div>
+      </div>
 
-        <div class="form-row" id="row-copie-source" style="display:none;">
-          <label>Copier depuis :</label>
-          <select id="new-marche-source"></select>
+      <div class="form-section">
+        <h3 class="form-section-title">🏢 Partenaires</h3>
+        <div class="form-row">
+          <label>Maître d'ouvrage (MO)</label>
+          <input type="text" id="new-marche-mo"
+                 placeholder="La Société Nationale des Autoroutes du Maroc...">
+        </div>
+        <div class="form-row">
+          <label>Maître d'œuvre (MOE)</label>
+          <input type="text" id="new-marche-moe"
+                 placeholder="Le Chef de division Viabilité et Sécurité...">
+        </div>
+        <div class="form-row">
+          <label>Prestataire</label>
+          <input type="text" id="new-marche-prestataire" value="AIC">
         </div>
       </div>
 
-      <div class="modal-home-footer">
-        <button class="btn btn-secondary" onclick="fermerModalNouveau()">✖ Annuler</button>
-        <button class="btn btn-primary" onclick="creerNouveauMarche()">✅ Créer le Marché</button>
+      <div class="form-section">
+        <h3 class="form-section-title">📍 Localisation & Objet</h3>
+        <div class="form-row">
+          <label>Section (plage PK)</label>
+          <input type="text" id="new-marche-section" placeholder="ex: PK 27 - PK 106">
+        </div>
+        <div class="form-row">
+          <label>Objet du marché</label>
+          <textarea id="new-marche-objet" rows="2"
+                    placeholder="Description complète..."></textarea>
+        </div>
       </div>
+
+      <div class="form-section">
+        <h3 class="form-section-title">🎯 Sections à activer</h3>
+        <p class="form-hint">Cochez les sections visibles dans ce marché</p>
+        <div class="sections-grid">
+          <label class="section-check"><input type="checkbox" id="sec-dashboard" checked><span>🏠 Dashboard</span></label>
+          <label class="section-check"><input type="checkbox" id="sec-parametres" checked><span>⚙️ Paramètres</span></label>
+          <label class="section-check"><input type="checkbox" id="sec-catalogue" checked><span>📚 Catalogue (DE)</span></label>
+          <label class="section-check"><input type="checkbox" id="sec-commandes" checked><span>📝 Commandes</span></label>
+          <label class="section-check"><input type="checkbox" id="sec-metre" checked><span>📑 Metré</span></label>
+          <label class="section-check"><input type="checkbox" id="sec-constat" checked><span>📋 Constat</span></label>
+          <label class="section-check"><input type="checkbox" id="sec-suivi" checked><span>💰 Suivi des Prix</span></label>
+          <label class="section-check"><input type="checkbox" id="sec-sinistres" checked><span>🚨 Sinistres</span></label>
+          <label class="section-check"><input type="checkbox" id="sec-equipements" checked><span>🏗️ Équipements</span></label>
+          <label class="section-check"><input type="checkbox" id="sec-historique" checked><span>🕒 Historique</span></label>
+          <label class="section-check"><input type="checkbox" id="sec-export" checked><span>📤 Export</span></label>
+        </div>
+      </div>
+
+      <div id="new-marche-status" class="form-status" style="display:none;"></div>
+
+    </div>
+
+    <div class="modal-home-footer">
+      <button class="btn btn-secondary" onclick="fermerModalNouveau()">✖ Annuler</button>
+      <button class="btn btn-primary" id="btn-creer-marche" onclick="creerNouveauMarche()">
+        ✅ Créer le Marché
+      </button>
     </div>
   </div>
+</div>
 
+<!-- ═══ MODAL MODIFICATION MARCHÉ ═══ -->
+<div class="modal-home" id="modal-edition-marche">
+  <div class="modal-home-content modal-large">
+    <div class="modal-home-header">
+      <h2>✏️ Modifier le marché</h2>
+      <button onclick="fermerModalEdition()" class="btn-close-modal">✖</button>
+    </div>
+
+    <div class="modal-home-body">
+
+      <!-- N° actuel (info) -->
+      <div class="form-section">
+        <h3 class="form-section-title">🔑 Identifiant</h3>
+        <div class="form-row">
+          <label>N° actuel</label>
+          <input type="text" id="edit-marche-old-id" readonly
+                 style="background:#f1f5f9;color:#64748b;cursor:not-allowed;">
+        </div>
+        <div class="form-row">
+          <label>Nouveau N° (laisser vide pour ne pas changer)</label>
+          <input type="text" id="edit-marche-new-id" placeholder="ex: M0004-25">
+          <small class="form-hint">⚠️ Changer le N° déplacera toutes les données</small>
+        </div>
+      </div>
+
+      <!-- Nom -->
+      <div class="form-section">
+        <h3 class="form-section-title">📝 Nom & Couleur</h3>
+        <div class="form-row">
+          <label>Nom du marché</label>
+          <input type="text" id="edit-marche-nom" placeholder="Nom du marché">
+        </div>
+
+        <div class="form-row">
+          <label>Couleur</label>
+          <div class="color-picker">
+            <input type="radio" name="edit-marche-color" value="#1e3a8a" id="ecol-1">
+            <label for="ecol-1" style="background:#1e3a8a;"></label>
+            <input type="radio" name="edit-marche-color" value="#059669" id="ecol-2">
+            <label for="ecol-2" style="background:#059669;"></label>
+            <input type="radio" name="edit-marche-color" value="#dc2626" id="ecol-3">
+            <label for="ecol-3" style="background:#dc2626;"></label>
+            <input type="radio" name="edit-marche-color" value="#7c3aed" id="ecol-4">
+            <label for="ecol-4" style="background:#7c3aed;"></label>
+            <input type="radio" name="edit-marche-color" value="#ea580c" id="ecol-5">
+            <label for="ecol-5" style="background:#ea580c;"></label>
+            <input type="radio" name="edit-marche-color" value="#0891b2" id="ecol-6">
+            <label for="ecol-6" style="background:#0891b2;"></label>
+            <input type="radio" name="edit-marche-color" value="#ca8a04" id="ecol-7">
+            <label for="ecol-7" style="background:#ca8a04;"></label>
+            <input type="radio" name="edit-marche-color" value="#64748b" id="ecol-8">
+            <label for="ecol-8" style="background:#64748b;"></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Status -->
+      <div id="edit-marche-status" class="form-status" style="display:none;"></div>
+
+    </div>
+
+    <div class="modal-home-footer">
+      <button class="btn btn-secondary" onclick="fermerModalEdition()">✖ Annuler</button>
+      <button class="btn btn-primary" id="btn-save-edition" onclick="sauvegarderEditionMarche()">
+        ✅ Enregistrer
+      </button>
+    </div>
+  </div>
+</div>
+
+  <script src="shared/github-api.js"></script>
   <script src="Marches.js"></script>
 </body>
 </html>
