@@ -7555,6 +7555,12 @@
   ],
   "historique": [
     {
+      "id": "mus98ktr9ngtm",
+      "date": "2026-10-03T10:34:09.903Z",
+      "action": "SAUVEGARDE ATTACHEMENT",
+      "details": "TR3 — N°5 — Mai 2026"
+    },
+    {
       "id": "mus97aqfmy740",
       "date": "2026-10-03T10:33:10.167Z",
       "action": "SAUVEGARDE ATTACHEMENT",
@@ -34209,9 +34215,9 @@
           "pu": 200,
           "estAnterieure": 2220,
           "metAnterieure": 0,
-          "estMois": 0,
+          "estMois": 20,
           "metMois": 0,
-          "totale": 2220,
+          "totale": 2240,
           "observations": ""
         },
         {
@@ -36882,7 +36888,8 @@
       ],
       "fiches": [],
       "createdAt": "2026-10-03T10:03:23.867Z",
-      "_numero": 5
+      "_numero": 5,
+      "updatedAt": "2026-10-03T10:34:09.903Z"
     },
     {
       "id": "mus853h6dn7im",
