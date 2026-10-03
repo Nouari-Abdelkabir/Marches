@@ -23505,9 +23505,79 @@
           "observations": ""
         }
       ],
-      "fiches": [],
+      "fiches": [
+        {
+          "id": "fiche_mus5btr84v164",
+          "prix": 1,
+          "libelle": "Fourniture de lisse de glissière métallique droite simple de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
+          "unite": "ml",
+          "numeroFiche": "1 / 26 / 11 / 4",
+          "dateDebut": "2026-11-01",
+          "dateFin": "2026-11-30",
+          "prestationsTerminees": [],
+          "prestationsNonTerminees": [
+            {
+              "designation": "Fourniture de lisse de glissière métallique droite simple de profil A pour glissières type GS2, GS4, GRC ou GCU (non compris support, écarteur et réflecteur).",
+              "metrees": 0,
+              "estimees": 56
+            }
+          ],
+          "quantiteAnterieure": 0,
+          "quantiteDuMois": 56,
+          "totalAttachement": 56,
+          "croquis": "",
+          "observations": "",
+          "feuillet": "1/1"
+        },
+        {
+          "id": "fiche_mus5btr8mkue9",
+          "prix": 3,
+          "libelle": "Fourniture et pose d'élément de glissière pour fin de file",
+          "unite": "U",
+          "numeroFiche": "3 / 26 / 11 / 4",
+          "dateDebut": "2026-11-01",
+          "dateFin": "2026-11-30",
+          "prestationsTerminees": [],
+          "prestationsNonTerminees": [
+            {
+              "designation": "Fourniture et pose d'élément de glissière pour fin de file",
+              "metrees": 0,
+              "estimees": 56
+            }
+          ],
+          "quantiteAnterieure": 0,
+          "quantiteDuMois": 56,
+          "totalAttachement": 56,
+          "croquis": "",
+          "observations": "",
+          "feuillet": "1/1"
+        },
+        {
+          "id": "fiche_mus5btr8eep1n",
+          "prix": 5,
+          "libelle": "Fourniture de support U100 ou C100 pour glissière type GS4 ou GS2",
+          "unite": "U",
+          "numeroFiche": "5 / 26 / 11 / 4",
+          "dateDebut": "2026-11-01",
+          "dateFin": "2026-11-30",
+          "prestationsTerminees": [],
+          "prestationsNonTerminees": [
+            {
+              "designation": "Fourniture de support U100 ou C100 pour glissière type GS4 ou GS2",
+              "metrees": 0,
+              "estimees": 56
+            }
+          ],
+          "quantiteAnterieure": 0,
+          "quantiteDuMois": 56,
+          "totalAttachement": 56,
+          "croquis": "",
+          "observations": "",
+          "feuillet": "1/1"
+        }
+      ],
       "createdAt": "2026-10-03T08:44:14.454Z",
-      "updatedAt": "2026-10-03T08:44:26.189Z",
+      "updatedAt": "2026-10-03T08:44:42.980Z",
       "_numero": 1
     }
   ]
