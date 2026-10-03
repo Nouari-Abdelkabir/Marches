@@ -7555,6 +7555,12 @@
   ],
   "historique": [
     {
+      "id": "mus6fjffpv5te",
+      "date": "2026-10-03T09:15:35.835Z",
+      "action": "SAUVEGARDE ATTACHEMENT",
+      "details": "TR3 — N°1 — Novembre 2026"
+    },
+    {
       "id": "mus6cbq2oy63d",
       "date": "2026-10-03T09:13:05.882Z",
       "action": "MODIFICATION PARAMÈTRES",
@@ -12570,7 +12576,7 @@
         }
       ],
       "createdAt": "2026-10-03T08:44:14.454Z",
-      "updatedAt": "2026-10-03T09:14:05.244Z",
+      "updatedAt": "2026-10-03T09:15:35.835Z",
       "_numero": 2
     },
     {
