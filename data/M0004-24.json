@@ -7555,6 +7555,12 @@
   ],
   "historique": [
     {
+      "id": "mus74am06pgt1",
+      "date": "2026-10-03T09:34:50.808Z",
+      "action": "SAUVEGARDE ATTACHEMENT",
+      "details": "TR3 — N°1 — Janvier 2026"
+    },
+    {
       "id": "mus6gs1tf7s37",
       "date": "2026-10-03T09:16:33.665Z",
       "action": "SAUVEGARDE ATTACHEMENT",
@@ -12583,7 +12589,7 @@
       ],
       "createdAt": "2026-10-03T08:44:14.454Z",
       "updatedAt": "2026-10-03T09:15:35.835Z",
-      "_numero": 2
+      "_numero": 3
     },
     {
       "id": "mus5hdv4g5gsc",
@@ -15273,7 +15279,7 @@
       ],
       "fiches": [],
       "createdAt": "2026-10-03T08:49:02.320Z",
-      "_numero": 1
+      "_numero": 2
     },
     {
       "id": "mus6clypz3mfn",
@@ -20654,7 +20660,7 @@
       "fiches": [],
       "createdAt": "2026-10-03T09:15:42.409Z",
       "updatedAt": "2026-10-03T09:16:33.665Z",
-      "_numero": 3
+      "_numero": 4
     },
     {
       "id": "mus73luvgwnv0",
@@ -23361,9 +23367,9 @@
           "pu": 200,
           "estAnterieure": 0,
           "metAnterieure": 0,
-          "estMois": 0,
+          "estMois": 120,
           "metMois": 0,
-          "totale": 0,
+          "totale": 120,
           "observations": ""
         },
         {
@@ -23400,9 +23406,9 @@
           "pu": 1400,
           "estAnterieure": 0,
           "metAnterieure": 0,
-          "estMois": 0,
+          "estMois": 50,
           "metMois": 0,
-          "totale": 0,
+          "totale": 50,
           "observations": ""
         },
         {
@@ -26033,7 +26039,9 @@
         }
       ],
       "fiches": [],
-      "createdAt": "2026-10-03T09:34:42.335Z"
+      "createdAt": "2026-10-03T09:34:42.335Z",
+      "updatedAt": "2026-10-03T09:34:50.808Z",
+      "_numero": 1
     }
   ]
 }
