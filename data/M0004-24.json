@@ -7555,6 +7555,12 @@
   ],
   "historique": [
     {
+      "id": "mus7m4t0op7t2",
+      "date": "2026-10-03T09:48:43.092Z",
+      "action": "SAUVEGARDE ATTACHEMENT",
+      "details": "TR3 — N°1 — Novembre 2026"
+    },
+    {
       "id": "mus7ksl1lef8d",
       "date": "2026-10-03T09:47:40.597Z",
       "action": "SAUVEGARDE ATTACHEMENT",
@@ -9875,9 +9881,9 @@
           "pu": 200,
           "estAnterieure": 370,
           "metAnterieure": 0,
-          "estMois": 56,
+          "estMois": 20,
           "metMois": 50,
-          "totale": 426,
+          "totale": 390,
           "observations": ""
         },
         {
@@ -9901,9 +9907,9 @@
           "pu": 300,
           "estAnterieure": 0,
           "metAnterieure": 0,
-          "estMois": 65,
+          "estMois": 50,
           "metMois": 0,
-          "totale": 65,
+          "totale": 50,
           "observations": ""
         },
         {
@@ -12618,7 +12624,7 @@
         }
       ],
       "createdAt": "2026-10-03T08:44:14.454Z",
-      "updatedAt": "2026-10-03T09:15:35.835Z",
+      "updatedAt": "2026-10-03T09:48:43.092Z",
       "_numero": 6
     },
     {
@@ -18014,7 +18020,7 @@
           "unite": "ml",
           "qteInitiale": 54000,
           "pu": 200,
-          "estAnterieure": 56,
+          "estAnterieure": 390,
           "metAnterieure": 50,
           "estMois": 0,
           "metMois": 50,
@@ -18027,7 +18033,7 @@
           "unite": "ml",
           "qteInitiale": 20,
           "pu": 200,
-          "estAnterieure": 0,
+          "estAnterieure": 20,
           "metAnterieure": 0,
           "estMois": 0,
           "metMois": 600,
@@ -18040,7 +18046,7 @@
           "unite": "U",
           "qteInitiale": 100,
           "pu": 300,
-          "estAnterieure": 65,
+          "estAnterieure": 50,
           "metAnterieure": 0,
           "estMois": 0,
           "metMois": 520,
@@ -18053,7 +18059,7 @@
           "unite": "ml",
           "qteInitiale": 800,
           "pu": 1400,
-          "estAnterieure": 0,
+          "estAnterieure": 50,
           "metAnterieure": 0,
           "estMois": 0,
           "metMois": 0,
@@ -18079,7 +18085,7 @@
           "unite": "U",
           "qteInitiale": 300,
           "pu": 250,
-          "estAnterieure": 0,
+          "estAnterieure": 25,
           "metAnterieure": 0,
           "estMois": 0,
           "metMois": 0,
