@@ -82,9 +82,32 @@
       "date": ""
     }
   },
-  "catalogue": [],
+  "catalogue": [
+    {
+      "numero": 1,
+      "libelle": "Surveillance et gardiennage assuré par un agent de sécurité au niveau de la Direction Régionale de Sud",
+      "unite": "Forfait / mois",
+      "qteInitiale": 408,
+      "prixUnitaire": 5600.56,
+      "prixTotal": 2285028.48
+    },
+    {
+      "numero": 2,
+      "libelle": "Gardiennage Occasionnel",
+      "unite": "Poste",
+      "qteInitiale": 100,
+      "prixUnitaire": 186.0186,
+      "prixTotal": 18601.86
+    }
+  ],
   "commandes": [],
   "historique": [
+    {
+      "id": "mutsvqzwx3jy6",
+      "date": "2026-10-04T12:31:49.868Z",
+      "action": "IMPORT DE.xlsx",
+      "details": "2 prix importés"
+    },
     {
       "id": "muts668alquoh",
       "date": "2026-10-04T12:11:56.554Z",
