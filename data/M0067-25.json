@@ -103,6 +103,18 @@
   "commandes": [],
   "historique": [
     {
+      "id": "mutswnu1tzz4z",
+      "date": "2026-10-04T12:32:32.425Z",
+      "action": "SAUVEGARDE ATTACHEMENT",
+      "details": "TR3 — N°2 — Février 2026"
+    },
+    {
+      "id": "mutswmdgd6h6p",
+      "date": "2026-10-04T12:32:30.532Z",
+      "action": "SAUVEGARDE ATTACHEMENT",
+      "details": "TR3 — N°2 — Février 2026"
+    },
+    {
       "id": "mutswdg9abjbq",
       "date": "2026-10-04T12:32:18.969Z",
       "action": "SAUVEGARDE ATTACHEMENT",
@@ -247,7 +259,7 @@
       ],
       "fiches": [],
       "createdAt": "2026-10-04T12:31:57.178Z",
-      "_numero": 2
+      "_numero": 3
     },
     {
       "id": "mutsw0bsh6455",
@@ -323,7 +335,9 @@
         }
       ],
       "fiches": [],
-      "createdAt": "2026-10-04T12:32:23.311Z"
+      "createdAt": "2026-10-04T12:32:23.311Z",
+      "updatedAt": "2026-10-04T12:32:32.425Z",
+      "_numero": 2
     }
   ]
 }
