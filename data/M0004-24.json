@@ -12785,7 +12785,7 @@
       "metre": true,
       "metrev": false,
       "constat": true,
-      "attachement": false,
+      "attachement": true,
       "decomptes": false,
       "suivi": true,
       "sinistres": true,
