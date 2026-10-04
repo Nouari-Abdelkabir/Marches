@@ -1637,68 +1637,7 @@
     }
   ],
   "commandes": [],
-  "historique": [
-    {
-      "id": "mutogmjnfdvu3",
-      "date": "2026-10-04T10:28:05.795Z",
-      "action": "SAUVEGARDE SUIVI PRIX",
-      "details": "N°1 — Octobre 2026 — 44 prix"
-    },
-    {
-      "id": "muto3z2rxpjdq",
-      "date": "2026-10-04T10:18:15.507Z",
-      "action": "SAUVEGARDE CONSTAT",
-      "details": "Constat N°1 — TR3 — Octobre 2026"
-    },
-    {
-      "id": "mutnyh4hq24b1",
-      "date": "2026-10-04T10:13:58.961Z",
-      "action": "SAUVEGARDE METREV",
-      "details": "N°1 — TR3 — Octobre 2026"
-    },
-    {
-      "id": "mutntaca7mvvd",
-      "date": "2026-10-04T10:09:56.891Z",
-      "action": "SAUVEGARDE METREV",
-      "details": "N°1 — TR3 — Octobre 2026"
-    },
-    {
-      "id": "mutnkw2xa5has",
-      "date": "2026-10-04T10:03:25.161Z",
-      "action": "SAUVEGARDE METREV",
-      "details": "N°1 — TR3 — Octobre 2026"
-    },
-    {
-      "id": "mutnkoo1vxx9w",
-      "date": "2026-10-04T10:03:15.553Z",
-      "action": "SUPPRESSION METREV",
-      "details": "N°1 — TR3"
-    },
-    {
-      "id": "mutn1sfsx1i0a",
-      "date": "2026-10-04T09:48:33.976Z",
-      "action": "SAUVEGARDE METREV",
-      "details": "N°1 — TR3 — Octobre 2026"
-    },
-    {
-      "id": "mutms8n3dgepf",
-      "date": "2026-10-04T09:41:08.415Z",
-      "action": "MODIFICATION PARAMÈTRES",
-      "details": "Mise à jour des paramètres et signatures"
-    },
-    {
-      "id": "mutms0kjd9jjz",
-      "date": "2026-10-04T09:40:57.955Z",
-      "action": "MODIFICATION PARAMÈTRES",
-      "details": "Mise à jour des paramètres et signatures"
-    },
-    {
-      "id": "mutmrrv2hky3h",
-      "date": "2026-10-04T09:40:46.670Z",
-      "action": "IMPORT DE.xlsx",
-      "details": "194 prix importés"
-    }
-  ],
+  "historique": [],
   "metresEnregistres": [],
   "constatsEnregistres": [
     {
