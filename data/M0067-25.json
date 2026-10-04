@@ -240,7 +240,45 @@
         }
       ],
       "fiches": [],
-      "createdAt": "2026-10-04T12:31:57.178Z"
+      "createdAt": "2026-10-04T12:31:57.178Z",
+      "_numero": 1
+    },
+    {
+      "id": "mutsw0bsh6455",
+      "numero": 1,
+      "mois": "2026-01",
+      "troncon": "TR3",
+      "dateReference": "2026-01-31",
+      "lignes": [
+        {
+          "prix": 1,
+          "libelle": "Surveillance et gardiennage assuré par un agent de sécurité au niveau de la Direction Régionale de Sud",
+          "unite": "Forfait / mois",
+          "qteInitiale": 408,
+          "pu": 5600.56,
+          "estAnterieure": 0,
+          "metAnterieure": 0,
+          "estMois": 0,
+          "metMois": 0,
+          "totale": 0,
+          "observations": ""
+        },
+        {
+          "prix": 2,
+          "libelle": "Gardiennage Occasionnel",
+          "unite": "Poste",
+          "qteInitiale": 100,
+          "pu": 186.0186,
+          "estAnterieure": 0,
+          "metAnterieure": 0,
+          "estMois": 0,
+          "metMois": 0,
+          "totale": 0,
+          "observations": ""
+        }
+      ],
+      "fiches": [],
+      "createdAt": "2026-10-04T12:32:01.960Z"
     }
   ]
 }
