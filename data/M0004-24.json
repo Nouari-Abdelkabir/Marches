@@ -56,7 +56,8 @@
       "texte": "",
       "nom": "",
       "date": ""
-    }
+    },
+    "entite": ""
   },
   "catalogue": [
     {
@@ -7553,6 +7554,12 @@
     }
   ],
   "historique": [
+    {
+      "id": "mutkyrktd1iid",
+      "date": "2026-10-04T08:50:13.661Z",
+      "action": "MODIFICATION PARAMÈTRES",
+      "details": "Mise à jour des paramètres et signatures"
+    },
     {
       "id": "muslex3wtsbhf",
       "date": "2026-10-03T16:15:01.148Z",
