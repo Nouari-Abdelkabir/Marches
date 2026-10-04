@@ -8,7 +8,7 @@
       "dashboard": true,
       "parametres": true,
       "catalogue": true,
-      "commandes": true,
+      "commandes": false,
       "metre": false,
       "metrev": true,
       "constat": true,
