@@ -103,6 +103,12 @@
   "commandes": [],
   "historique": [
     {
+      "id": "muttm2aabevta",
+      "date": "2026-10-04T12:52:17.554Z",
+      "action": "SAUVEGARDE SUIVI PRIX",
+      "details": "N°1 — Janvier 2026 — 1 prix"
+    },
+    {
       "id": "mutswuoc4ikg9",
       "date": "2026-10-04T12:32:41.292Z",
       "action": "SUPPRESSION ATTACHEMENT",
@@ -159,7 +165,24 @@
   ],
   "metresEnregistres": [],
   "constatsEnregistres": [],
-  "suivisPrix": [],
+  "suivisPrix": [
+    {
+      "id": "muttm2aa47sqi",
+      "numero": 1,
+      "moisDebut": "2026-01",
+      "moisFin": "2026-01",
+      "dateReference": "2026-01-31",
+      "lignes": {
+        "1": {
+          "TR1": 0,
+          "TR2": 0,
+          "TR3": 8,
+          "TR4": 0
+        }
+      },
+      "createdAt": "2026-10-04T12:52:17.554Z"
+    }
+  ],
   "etatsSinistres": [],
   "facturesSinistres": {},
   "photoSinistres": {},
