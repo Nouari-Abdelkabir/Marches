@@ -319,17 +319,42 @@
           "unite": "Poste",
           "qteInitiale": 100,
           "pu": 186.0186,
-          "estAnterieure": 2,
+          "estAnterieure": 0,
           "metAnterieure": 0,
           "estMois": 0,
           "metMois": 0,
-          "totale": 2,
+          "totale": 0,
           "observations": ""
         }
       ],
-      "fiches": [],
+      "fiches": [
+        {
+          "id": "fiche_mutsybx01jaoq",
+          "prix": 1,
+          "libelle": "Surveillance et gardiennage assuré par un agent de sécurité au niveau de la Direction Régionale de Sud",
+          "unite": "Forfait / mois",
+          "numeroFiche": "1 / 26 / 2 / 2",
+          "dateDebut": "2026-02-01",
+          "dateFin": "2026-02-28",
+          "prestationsTerminees": [],
+          "prestationsNonTerminees": [
+            {
+              "designation": "Surveillance et gardiennage assuré par un agent de sécurité au niveau de la Direction Régionale de Sud",
+              "metrees": 8,
+              "estimees": 0
+            }
+          ],
+          "quantiteAnterieure": 8,
+          "quantiteDuMois": 8,
+          "totalAttachement": 16,
+          "croquis": "",
+          "observations": "",
+          "feuillet": "1/1",
+          "estDernierMois": false
+        }
+      ],
       "createdAt": "2026-10-04T12:32:23.311Z",
-      "updatedAt": "2026-10-04T12:32:32.425Z",
+      "updatedAt": "2026-10-04T12:33:50.292Z",
       "_numero": 2
     }
   ]
