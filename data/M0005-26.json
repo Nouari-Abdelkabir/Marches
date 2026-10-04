@@ -1639,6 +1639,12 @@
   "commandes": [],
   "historique": [
     {
+      "id": "mutl8qqasi31t",
+      "date": "2026-10-04T08:57:59.122Z",
+      "action": "SAUVEGARDE ATTACHEMENT",
+      "details": "TR1 — N°1 — Janvier 2026"
+    },
+    {
       "id": "mutl88dd5a808",
       "date": "2026-10-04T08:57:35.329Z",
       "action": "SAUVEGARDE ATTACHEMENT",
@@ -4734,9 +4740,9 @@
           "pu": 50,
           "estAnterieure": 0,
           "metAnterieure": 0,
-          "estMois": 0,
+          "estMois": 50,
           "metMois": 0,
-          "totale": 0,
+          "totale": 50,
           "observations": ""
         },
         {
@@ -7238,7 +7244,7 @@
       ],
       "fiches": [],
       "createdAt": "2026-10-04T08:57:04.282Z",
-      "updatedAt": "2026-10-04T08:57:10.708Z",
+      "updatedAt": "2026-10-04T08:57:59.122Z",
       "_numero": 1
     },
     {
