@@ -40,9 +40,1569 @@
     "accepteNom": "",
     "accepteDate": ""
   },
-  "catalogue": [],
+  "catalogue": [
+    {
+      "numero": 1,
+      "libelle": "Démolition de cloison en maçonneries ou en briques",
+      "unite": "M2",
+      "qteInitiale": 28,
+      "prixUnitaire": 20,
+      "prixTotal": 560
+    },
+    {
+      "numero": 2,
+      "libelle": "Démolition de forme ou dallage en béton de tout type",
+      "unite": "M2",
+      "qteInitiale": 52,
+      "prixUnitaire": 50,
+      "prixTotal": 2600
+    },
+    {
+      "numero": 3,
+      "libelle": "Démolition d'ouvrages en béton ou en béton armé",
+      "unite": "M3",
+      "qteInitiale": 6,
+      "prixUnitaire": 20,
+      "prixTotal": 120
+    },
+    {
+      "numero": 4,
+      "libelle": "Démolition de revêtements de sol ou de murs",
+      "unite": "M2",
+      "qteInitiale": 85,
+      "prixUnitaire": 50,
+      "prixTotal": 4250
+    },
+    {
+      "numero": 5,
+      "libelle": "Démolition de l’étanchéité en totalité ou en partie",
+      "unite": "M2",
+      "qteInitiale": 100,
+      "prixUnitaire": 40,
+      "prixTotal": 4000
+    },
+    {
+      "numero": 6,
+      "libelle": "Dépose d'article de menuiserie.",
+      "unite": "U",
+      "qteInitiale": 12,
+      "prixUnitaire": 150,
+      "prixTotal": 1800
+    },
+    {
+      "numero": 7,
+      "libelle": "Dépose d'article de ferronnerie",
+      "unite": "U",
+      "qteInitiale": 10,
+      "prixUnitaire": 100,
+      "prixTotal": 1000
+    },
+    {
+      "numero": 8,
+      "libelle": "Dépose des appareils sanitaires.",
+      "unite": "U",
+      "qteInitiale": 28,
+      "prixUnitaire": 200,
+      "prixTotal": 5600
+    },
+    {
+      "numero": 9,
+      "libelle": "Dépose et pose de portail métallique",
+      "unite": "Forfait",
+      "qteInitiale": 2,
+      "prixUnitaire": 3000,
+      "prixTotal": 6000
+    },
+    {
+      "numero": 10,
+      "libelle": "Traitement des fissures",
+      "unite": "ML",
+      "qteInitiale": 200,
+      "prixUnitaire": 70,
+      "prixTotal": 14000
+    },
+    {
+      "numero": 11,
+      "libelle": "Vidange fosse sceptique",
+      "unite": "M3",
+      "qteInitiale": 30,
+      "prixUnitaire": 150,
+      "prixTotal": 4500
+    },
+    {
+      "numero": 12,
+      "libelle": "Réparation de fuite au niveau d'une canalisation",
+      "unite": "Forfait",
+      "qteInitiale": 6,
+      "prixUnitaire": 450,
+      "prixTotal": 2700
+    },
+    {
+      "numero": 13,
+      "libelle": "Fourniture et pose de faux plafond en staff lisse",
+      "unite": "M3",
+      "qteInitiale": 4,
+      "prixUnitaire": 160,
+      "prixTotal": 640
+    },
+    {
+      "numero": 14,
+      "libelle": "Fourniture et pose de mâts pour drapeaux (H=6m)",
+      "unite": "U",
+      "qteInitiale": 4,
+      "prixUnitaire": 1000,
+      "prixTotal": 4000
+    },
+    {
+      "numero": 15,
+      "libelle": "Poutre chenaux pour évacuation des climatiseurs",
+      "unite": "ML",
+      "qteInitiale": 2,
+      "prixUnitaire": 20,
+      "prixTotal": 40
+    },
+    {
+      "numero": 16,
+      "libelle": "Fouilles en tranchées ou en trous dans tous terrains y compris le rocher",
+      "unite": "M3",
+      "qteInitiale": 70,
+      "prixUnitaire": 20,
+      "prixTotal": 1400
+    },
+    {
+      "numero": 17,
+      "libelle": "Remblaiement ou évacuation aux décharges publiques",
+      "unite": "M3",
+      "qteInitiale": 70,
+      "prixUnitaire": 30,
+      "prixTotal": 2100
+    },
+    {
+      "numero": 18,
+      "libelle": "Maçonnerie en agglomérés de 0.20",
+      "unite": "M2",
+      "qteInitiale": 42,
+      "prixUnitaire": 130,
+      "prixTotal": 5460
+    },
+    {
+      "numero": 19,
+      "libelle": "Béton",
+      "unite": "M3",
+      "qteInitiale": 30,
+      "prixUnitaire": 1100,
+      "prixTotal": 33000
+    },
+    {
+      "numero": 20,
+      "libelle": "Armatures en acier",
+      "unite": "KG",
+      "qteInitiale": 1500,
+      "prixUnitaire": 14,
+      "prixTotal": 21000
+    },
+    {
+      "numero": 21,
+      "libelle": "Cloison simple en briques",
+      "unite": "M2",
+      "qteInitiale": 16,
+      "prixUnitaire": 120,
+      "prixTotal": 1920
+    },
+    {
+      "numero": 22,
+      "libelle": "Canalisation PVC D 50 mm pour évacuation",
+      "unite": "ML",
+      "qteInitiale": 14,
+      "prixUnitaire": 30,
+      "prixTotal": 420
+    },
+    {
+      "numero": 23,
+      "libelle": "Canalisation PVC D 80 mm pour évacuation",
+      "unite": "ML",
+      "qteInitiale": 6,
+      "prixUnitaire": 15,
+      "prixTotal": 90
+    },
+    {
+      "numero": 24,
+      "libelle": "Canalisation PVC D 100 mm pour évacuation",
+      "unite": "ML",
+      "qteInitiale": 10,
+      "prixUnitaire": 80,
+      "prixTotal": 800
+    },
+    {
+      "numero": 25,
+      "libelle": "Canalisation PVC D 200 mm pour évacuation",
+      "unite": "ML",
+      "qteInitiale": 14,
+      "prixUnitaire": 180,
+      "prixTotal": 2520
+    },
+    {
+      "numero": 26,
+      "libelle": "Canalisation PVC D 300 mm pour évacuation",
+      "unite": "ML",
+      "qteInitiale": 20,
+      "prixUnitaire": 300,
+      "prixTotal": 6000
+    },
+    {
+      "numero": 27,
+      "libelle": "Conduite en polyéthylène Diamètre D20 PN16",
+      "unite": "ML",
+      "qteInitiale": 16,
+      "prixUnitaire": 50,
+      "prixTotal": 800
+    },
+    {
+      "numero": 28,
+      "libelle": "Conduite en polyéthyléne Diamétre D63PN16",
+      "unite": "ML",
+      "qteInitiale": 30,
+      "prixUnitaire": 70,
+      "prixTotal": 2100
+    },
+    {
+      "numero": 29,
+      "libelle": "Conduite en polyéthylène Diamètre D40 PN16",
+      "unite": "ML",
+      "qteInitiale": 100,
+      "prixUnitaire": 70,
+      "prixTotal": 7000
+    },
+    {
+      "numero": 30,
+      "libelle": "Conduite en polyéthylène Diamètre D50 PN16",
+      "unite": "ML",
+      "qteInitiale": 14,
+      "prixUnitaire": 20,
+      "prixTotal": 280
+    },
+    {
+      "numero": 31,
+      "libelle": "Conduite en polyéthylène Diamètre D63 PN16",
+      "unite": "ML",
+      "qteInitiale": 14,
+      "prixUnitaire": 20,
+      "prixTotal": 280
+    },
+    {
+      "numero": 32,
+      "libelle": "Bouche d’arrosage Φ 15",
+      "unite": "U",
+      "qteInitiale": 14,
+      "prixUnitaire": 500,
+      "prixTotal": 7000
+    },
+    {
+      "numero": 33,
+      "libelle": "Regard 40 * 40 cm de section intérieure",
+      "unite": "U",
+      "qteInitiale": 2,
+      "prixUnitaire": 300,
+      "prixTotal": 600
+    },
+    {
+      "numero": 34,
+      "libelle": "Regard 50 * 50 cm de section intérieure",
+      "unite": "U",
+      "qteInitiale": 2,
+      "prixUnitaire": 400,
+      "prixTotal": 800
+    },
+    {
+      "numero": 35,
+      "libelle": "Regard 60 * 60 cm  de section intérieure",
+      "unite": "U",
+      "qteInitiale": 2,
+      "prixUnitaire": 700,
+      "prixTotal": 1400
+    },
+    {
+      "numero": 36,
+      "libelle": "Regard 70 * 70 cm  de section intérieure",
+      "unite": "U",
+      "qteInitiale": 2,
+      "prixUnitaire": 800,
+      "prixTotal": 1600
+    },
+    {
+      "numero": 37,
+      "libelle": "Tampon - grille en fonte",
+      "unite": "M2",
+      "qteInitiale": 2,
+      "prixUnitaire": 3000,
+      "prixTotal": 6000
+    },
+    {
+      "numero": 38,
+      "libelle": "Caniveau en béton armé avec grilles de protection en acier galvanisé 0.20 x 0.20m",
+      "unite": "ML",
+      "qteInitiale": 2,
+      "prixUnitaire": 100,
+      "prixTotal": 200
+    },
+    {
+      "numero": 39,
+      "libelle": "Caniveau en béton armé avec grilles de protection en acier galvanisé 0.40 x 0.20m",
+      "unite": "ML",
+      "qteInitiale": 2,
+      "prixUnitaire": 100,
+      "prixTotal": 200
+    },
+    {
+      "numero": 40,
+      "libelle": "Caniveau en béton armé avec grilles de protection en acier galvanisé 0.40*0.40m",
+      "unite": "ML",
+      "qteInitiale": 2,
+      "prixUnitaire": 100,
+      "prixTotal": 200
+    },
+    {
+      "numero": 41,
+      "libelle": "Caniveau en béton armé avec dallettes en béton armé   0.20*0.20m",
+      "unite": "ML",
+      "qteInitiale": 2,
+      "prixUnitaire": 100,
+      "prixTotal": 200
+    },
+    {
+      "numero": 42,
+      "libelle": "Caniveau en béton armé avec dallettes en béton armé  0.40*0.20m",
+      "unite": "ML",
+      "qteInitiale": 2,
+      "prixUnitaire": 100,
+      "prixTotal": 200
+    },
+    {
+      "numero": 43,
+      "libelle": "Caniveau en béton armé avec dallettes en béton armé   0.40*0.40m",
+      "unite": "ML",
+      "qteInitiale": 2,
+      "prixUnitaire": 110,
+      "prixTotal": 220
+    },
+    {
+      "numero": 44,
+      "libelle": "Fourniture et pose de tampon en béton armé",
+      "unite": "M2",
+      "qteInitiale": 2,
+      "prixUnitaire": 120,
+      "prixTotal": 240
+    },
+    {
+      "numero": 45,
+      "libelle": "Fourniture et pose de trappe pour regard visitable",
+      "unite": "M2",
+      "qteInitiale": 2,
+      "prixUnitaire": 200,
+      "prixTotal": 400
+    },
+    {
+      "numero": 46,
+      "libelle": "Curage des canalisations",
+      "unite": "ML",
+      "qteInitiale": 6,
+      "prixUnitaire": 600,
+      "prixTotal": 3600
+    },
+    {
+      "numero": 47,
+      "libelle": "Enduit extérieur au mortier bâtard, lisse, rustique ou tyrolien",
+      "unite": "M2",
+      "qteInitiale": 70,
+      "prixUnitaire": 40,
+      "prixTotal": 2800
+    },
+    {
+      "numero": 48,
+      "libelle": "Enduit intérieur au mortier de ciment sur murs y compris  baguettes d'angles métalliques",
+      "unite": "M2",
+      "qteInitiale": 28,
+      "prixUnitaire": 30,
+      "prixTotal": 840
+    },
+    {
+      "numero": 49,
+      "libelle": "Reprise d'enduit au mortier de ciment et grillage y compris incorporation de produit hydrofuge type SIKA ou équivalent",
+      "unite": "M2",
+      "qteInitiale": 90,
+      "prixUnitaire": 40,
+      "prixTotal": 3600
+    },
+    {
+      "numero": 50,
+      "libelle": "Enduit sur mur intérieur ou extérieur en mortier de ciment",
+      "unite": "M2",
+      "qteInitiale": 150,
+      "prixUnitaire": 40,
+      "prixTotal": 6000
+    },
+    {
+      "numero": 51,
+      "libelle": "Fourniture et pose d'alucobond",
+      "unite": "M2",
+      "qteInitiale": 2,
+      "prixUnitaire": 2500,
+      "prixTotal": 5000
+    },
+    {
+      "numero": 52,
+      "libelle": "Profilé d'assemblage des chassis",
+      "unite": "ML",
+      "qteInitiale": 6,
+      "prixUnitaire": 100,
+      "prixTotal": 600
+    },
+    {
+      "numero": 53,
+      "libelle": "Fourniture et pose de polycarbonate lexan",
+      "unite": "M2",
+      "qteInitiale": 80,
+      "prixUnitaire": 150,
+      "prixTotal": 12000
+    },
+    {
+      "numero": 54,
+      "libelle": "Revêtement de sol en granit",
+      "unite": "M2",
+      "qteInitiale": 2,
+      "prixUnitaire": 1000,
+      "prixTotal": 2000
+    },
+    {
+      "numero": 55,
+      "libelle": "Plinthes en granit",
+      "unite": "ML",
+      "qteInitiale": 2,
+      "prixUnitaire": 150,
+      "prixTotal": 300
+    },
+    {
+      "numero": 56,
+      "libelle": "Revêtement de tablette de vasque ou de paillasse en granit y compris plinthes et retours",
+      "unite": "M2",
+      "qteInitiale": 2,
+      "prixUnitaire": 1000,
+      "prixTotal": 2000
+    },
+    {
+      "numero": 57,
+      "libelle": "Revêtement de façade en granit noir",
+      "unite": "M2",
+      "qteInitiale": 2,
+      "prixUnitaire": 800,
+      "prixTotal": 1600
+    },
+    {
+      "numero": 58,
+      "libelle": "Revêtement de façade en granit autre que le noir",
+      "unite": "M2",
+      "qteInitiale": 2,
+      "prixUnitaire": 800,
+      "prixTotal": 1600
+    },
+    {
+      "numero": 59,
+      "libelle": "Revêtement de façade en pierres",
+      "unite": "M2",
+      "qteInitiale": 6,
+      "prixUnitaire": 200,
+      "prixTotal": 1200
+    },
+    {
+      "numero": 60,
+      "libelle": "Pose de revêtement de façade en granit ou en pierres",
+      "unite": "M3",
+      "qteInitiale": 70,
+      "prixUnitaire": 400,
+      "prixTotal": 28000
+    },
+    {
+      "numero": 61,
+      "libelle": "Revêtement de sol en carreaux Porcelaine de  40*40 cm",
+      "unite": "M2",
+      "qteInitiale": 50,
+      "prixUnitaire": 260,
+      "prixTotal": 13000
+    },
+    {
+      "numero": 62,
+      "libelle": "Revêtement de sol en carreaux Porcelaine de 60*60 cm",
+      "unite": "M2",
+      "qteInitiale": 50,
+      "prixUnitaire": 230,
+      "prixTotal": 11500
+    },
+    {
+      "numero": 63,
+      "libelle": "Plinthes en carreaux Porcelaine",
+      "unite": "ML",
+      "qteInitiale": 28,
+      "prixUnitaire": 100,
+      "prixTotal": 2800
+    },
+    {
+      "numero": 64,
+      "libelle": "Revêtement mural en carreaux Porcelaine",
+      "unite": "M2",
+      "qteInitiale": 40,
+      "prixUnitaire": 280,
+      "prixTotal": 11200
+    },
+    {
+      "numero": 65,
+      "libelle": "Revêtement de façade en carreaux grès cérame",
+      "unite": "M2",
+      "qteInitiale": 6,
+      "prixUnitaire": 240,
+      "prixTotal": 1440
+    },
+    {
+      "numero": 66,
+      "libelle": "Dépose d'article de granit et marbre.",
+      "unite": "M2",
+      "qteInitiale": 2,
+      "prixUnitaire": 20,
+      "prixTotal": 40
+    },
+    {
+      "numero": 67,
+      "libelle": "Fourniture et pose d'article de granit",
+      "unite": "M2",
+      "qteInitiale": 2,
+      "prixUnitaire": 600,
+      "prixTotal": 1200
+    },
+    {
+      "numero": 68,
+      "libelle": "Pose d’article de granit",
+      "unite": "M2",
+      "qteInitiale": 2,
+      "prixUnitaire": 50,
+      "prixTotal": 100
+    },
+    {
+      "numero": 69,
+      "libelle": "Revêtement de sol en gravillon lavé",
+      "unite": "M2",
+      "qteInitiale": 2,
+      "prixUnitaire": 120,
+      "prixTotal": 240
+    },
+    {
+      "numero": 70,
+      "libelle": "Plinthes en gravillon lavé",
+      "unite": "ML",
+      "qteInitiale": 2,
+      "prixUnitaire": 40,
+      "prixTotal": 80
+    },
+    {
+      "numero": 71,
+      "libelle": "Retombée en gravillon lavé",
+      "unite": "ML",
+      "qteInitiale": 2,
+      "prixUnitaire": 150,
+      "prixTotal": 300
+    },
+    {
+      "numero": 72,
+      "libelle": "Revêtement de sol en granito poli blanc",
+      "unite": "M2",
+      "qteInitiale": 4,
+      "prixUnitaire": 150,
+      "prixTotal": 600
+    },
+    {
+      "numero": 73,
+      "libelle": "Plinthes en granito poli blanc",
+      "unite": "ML",
+      "qteInitiale": 2,
+      "prixUnitaire": 30,
+      "prixTotal": 60
+    },
+    {
+      "numero": 74,
+      "libelle": "Revêtement en pavés Autobloquants",
+      "unite": "M2",
+      "qteInitiale": 40,
+      "prixUnitaire": 130,
+      "prixTotal": 5200
+    },
+    {
+      "numero": 75,
+      "libelle": "Revêtement en carreaux type REV-SOL",
+      "unite": "M3",
+      "qteInitiale": 30,
+      "prixUnitaire": 130,
+      "prixTotal": 3900
+    },
+    {
+      "numero": 76,
+      "libelle": "Bordures de type T1",
+      "unite": "ML",
+      "qteInitiale": 30,
+      "prixUnitaire": 50,
+      "prixTotal": 1500
+    },
+    {
+      "numero": 77,
+      "libelle": "Bordures de type T2",
+      "unite": "ML",
+      "qteInitiale": 14,
+      "prixUnitaire": 50,
+      "prixTotal": 700
+    },
+    {
+      "numero": 78,
+      "libelle": "Bordures de type T3",
+      "unite": "ML",
+      "qteInitiale": 28,
+      "prixUnitaire": 80,
+      "prixTotal": 2240
+    },
+    {
+      "numero": 79,
+      "libelle": "Bordures de type T4",
+      "unite": "ML",
+      "qteInitiale": 14,
+      "prixUnitaire": 80,
+      "prixTotal": 1120
+    },
+    {
+      "numero": 80,
+      "libelle": "Forme de pente y compris chape de lissage",
+      "unite": "M2",
+      "qteInitiale": 100,
+      "prixUnitaire": 40,
+      "prixTotal": 4000
+    },
+    {
+      "numero": 81,
+      "libelle": "Ecran pare vapeur y compris isolation thermique",
+      "unite": "M2",
+      "qteInitiale": 2,
+      "prixUnitaire": 100,
+      "prixTotal": 200
+    },
+    {
+      "numero": 82,
+      "libelle": "Gorges arrondies pour solins",
+      "unite": "ML",
+      "qteInitiale": 20,
+      "prixUnitaire": 60,
+      "prixTotal": 1200
+    },
+    {
+      "numero": 83,
+      "libelle": "Etanchéité des terrasses",
+      "unite": "M2",
+      "qteInitiale": 170,
+      "prixUnitaire": 190,
+      "prixTotal": 32300
+    },
+    {
+      "numero": 84,
+      "libelle": "Etanchéité des relevés",
+      "unite": "ML",
+      "qteInitiale": 80,
+      "prixUnitaire": 150,
+      "prixTotal": 12000
+    },
+    {
+      "numero": 85,
+      "libelle": "Fourniture et pose de gargouilles",
+      "unite": "U",
+      "qteInitiale": 2,
+      "prixUnitaire": 500,
+      "prixTotal": 1000
+    },
+    {
+      "numero": 86,
+      "libelle": "Traitement de l'étanchéité des fenêtres de la façade vitrée",
+      "unite": "ML",
+      "qteInitiale": 30,
+      "prixUnitaire": 60,
+      "prixTotal": 1800
+    },
+    {
+      "numero": 87,
+      "libelle": "Fourniture et pose de faux cadres",
+      "unite": "ML",
+      "qteInitiale": 6,
+      "prixUnitaire": 30,
+      "prixTotal": 180
+    },
+    {
+      "numero": 88,
+      "libelle": "Fourniture et pose de cadres",
+      "unite": "ML",
+      "qteInitiale": 6,
+      "prixUnitaire": 50,
+      "prixTotal": 300
+    },
+    {
+      "numero": 89,
+      "libelle": "Fourniture et pose d’ouvrants de portes isoplanes",
+      "unite": "M2",
+      "qteInitiale": 2,
+      "prixUnitaire": 1000,
+      "prixTotal": 2000
+    },
+    {
+      "numero": 90,
+      "libelle": "Fourniture et pose de chambranles",
+      "unite": "ML",
+      "qteInitiale": 6,
+      "prixUnitaire": 30,
+      "prixTotal": 180
+    },
+    {
+      "numero": 91,
+      "libelle": "Réparation d’articles de menuiserie bois existants",
+      "unite": "U",
+      "qteInitiale": 50,
+      "prixUnitaire": 700,
+      "prixTotal": 35000
+    },
+    {
+      "numero": 92,
+      "libelle": "Fourniture et pose d’ensemble de béquilles pour porte en bois",
+      "unite": "U",
+      "qteInitiale": 60,
+      "prixUnitaire": 250,
+      "prixTotal": 15000
+    },
+    {
+      "numero": 93,
+      "libelle": "Fourniture et pose de serrures pour porte en bois",
+      "unite": "U",
+      "qteInitiale": 50,
+      "prixUnitaire": 250,
+      "prixTotal": 12500
+    },
+    {
+      "numero": 94,
+      "libelle": "Fourniture et pose de butoirs",
+      "unite": "U",
+      "qteInitiale": 6,
+      "prixUnitaire": 10,
+      "prixTotal": 60
+    },
+    {
+      "numero": 95,
+      "libelle": "Fourniture et pose de canon pour porte en bois",
+      "unite": "U",
+      "qteInitiale": 70,
+      "prixUnitaire": 140,
+      "prixTotal": 9800
+    },
+    {
+      "numero": 96,
+      "libelle": "Fourniture et pose de paumelles pour porte en bois",
+      "unite": "U",
+      "qteInitiale": 16,
+      "prixUnitaire": 25,
+      "prixTotal": 400
+    },
+    {
+      "numero": 97,
+      "libelle": "Fourniture et pose de placard en bois",
+      "unite": "M2",
+      "qteInitiale": 14,
+      "prixUnitaire": 1400,
+      "prixTotal": 19600
+    },
+    {
+      "numero": 98,
+      "libelle": "Fourniture et pose de charnière pour placard en bois",
+      "unite": "U",
+      "qteInitiale": 14,
+      "prixUnitaire": 20,
+      "prixTotal": 280
+    },
+    {
+      "numero": 99,
+      "libelle": "Fourniture et pose d’ouvrants de portes en Aluminium",
+      "unite": "M2",
+      "qteInitiale": 2,
+      "prixUnitaire": 900,
+      "prixTotal": 1800
+    },
+    {
+      "numero": 100,
+      "libelle": "Fourniture et pose de fenêtres complètes en Aluminium",
+      "unite": "M2",
+      "qteInitiale": 10,
+      "prixUnitaire": 1300,
+      "prixTotal": 13000
+    },
+    {
+      "numero": 101,
+      "libelle": "Fourniture et pose d’ouvrant de fenêtres en Aluminium",
+      "unite": "M2",
+      "qteInitiale": 2,
+      "prixUnitaire": 1300,
+      "prixTotal": 2600
+    },
+    {
+      "numero": 102,
+      "libelle": "Châssis extérieurs en Aluminium",
+      "unite": "M2",
+      "qteInitiale": 2,
+      "prixUnitaire": 1200,
+      "prixTotal": 2400
+    },
+    {
+      "numero": 103,
+      "libelle": "Cloison amovible vitrée",
+      "unite": "M2",
+      "qteInitiale": 2,
+      "prixUnitaire": 700,
+      "prixTotal": 1400
+    },
+    {
+      "numero": 104,
+      "libelle": "Remplacement d’éléments défectueux",
+      "unite": "M2",
+      "qteInitiale": 2,
+      "prixUnitaire": 500,
+      "prixTotal": 1000
+    },
+    {
+      "numero": 105,
+      "libelle": "Fourniture et pose de cadres en Aluminium.",
+      "unite": "ML",
+      "qteInitiale": 2,
+      "prixUnitaire": 120,
+      "prixTotal": 240
+    },
+    {
+      "numero": 106,
+      "libelle": "Fourniture et pose de chambranle en Aluminium",
+      "unite": "ML",
+      "qteInitiale": 2,
+      "prixUnitaire": 100,
+      "prixTotal": 200
+    },
+    {
+      "numero": 107,
+      "libelle": "Ajustement et renforcement d'articles de menuiserie Aluminium",
+      "unite": "U",
+      "qteInitiale": 2,
+      "prixUnitaire": 700,
+      "prixTotal": 1400
+    },
+    {
+      "numero": 108,
+      "libelle": "Ferme porte hydraulique",
+      "unite": "U",
+      "qteInitiale": 6,
+      "prixUnitaire": 600,
+      "prixTotal": 3600
+    },
+    {
+      "numero": 109,
+      "libelle": "Fourniture et pose d’ensemble de béquilles",
+      "unite": "U",
+      "qteInitiale": 30,
+      "prixUnitaire": 150,
+      "prixTotal": 4500
+    },
+    {
+      "numero": 110,
+      "libelle": "Fourniture et pose de serrures",
+      "unite": "U",
+      "qteInitiale": 30,
+      "prixUnitaire": 250,
+      "prixTotal": 7500
+    },
+    {
+      "numero": 111,
+      "libelle": "Fourniture et pose de stores vénitiens",
+      "unite": "M2",
+      "qteInitiale": 30,
+      "prixUnitaire": 550,
+      "prixTotal": 16500
+    },
+    {
+      "numero": 112,
+      "libelle": "Fourniture et pose de stores Californiens",
+      "unite": "M2",
+      "qteInitiale": 30,
+      "prixUnitaire": 550,
+      "prixTotal": 16500
+    },
+    {
+      "numero": 113,
+      "libelle": "Vitrerie",
+      "unite": "M2",
+      "qteInitiale": 16,
+      "prixUnitaire": 500,
+      "prixTotal": 8000
+    },
+    {
+      "numero": 114,
+      "libelle": "Film solaire anti chaleur",
+      "unite": "M2",
+      "qteInitiale": 16,
+      "prixUnitaire": 300,
+      "prixTotal": 4800
+    },
+    {
+      "numero": 115,
+      "libelle": "Porte métallique",
+      "unite": "M2",
+      "qteInitiale": 16,
+      "prixUnitaire": 800,
+      "prixTotal": 12800
+    },
+    {
+      "numero": 116,
+      "libelle": "Porte en grille métallique",
+      "unite": "M2",
+      "qteInitiale": 16,
+      "prixUnitaire": 700,
+      "prixTotal": 11200
+    },
+    {
+      "numero": 117,
+      "libelle": "Grilles de protection métalliques",
+      "unite": "M2",
+      "qteInitiale": 14,
+      "prixUnitaire": 700,
+      "prixTotal": 9800
+    },
+    {
+      "numero": 118,
+      "libelle": "Grilles pour gargouilles, caniveaux et tout réseau d’évacuation des eaux",
+      "unite": "M3",
+      "qteInitiale": 16,
+      "prixUnitaire": 300,
+      "prixTotal": 4800
+    },
+    {
+      "numero": 119,
+      "libelle": "Réparation d’article de menuiserie métallique existant",
+      "unite": "U",
+      "qteInitiale": 20,
+      "prixUnitaire": 800,
+      "prixTotal": 16000
+    },
+    {
+      "numero": 120,
+      "libelle": "Fourniture et pose d’ensemble de béquilles.",
+      "unite": "U",
+      "qteInitiale": 40,
+      "prixUnitaire": 250,
+      "prixTotal": 10000
+    },
+    {
+      "numero": 121,
+      "libelle": "Fourniture et pose de serrures pour porte métallique",
+      "unite": "U",
+      "qteInitiale": 60,
+      "prixUnitaire": 250,
+      "prixTotal": 15000
+    },
+    {
+      "numero": 122,
+      "libelle": "Clôture en grillage métallique  type 1 (h=2m)",
+      "unite": "ML",
+      "qteInitiale": 30,
+      "prixUnitaire": 500,
+      "prixTotal": 15000
+    },
+    {
+      "numero": 123,
+      "libelle": "Clôture en grillage métallique type 2 (h=1.60m)",
+      "unite": "ML",
+      "qteInitiale": 16,
+      "prixUnitaire": 250,
+      "prixTotal": 4000
+    },
+    {
+      "numero": 124,
+      "libelle": "Ajustement et fixation de la clôture en grillage métallique",
+      "unite": "U",
+      "qteInitiale": 20,
+      "prixUnitaire": 800,
+      "prixTotal": 16000
+    },
+    {
+      "numero": 125,
+      "libelle": "Porte grillagée en inox",
+      "unite": "M2",
+      "qteInitiale": 2,
+      "prixUnitaire": 1000,
+      "prixTotal": 2000
+    },
+    {
+      "numero": 126,
+      "libelle": "Grille en Inox",
+      "unite": "Kilogramme",
+      "qteInitiale": 28,
+      "prixUnitaire": 150,
+      "prixTotal": 4200
+    },
+    {
+      "numero": 127,
+      "libelle": "Habillage de façade en panneaux composites",
+      "unite": "M2",
+      "qteInitiale": 6,
+      "prixUnitaire": 700,
+      "prixTotal": 4200
+    },
+    {
+      "numero": 128,
+      "libelle": "Peinture vinylique sur façade",
+      "unite": "M2",
+      "qteInitiale": 9000,
+      "prixUnitaire": 20.5,
+      "prixTotal": 184500
+    },
+    {
+      "numero": 129,
+      "libelle": "Peinture glycérophtalique sur murs et plafonds intérieurs",
+      "unite": "M2",
+      "qteInitiale": 700,
+      "prixUnitaire": 18,
+      "prixTotal": 12600
+    },
+    {
+      "numero": 130,
+      "libelle": "Peinture vinylique sur murs et plafonds intérieurs",
+      "unite": "M2",
+      "qteInitiale": 9000,
+      "prixUnitaire": 20.5,
+      "prixTotal": 184500
+    },
+    {
+      "numero": 131,
+      "libelle": "Peinture griffée",
+      "unite": "M2",
+      "qteInitiale": 160,
+      "prixUnitaire": 55,
+      "prixTotal": 8800
+    },
+    {
+      "numero": 132,
+      "libelle": "Peinture GRANITO",
+      "unite": "M2",
+      "qteInitiale": 40,
+      "prixUnitaire": 60,
+      "prixTotal": 2400
+    },
+    {
+      "numero": 133,
+      "libelle": "Travaux préparatoires de peinture sur bois",
+      "unite": "M2",
+      "qteInitiale": 100,
+      "prixUnitaire": 4,
+      "prixTotal": 400
+    },
+    {
+      "numero": 134,
+      "libelle": "Peinture sur bois",
+      "unite": "M2",
+      "qteInitiale": 160,
+      "prixUnitaire": 22,
+      "prixTotal": 3520
+    },
+    {
+      "numero": 135,
+      "libelle": "Vernis pour menuiserie bois",
+      "unite": "M2",
+      "qteInitiale": 100,
+      "prixUnitaire": 30,
+      "prixTotal": 3000
+    },
+    {
+      "numero": 136,
+      "libelle": "Revêtement de peinture satinée sur supports métalliques",
+      "unite": "M2",
+      "qteInitiale": 1000,
+      "prixUnitaire": 20,
+      "prixTotal": 20000
+    },
+    {
+      "numero": 137,
+      "libelle": "Dessin et écriture",
+      "unite": "M2",
+      "qteInitiale": 70,
+      "prixUnitaire": 200,
+      "prixTotal": 14000
+    },
+    {
+      "numero": 138,
+      "libelle": "Retube diamètre 13/16",
+      "unite": "ML",
+      "qteInitiale": 28,
+      "prixUnitaire": 20,
+      "prixTotal": 560
+    },
+    {
+      "numero": 139,
+      "libelle": "Retube diamètre 16/20",
+      "unite": "ML",
+      "qteInitiale": 140,
+      "prixUnitaire": 50,
+      "prixTotal": 7000
+    },
+    {
+      "numero": 140,
+      "libelle": "Fourniture et pose de tuyau flexible pour raccordement de robinets",
+      "unite": "ML",
+      "qteInitiale": 34,
+      "prixUnitaire": 40,
+      "prixTotal": 1360
+    },
+    {
+      "numero": 141,
+      "libelle": "Fourniture et pose de tuyau C-PVC pour raccordement d’eau potable en apparent",
+      "unite": "ML",
+      "qteInitiale": 70,
+      "prixUnitaire": 40,
+      "prixTotal": 2800
+    },
+    {
+      "numero": 142,
+      "libelle": "Fourniture et pose de tube en acier galvanisé pour raccordement d’eau potable",
+      "unite": "ML",
+      "qteInitiale": 4,
+      "prixUnitaire": 100,
+      "prixTotal": 400
+    },
+    {
+      "numero": 143,
+      "libelle": "Lavabo sur colonne de 65cm",
+      "unite": "U",
+      "qteInitiale": 2,
+      "prixUnitaire": 1200,
+      "prixTotal": 2400
+    },
+    {
+      "numero": 144,
+      "libelle": "Lavabo suspendu de 55cm",
+      "unite": "U",
+      "qteInitiale": 2,
+      "prixUnitaire": 1500,
+      "prixTotal": 3000
+    },
+    {
+      "numero": 145,
+      "libelle": "Lavabo vasque à encastrer tout compris",
+      "unite": "U",
+      "qteInitiale": 2,
+      "prixUnitaire": 1000,
+      "prixTotal": 2000
+    },
+    {
+      "numero": 146,
+      "libelle": "Lavabo vasque collectif de 1,50 m tout compris",
+      "unite": "U",
+      "qteInitiale": 2,
+      "prixUnitaire": 2000,
+      "prixTotal": 4000
+    },
+    {
+      "numero": 147,
+      "libelle": "Fourniture et pose d'évier simple en INOX",
+      "unite": "U",
+      "qteInitiale": 2,
+      "prixUnitaire": 800,
+      "prixTotal": 1600
+    },
+    {
+      "numero": 148,
+      "libelle": "W.C à l'anglaise suspendu avec réservoir à encastrer tout compris",
+      "unite": "U",
+      "qteInitiale": 2,
+      "prixUnitaire": 1800,
+      "prixTotal": 3600
+    },
+    {
+      "numero": 149,
+      "libelle": "W.C à l'anglaise avec réservoir apparent tout compris",
+      "unite": "U",
+      "qteInitiale": 2,
+      "prixUnitaire": 1800,
+      "prixTotal": 3600
+    },
+    {
+      "numero": 150,
+      "libelle": "W.C. à la turque",
+      "unite": "U",
+      "qteInitiale": 4,
+      "prixUnitaire": 400,
+      "prixTotal": 1600
+    },
+    {
+      "numero": 151,
+      "libelle": "Fourniture et pose de mécanisme de chasse standard pour WC à l’anglaise",
+      "unite": "U",
+      "qteInitiale": 16,
+      "prixUnitaire": 300,
+      "prixTotal": 4800
+    },
+    {
+      "numero": 152,
+      "libelle": "Fourniture et pose de mécanisme de chasse standard pour WC à la turque",
+      "unite": "U",
+      "qteInitiale": 2,
+      "prixUnitaire": 150,
+      "prixTotal": 300
+    },
+    {
+      "numero": 153,
+      "libelle": "Fourniture et pose de mécanisme de chasse standard pour urinoir",
+      "unite": "U",
+      "qteInitiale": 2,
+      "prixUnitaire": 150,
+      "prixTotal": 300
+    },
+    {
+      "numero": 154,
+      "libelle": "Fourniture et pose d’abattant pour WC à l’anglaise",
+      "unite": "U",
+      "qteInitiale": 6,
+      "prixUnitaire": 300,
+      "prixTotal": 1800
+    },
+    {
+      "numero": 155,
+      "libelle": "Fourniture et pose de siphon de lavabo",
+      "unite": "U",
+      "qteInitiale": 14,
+      "prixUnitaire": 100,
+      "prixTotal": 1400
+    },
+    {
+      "numero": 156,
+      "libelle": "Fourniture et pose de cache-siphon pour lavabo existant",
+      "unite": "U",
+      "qteInitiale": 4,
+      "prixUnitaire": 250,
+      "prixTotal": 1000
+    },
+    {
+      "numero": 157,
+      "libelle": "Siphon de sol",
+      "unite": "U",
+      "qteInitiale": 6,
+      "prixUnitaire": 300,
+      "prixTotal": 1800
+    },
+    {
+      "numero": 158,
+      "libelle": "Fourniture et pose de robinet EF pour évier à bec orientable",
+      "unite": "U",
+      "qteInitiale": 6,
+      "prixUnitaire": 200,
+      "prixTotal": 1200
+    },
+    {
+      "numero": 159,
+      "libelle": "Fourniture et pose de robinet EF-pour évier à bec orientable et à fixation murale",
+      "unite": "U",
+      "qteInitiale": 6,
+      "prixUnitaire": 200,
+      "prixTotal": 1200
+    },
+    {
+      "numero": 160,
+      "libelle": "Fourniture et pose de mélangeur EF-EC pour lavabo",
+      "unite": "U",
+      "qteInitiale": 4,
+      "prixUnitaire": 900,
+      "prixTotal": 3600
+    },
+    {
+      "numero": 161,
+      "libelle": "Fourniture et pose de robinet EFpour lavabo",
+      "unite": "U",
+      "qteInitiale": 14,
+      "prixUnitaire": 250,
+      "prixTotal": 3500
+    },
+    {
+      "numero": 162,
+      "libelle": "Fourniture et pose de douchette y compris flexible et mitigeur",
+      "unite": "U",
+      "qteInitiale": 10,
+      "prixUnitaire": 300,
+      "prixTotal": 3000
+    },
+    {
+      "numero": 163,
+      "libelle": "Fourniture et pose de pommeau de douche",
+      "unite": "U",
+      "qteInitiale": 16,
+      "prixUnitaire": 600,
+      "prixTotal": 9600
+    },
+    {
+      "numero": 164,
+      "libelle": "Fourniture et pose de tuyau flexible",
+      "unite": "ML",
+      "qteInitiale": 34,
+      "prixUnitaire": 200,
+      "prixTotal": 6800
+    },
+    {
+      "numero": 165,
+      "libelle": "Fourniture et pose de robinet simple en laiton",
+      "unite": "U",
+      "qteInitiale": 50,
+      "prixUnitaire": 60,
+      "prixTotal": 3000
+    },
+    {
+      "numero": 166,
+      "libelle": "Fourniture et pose de robinet à poussoir",
+      "unite": "U",
+      "qteInitiale": 10,
+      "prixUnitaire": 250,
+      "prixTotal": 2500
+    },
+    {
+      "numero": 167,
+      "libelle": "Fourniture et pose de de robinet d'arrêt",
+      "unite": "U",
+      "qteInitiale": 34,
+      "prixUnitaire": 100,
+      "prixTotal": 3400
+    },
+    {
+      "numero": 168,
+      "libelle": "Fixation d’appareil sanitaire divers",
+      "unite": "U",
+      "qteInitiale": 20,
+      "prixUnitaire": 400,
+      "prixTotal": 8000
+    },
+    {
+      "numero": 169,
+      "libelle": "Fourniture et pose d’un chauffe-eau électrique instantané",
+      "unite": "U",
+      "qteInitiale": 4,
+      "prixUnitaire": 2500,
+      "prixTotal": 10000
+    },
+    {
+      "numero": 170,
+      "libelle": "Fourniture et pose d’un chauffe-eau électrique traditionnel de 25 litres",
+      "unite": "U",
+      "qteInitiale": 2,
+      "prixUnitaire": 800,
+      "prixTotal": 1600
+    },
+    {
+      "numero": 171,
+      "libelle": "Fourniture et pose d’un chauffe-eau électrique traditionnel de 50 litres",
+      "unite": "U",
+      "qteInitiale": 2,
+      "prixUnitaire": 3500,
+      "prixTotal": 7000
+    },
+    {
+      "numero": 172,
+      "libelle": "Fourniture et pose d’un chauffe-eau solaire 150 litres",
+      "unite": "U",
+      "qteInitiale": 2,
+      "prixUnitaire": 12000,
+      "prixTotal": 24000
+    },
+    {
+      "numero": 173,
+      "libelle": "Sèche main électrique",
+      "unite": "U",
+      "qteInitiale": 2,
+      "prixUnitaire": 2300,
+      "prixTotal": 4600
+    },
+    {
+      "numero": 174,
+      "libelle": "Glace miroir",
+      "unite": "M2",
+      "qteInitiale": 2,
+      "prixUnitaire": 600,
+      "prixTotal": 1200
+    },
+    {
+      "numero": 175,
+      "libelle": "Porte papier hygiénique.",
+      "unite": "U",
+      "qteInitiale": 2,
+      "prixUnitaire": 300,
+      "prixTotal": 600
+    },
+    {
+      "numero": 176,
+      "libelle": "Porte savon liquide",
+      "unite": "M3",
+      "qteInitiale": 6,
+      "prixUnitaire": 300,
+      "prixTotal": 1800
+    },
+    {
+      "numero": 177,
+      "libelle": "Porte serviette",
+      "unite": "U",
+      "qteInitiale": 6,
+      "prixUnitaire": 300,
+      "prixTotal": 1800
+    },
+    {
+      "numero": 178,
+      "libelle": "Porte manteaux",
+      "unite": "U",
+      "qteInitiale": 2,
+      "prixUnitaire": 100,
+      "prixTotal": 200
+    },
+    {
+      "numero": 179,
+      "libelle": "Fourniture et pose d'un mélangeur de douche",
+      "unite": "U",
+      "qteInitiale": 4,
+      "prixUnitaire": 400,
+      "prixTotal": 1600
+    },
+    {
+      "numero": 180,
+      "libelle": "Extracteur d'air",
+      "unite": "U",
+      "qteInitiale": 2,
+      "prixUnitaire": 150,
+      "prixTotal": 300
+    },
+    {
+      "numero": 181,
+      "libelle": "Fourniture et pose de combiné de douche complet",
+      "unite": "U",
+      "qteInitiale": 10,
+      "prixUnitaire": 1500,
+      "prixTotal": 15000
+    },
+    {
+      "numero": 182,
+      "libelle": "Fourniture et pose de Vanne d'arrêt tout diamètre inférieur à 50 mm",
+      "unite": "U",
+      "qteInitiale": 20,
+      "prixUnitaire": 200,
+      "prixTotal": 4000
+    },
+    {
+      "numero": 183,
+      "libelle": "Fourniture et pose de Siphon simple pour évier",
+      "unite": "U",
+      "qteInitiale": 10,
+      "prixUnitaire": 130,
+      "prixTotal": 1300
+    },
+    {
+      "numero": 184,
+      "libelle": "Fourniture et pose de Siphon double pour évier",
+      "unite": "U",
+      "qteInitiale": 4,
+      "prixUnitaire": 200,
+      "prixTotal": 800
+    },
+    {
+      "numero": 185,
+      "libelle": "Fourniture et pose de reglette étanche sur lavabo de 50 cm",
+      "unite": "U",
+      "qteInitiale": 4,
+      "prixUnitaire": 300,
+      "prixTotal": 1200
+    },
+    {
+      "numero": 186,
+      "libelle": "PEHD D40",
+      "unite": "ML",
+      "qteInitiale": 50,
+      "prixUnitaire": 20,
+      "prixTotal": 1000
+    },
+    {
+      "numero": 187,
+      "libelle": "PEHD D50",
+      "unite": "ML",
+      "qteInitiale": 14,
+      "prixUnitaire": 20,
+      "prixTotal": 280
+    },
+    {
+      "numero": 188,
+      "libelle": "PEHD D60",
+      "unite": "ML",
+      "qteInitiale": 14,
+      "prixUnitaire": 20,
+      "prixTotal": 280
+    },
+    {
+      "numero": 189,
+      "libelle": "Receveur de douche 70x70",
+      "unite": "U",
+      "qteInitiale": 4,
+      "prixUnitaire": 500,
+      "prixTotal": 2000
+    },
+    {
+      "numero": 190,
+      "libelle": "Fourniture de poubelle",
+      "unite": "U",
+      "qteInitiale": 10,
+      "prixUnitaire": 800,
+      "prixTotal": 8000
+    },
+    {
+      "numero": 191,
+      "libelle": "Porte poubelle",
+      "unite": "U",
+      "qteInitiale": 10,
+      "prixUnitaire": 500,
+      "prixTotal": 5000
+    },
+    {
+      "numero": 192,
+      "libelle": "Fourniture et pose de planche en bois massif de 25 mm",
+      "unite": "M2",
+      "qteInitiale": 30,
+      "prixUnitaire": 200,
+      "prixTotal": 6000
+    },
+    {
+      "numero": 193,
+      "libelle": "Fourniture et pose de tapis vinyle en plastique",
+      "unite": "M2",
+      "qteInitiale": 30,
+      "prixUnitaire": 150,
+      "prixTotal": 4500
+    },
+    {
+      "numero": 194,
+      "libelle": "Fourniture et pose de plaque Plexiglas avec entretoise",
+      "unite": "U",
+      "qteInitiale": 70,
+      "prixUnitaire": 400,
+      "prixTotal": 28000
+    }
+  ],
   "commandes": [],
-  "historique": [],
+  "historique": [
+    {
+      "id": "mutmrrv2hky3h",
+      "date": "2026-10-04T09:40:46.670Z",
+      "action": "IMPORT DE.xlsx",
+      "details": "194 prix importés"
+    }
+  ],
   "metresEnregistres": [],
   "constatsEnregistres": [],
   "suivisPrix": [],
