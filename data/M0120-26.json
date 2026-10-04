@@ -1997,20 +1997,22 @@
   },
   "constats": {
     "TR1": {
-      "date": "2026-11-30",
+      "date": "2026-10-31",
       "anterieures": {},
       "observations": {},
       "quantitesMois": {}
     },
     "TR2": {
-      "date": "2026-11-30",
+      "date": "2026-10-31",
       "anterieures": {},
       "observations": {},
       "quantitesMois": {}
     },
     "TR3": {
-      "date": "2026-11-30",
-      "anterieures": {
+      "date": "2026-10-31",
+      "anterieures": {},
+      "observations": {},
+      "quantitesMois": {
         "3": 1,
         "4": 2.32,
         "5": 160.52,
@@ -2055,18 +2057,16 @@
         "178": 3,
         "179": 1,
         "186": 32
-      },
-      "observations": {},
-      "quantitesMois": {}
+      }
     },
     "TR4": {
-      "date": "2026-11-30",
+      "date": "2026-10-31",
       "anterieures": {},
       "observations": {},
       "quantitesMois": {}
     },
     "CONS": {
-      "date": "2026-11-30",
+      "date": "2026-10-31",
       "anterieures": {},
       "observations": {},
       "quantitesMois": {}
