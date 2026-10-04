@@ -1639,6 +1639,12 @@
   "commandes": [],
   "historique": [
     {
+      "id": "muto3z2rxpjdq",
+      "date": "2026-10-04T10:18:15.507Z",
+      "action": "SAUVEGARDE CONSTAT",
+      "details": "Constat N°1 — TR3 — Octobre 2026"
+    },
+    {
       "id": "mutnyh4hq24b1",
       "date": "2026-10-04T10:13:58.961Z",
       "action": "SAUVEGARDE METREV",
@@ -1688,7 +1694,23 @@
     }
   ],
   "metresEnregistres": [],
-  "constatsEnregistres": [],
+  "constatsEnregistres": [
+    {
+      "id": "c_muto3z2qstdbn",
+      "numero": 1,
+      "mois": "2026-10",
+      "troncon": "TR3",
+      "dateReference": "2026-10-31",
+      "metreRef": null,
+      "metreNumero": 1,
+      "anterieures": {},
+      "observations": {},
+      "quantitesMois": {},
+      "cumulees": {},
+      "createdAt": "2026-10-04T10:18:15.507Z",
+      "_numero": 1
+    }
+  ],
   "suivisPrix": [],
   "etatsSinistres": [],
   "facturesSinistres": {},
