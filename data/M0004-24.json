@@ -12892,5 +12892,23 @@
     }
   },
   "_migre": true,
-  "metreVEnregistres": []
+  "metreVEnregistres": [],
+  "config": {
+    "sections": {
+      "dashboard": true,
+      "parametres": true,
+      "catalogue": true,
+      "commandes": true,
+      "metre": true,
+      "metrev": false,
+      "constat": true,
+      "attachement": false,
+      "decomptes": false,
+      "suivi": true,
+      "sinistres": true,
+      "equipements": true,
+      "historique": true,
+      "export": true
+    }
+  }
 }
