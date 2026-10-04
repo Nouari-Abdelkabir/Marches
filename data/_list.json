@@ -82,6 +82,27 @@
         "historique": true,
         "export": true
       }
+    },
+    "M0067-25": {
+      "nom": "Surveillance et gardiennage",
+      "couleur": "#dc2626",
+      "createdAt": "2026-10-04T12:10:07.933Z",
+      "sections": {
+        "dashboard": true,
+        "parametres": true,
+        "catalogue": true,
+        "commandes": false,
+        "metre": false,
+        "metrev": false,
+        "constat": false,
+        "attachement": true,
+        "decomptes": false,
+        "suivi": true,
+        "sinistres": false,
+        "equipements": false,
+        "historique": true,
+        "export": true
+      }
     }
   }
 }
