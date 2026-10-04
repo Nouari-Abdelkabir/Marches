@@ -1639,6 +1639,12 @@
   "commandes": [],
   "historique": [
     {
+      "id": "mutl7pdgdkups",
+      "date": "2026-10-04T08:57:10.708Z",
+      "action": "SAUVEGARDE ATTACHEMENT",
+      "details": "TR1 — N°1 — Janvier 2026"
+    },
+    {
       "id": "mutkm7p14zcj3",
       "date": "2026-10-04T08:40:28.021Z",
       "action": "IMPORT DE.xlsx",
@@ -4692,7 +4698,7 @@
       ],
       "fiches": [],
       "createdAt": "2026-10-04T08:56:43.275Z",
-      "_numero": 1
+      "_numero": 2
     },
     {
       "id": "mutl7keyt7i9y",
@@ -4709,9 +4715,9 @@
           "pu": 20,
           "estAnterieure": 0,
           "metAnterieure": 0,
-          "estMois": 0,
+          "estMois": 20,
           "metMois": 0,
-          "totale": 0,
+          "totale": 20,
           "observations": ""
         },
         {
@@ -7225,7 +7231,9 @@
         }
       ],
       "fiches": [],
-      "createdAt": "2026-10-04T08:57:04.282Z"
+      "createdAt": "2026-10-04T08:57:04.282Z",
+      "updatedAt": "2026-10-04T08:57:10.708Z",
+      "_numero": 1
     }
   ],
   "colonnes": {
