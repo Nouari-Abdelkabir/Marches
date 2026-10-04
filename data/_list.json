@@ -59,6 +59,27 @@
         "historique": true,
         "export": true
       }
+    },
+    "M0120-26": {
+      "nom": "Entretien des bâtiments DRRS",
+      "couleur": "#1e3a8a",
+      "createdAt": "2026-10-04T09:39:25.735Z",
+      "sections": {
+        "dashboard": true,
+        "parametres": true,
+        "catalogue": true,
+        "commandes": true,
+        "metre": false,
+        "metrev": true,
+        "constat": true,
+        "attachement": false,
+        "decomptes": false,
+        "suivi": true,
+        "sinistres": true,
+        "equipements": true,
+        "historique": true,
+        "export": true
+      }
     }
   }
 }
