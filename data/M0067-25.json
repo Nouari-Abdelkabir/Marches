@@ -103,6 +103,12 @@
   "commandes": [],
   "historique": [
     {
+      "id": "muttmfuqp8unq",
+      "date": "2026-10-04T12:52:35.138Z",
+      "action": "SAUVEGARDE SUIVI PRIX",
+      "details": "N°3 — Mars 2026 — 0 prix"
+    },
+    {
       "id": "muttmaghkcpg2",
       "date": "2026-10-04T12:52:28.145Z",
       "action": "SAUVEGARDE SUIVI PRIX",
@@ -203,6 +209,15 @@
         }
       },
       "createdAt": "2026-10-04T12:52:28.145Z"
+    },
+    {
+      "id": "muttmfuqg02a4",
+      "numero": 3,
+      "moisDebut": "2026-03",
+      "moisFin": "2026-03",
+      "dateReference": "2026-03-31",
+      "lignes": {},
+      "createdAt": "2026-10-04T12:52:35.138Z"
     }
   ],
   "etatsSinistres": [],
