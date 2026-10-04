@@ -50,13 +50,14 @@
         "parametres": true,
         "catalogue": true,
         "commandes": true,
-        "metre": true,
+        "metre": false,
+        "metrev": true,
         "constat": true,
         "attachement": true,
         "decomptes": false,
         "suivi": true,
-        "sinistres": true,
-        "equipements": true,
+        "sinistres": false,
+        "equipements": false,
         "historique": true,
         "export": true
       }
