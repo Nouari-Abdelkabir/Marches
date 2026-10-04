@@ -39,7 +39,7 @@
     "acceptePar": "Le représentant de l'entreprise",
     "accepteNom": "",
     "accepteDate": "",
-    "entite": "",
+    "entite": "Direction Régionale Réseau Sud",
     "signatures": {
       "TR1": {
         "fonction": "",
@@ -85,6 +85,12 @@
   "catalogue": [],
   "commandes": [],
   "historique": [
+    {
+      "id": "muts4w0so7efx",
+      "date": "2026-10-04T12:10:56.668Z",
+      "action": "MODIFICATION PARAMÈTRES",
+      "details": "Mise à jour des paramètres et signatures"
+    },
     {
       "id": "muts4n0urwjn8",
       "date": "2026-10-04T12:10:45.006Z",
