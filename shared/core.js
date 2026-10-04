@@ -172,6 +172,28 @@ function calculerQteDuMoisMetre(metre, prix) {
   });
   return t;
 }
+/* ═══════════════════════════════════════════════════════════
+   🎯 QUANTITÉ DU MOIS — Lit depuis Metré OU MetréV
+   ═══════════════════════════════════════════════════════════ */
+function getQteMoisPourPrix(mois, tr, prix) {
+  let qte = 0;
+  
+  /* 1. Metré (Routier) */
+  const met = DATA.metresEnregistres.find(m => 
+    m.mois === mois && m.troncon === tr
+  );
+  if (met) qte += calculerQteDuMoisMetre(met, prix);
+  
+  /* 2. MetréV (Bâtiment) */
+  const metV = (DATA.metreVEnregistres || []).find(m => 
+    m.mois === mois && m.troncon === tr
+  );
+  if (metV && metV.totauxParPrix && metV.totauxParPrix[prix] !== undefined) {
+    qte += metV.totauxParPrix[prix] || 0;
+  }
+  
+  return qte;
+}
 
 function notifier(msg, type = 'info') {
   const n = document.createElement('div');
@@ -466,6 +488,7 @@ document.querySelectorAll('.tab').forEach(tab => {
     if (t === 'catalogue')     rendreCatalogue();
     if (t === 'commandes')     rendreListeCommandes();
     if (t === 'metre')         switchMetre(currentMetreTR);
+    if (t === 'metrev')        { if (typeof switchMetreV === 'function') switchMetreV(currentMetreVTR || 'TR1'); }
     if (t === 'constat')       switchConstat(currentConstatTR);
     if (t === 'attachement')   switchAttachement();
     if (t === 'decomptes')     { /* à construire */ }
@@ -1075,6 +1098,54 @@ window.changerPeriodeDashboard = function() {
 };
 
 function rendreDashboard() {
+    /* ═══════════════════════════════════════════════════════════
+     Filtrer les cartes selon les sections actives
+     ═══════════════════════════════════════════════════════════ */
+  const sections = DATA.config?.sections || {};
+  
+  /* Map : id de la carte → section requise */
+    const carteSection = {
+    /* Cartes financières */
+    'dash-budget-marche':     'catalogue',
+    'dash-montant-metres':    ['metre', 'metrev', 'suivi', 'attachement'],  /* ← Modifié */
+    'dash-montant-factures':  'sinistres',
+    'dash-tva':               'sinistres',
+    'dash-taux':              ['metre', 'metrev', 'suivi', 'attachement'],  /* ← Modifié */
+    
+    /* Cartes activité */
+    'dash-nb-commandes':      'commandes',
+    'dash-nb-metres':         ['metre', 'metrev', 'suivi', 'attachement'],  /* ← Modifié */
+    'dash-nb-constats':       'constat',
+    'dash-nb-sinistres':      'sinistres',
+    'dash-nb-factures':       'sinistres'
+  };
+  
+  /* Afficher/masquer chaque carte */
+  Object.entries(carteSection).forEach(([id, required]) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    
+    /* La carte parente (dash-card) */
+    const card = el.closest('.dash-card');
+    if (!card) return;
+    
+    /* Vérifier si au moins une section est active */
+    let visible = false;
+    if (Array.isArray(required)) {
+      visible = required.some(s => sections[s] === true);
+    } else {
+      visible = sections[required] === true;
+    }
+    
+    card.style.display = visible ? '' : 'none';
+  });
+  
+  /* ─── Répartition par Tronçon : afficher seulement si Metré ou MetréV ─── */
+  const trPanel = document.getElementById('dashboard-tr-cards')?.closest('.panel');
+  if (trPanel) {
+    const showTR = sections.metre === true || sections.metrev === true;
+    trPanel.style.display = showTR ? '' : 'none';
+  }
   /* ─── Pickers ─── */
   const pickerD = document.getElementById('dash-picker-debut');
   const pickerF = document.getElementById('dash-picker-fin');
@@ -1120,17 +1191,27 @@ function rendreDashboard() {
   const budgetTotal = DATA.catalogue.reduce((s, p) =>
     s + ((p.qteInitiale || 0) * (p.prixUnitaire || 0)), 0);
 
-  /* ═══ 2. Montant Metrés (période) ═══ */
-  let montantMet = 0, nbMet = 0;
-  DATA.metresEnregistres.forEach(m => {
-    if (!isInPeriode(m.mois)) return;
-    nbMet++;
-    Object.values(m.entrees || {}).forEach(row => {
-      Object.entries(row).forEach(([prixNum, qte]) => {
-        const p = DATA.catalogue.find(x => x.numero === parseInt(prixNum));
-        if (p) montantMet += (parseFloat(qte) || 0) * (p.prixUnitaire || 0);
-      });
+    /* ═══════════════════════════════════════════════════════════
+     2. Montant depuis Suivi des Prix
+     (Suivi lit depuis Attachement → Constat → Metré → MetréV)
+     ═══════════════════════════════════════════════════════════ */
+  let montantMet = 0;
+  let nbMet = 0;
+  
+  /* Parcourir tous les prix du catalogue */
+  (DATA.catalogue || []).forEach(p => {
+    /* Calculer la quantité totale sur la période */
+    let qteTotal = 0;
+    
+    /* TR1 à TR4 */
+    ['TR1','TR2','TR3','TR4'].forEach(tr => {
+      qteTotal += getQtePrixPourTRPeriode(dDebut, dFin, p.numero, tr);
     });
+    
+    if (qteTotal > 0) {
+      montantMet += qteTotal * (p.prixUnitaire || 0);
+      nbMet++;
+    }
   });
 
   /* ═══ 3. Montant Factures payées + 4. TVA ═══ */
@@ -1569,7 +1650,9 @@ window.changerMoisConstat = function(mois) {
 
   ['TR1','TR2','TR3','TR4'].forEach(tr => {
     const existing = DATA.constatsEnregistres.find(c => c.mois === mois && c.troncon === tr);
+    
     if (existing) {
+      /* Cas 1 : Constat déjà enregistré pour ce mois → charger tel quel */
       DATA.constats[tr] = {
         date: existing.dateReference || getFinDeMois(mois),
         anterieures: { ...(existing.anterieures || {}) },
@@ -1577,14 +1660,62 @@ window.changerMoisConstat = function(mois) {
         quantitesMois: { ...(existing.quantitesMois || {}) }
       };
     } else {
-      const prevMois = getMoisPrecedentConstat(mois, tr);
+      /* Cas 2 : Nouveau mois → calculer les antérieures 
+         en cumulant TOUTES les quantités des mois précédents 
+         (depuis Metré + MetréV) */
+      
       const anterieures = {};
-      if (prevMois) {
-        const prev = DATA.constatsEnregistres.find(c => c.mois === prevMois && c.troncon === tr);
-        if (prev && prev.cumulees) {
-          Object.entries(prev.cumulees).forEach(([p, v]) => { anterieures[p] = v; });
+      
+      /* Récupérer tous les prix qui ont une quantité dans les mois précédents */
+      const prixSet = new Set();
+      
+      /* --- 2a. Metré (Routier) --- */
+      DATA.metresEnregistres.forEach(m => {
+        if (m.troncon !== tr) return;
+        if (!m.mois || m.mois >= mois) return;   /* Seulement les mois < mois courant */
+        Object.values(m.entrees || {}).forEach(row => {
+          Object.keys(row).forEach(p => {
+            if (parseFloat(row[p]) > 0) prixSet.add(parseInt(p));
+          });
+        });
+      });
+      
+      /* --- 2b. MetréV (Bâtiment) --- */
+      (DATA.metreVEnregistres || []).forEach(m => {
+        if (m.troncon !== tr) return;
+        if (!m.mois || m.mois >= mois) return;
+        if (m.totauxParPrix) {
+          Object.keys(m.totauxParPrix).forEach(p => {
+            if (parseFloat(m.totauxParPrix[p]) > 0) prixSet.add(parseInt(p));
+          });
         }
-      }
+      });
+      
+      /* --- 2c. Cumuler les quantités mois par mois --- */
+      prixSet.forEach(p => {
+        let total = 0;
+        
+        /* Metré */
+        DATA.metresEnregistres.forEach(m => {
+          if (m.troncon !== tr) return;
+          if (!m.mois || m.mois >= mois) return;
+          Object.values(m.entrees || {}).forEach(row => {
+            total += parseFloat(row[p]) || 0;
+          });
+        });
+        
+        /* MetréV */
+        (DATA.metreVEnregistres || []).forEach(m => {
+          if (m.troncon !== tr) return;
+          if (!m.mois || m.mois >= mois) return;
+          if (m.totauxParPrix && m.totauxParPrix[p] !== undefined) {
+            total += parseFloat(m.totauxParPrix[p]) || 0;
+          }
+        });
+        
+        if (total > 0) anterieures[p] = total;
+      });
+      
       DATA.constats[tr] = {
         date: getFinDeMois(mois),
         anterieures,
@@ -1593,8 +1724,46 @@ window.changerMoisConstat = function(mois) {
       };
     }
   });
+    /* ═══════════════════════════════════════════════════════════
+     Calculer quantitesMois pour CHAQUE TR
+     (depuis Metré + MetréV) — pour tous les cas
+     ═══════════════════════════════════════════════════════════ */
+  ['TR1','TR2','TR3','TR4'].forEach(tr => {
+    const quantitesMois = {};
+    const tousLesPrix = new Set();
+    
+    /* Metré (Routier) */
+    const met = DATA.metresEnregistres.find(m => m.mois === mois && m.troncon === tr);
+    if (met) {
+      Object.values(met.entrees || {}).forEach(row => {
+        Object.keys(row).forEach(p => {
+          if (parseFloat(row[p]) > 0) tousLesPrix.add(parseInt(p));
+        });
+      });
+    }
+    
+    /* MetréV (Bâtiment) */
+    const metV = (DATA.metreVEnregistres || []).find(m => m.mois === mois && m.troncon === tr);
+    if (metV && metV.totauxParPrix) {
+      Object.keys(metV.totauxParPrix).forEach(p => {
+        if (parseFloat(metV.totauxParPrix[p]) > 0) tousLesPrix.add(parseInt(p));
+      });
+    }
+    
+    /* Calculer la quantité */
+    tousLesPrix.forEach(p => {
+      const q = getQteMoisPourPrix(mois, tr, p);
+      if (q > 0) quantitesMois[p] = q;
+    });
+    
+    /* Injecter */
+    if (DATA.constats[tr]) {
+      DATA.constats[tr].quantitesMois = quantitesMois;
+    }
+  });
 
-  /* CONS */
+
+  /* CONS — inchangé */
   const existingCons = DATA.constatsEnregistres.find(c => c.mois === mois && c.troncon === 'CONS');
   if (existingCons) {
     DATA.constats.CONS = {
@@ -1644,16 +1813,27 @@ function rendreConstatTR(tr) {
   `;
 
   /* Récupérer les prix avec quantité */
-  const trs = tr === 'CONS' ? ['TR1','TR2','TR3','TR4'] : [tr];
+    const trs = tr === 'CONS' ? ['TR1','TR2','TR3','TR4'] : [tr];
   const prixSet = new Set();
 
   trs.forEach(t => {
+    /* 1. Metré (Routier) */
     const met = DATA.metresEnregistres.find(m => m.mois === mois && m.troncon === t);
     if (met) {
       Object.values(met.entrees || {}).forEach(row => {
         Object.keys(row).forEach(p => { if (parseFloat(row[p])) prixSet.add(parseInt(p)); });
       });
     }
+    
+    /* 2. MetréV (Bâtiment) — NOUVEAU */
+    const metV = (DATA.metreVEnregistres || []).find(m => m.mois === mois && m.troncon === t);
+    if (metV && metV.totauxParPrix) {
+      Object.keys(metV.totauxParPrix).forEach(p => {
+        if (parseFloat(metV.totauxParPrix[p]) > 0) prixSet.add(parseInt(p));
+      });
+    }
+    
+    /* 3. Constat (données manuelles) */
     if (DATA.constats[t]?.anterieures) {
       Object.keys(DATA.constats[t].anterieures).forEach(p => prixSet.add(parseInt(p)));
     }
@@ -1680,17 +1860,33 @@ function rendreConstatTR(tr) {
   const prixList = [...prixSet].sort((a, b) => a - b);
 
   let totalAnt = 0, totalMois = 0, totalCum = 0;
-  const lignes = prixList.map(p => {
+    const lignes = prixList.map(p => {
     const cat = DATA.catalogue.find(x => x.numero === p);
 
-    /* Quantité du mois : importée OU calculée depuis Metré */
+    /* ═══════════════════════════════════════════════════════════
+       Quantité du mois : 
+       - Priorité 1 : quantitesMois importées (constat Excel)
+       - Priorité 2 : calculée depuis Metré (Routier)
+       - Priorité 3 : calculée depuis MetréV (Bâtiment)  ← NOUVEAU
+       ═══════════════════════════════════════════════════════════ */
     let qteMois = 0;
+    
     if (c.quantitesMois && c.quantitesMois[p] !== undefined) {
+      /* Priorité 1 : import Excel */
       qteMois = c.quantitesMois[p];
     } else {
       trs.forEach(t => {
+        /* Priorité 2 : Metré (Routier) */
         const met = DATA.metresEnregistres.find(m => m.mois === mois && m.troncon === t);
         if (met) qteMois += calculerQteDuMoisMetre(met, p);
+        
+        /* Priorité 3 : MetréV (Bâtiment) — NOUVEAU */
+        const metV = (DATA.metreVEnregistres || []).find(m => 
+          m.mois === mois && m.troncon === t
+        );
+        if (metV && metV.totauxParPrix && metV.totauxParPrix[p] !== undefined) {
+          qteMois += metV.totauxParPrix[p] || 0;
+        }
       });
     }
 
@@ -1820,18 +2016,17 @@ window.sauvegarderConstatMois = function() {
     });
 
     const cumulees = {};
-    prixSet.forEach(p => {
-      let total = 0;
-      ['TR1','TR2','TR3','TR4'].forEach(t => {
-        const met = DATA.metresEnregistres.find(m => m.mois === mois && m.troncon === t);
-        const ant = parseFloat((DATA.constats[t]?.anterieures || {})[p]) || 0;
-        const qMois = (DATA.constats[t]?.quantitesMois?.[p] !== undefined)
-          ? DATA.constats[t].quantitesMois[p]
-          : (met ? calculerQteDuMoisMetre(met, p) : 0);
-        total += ant + qMois;
+      prixSet.forEach(p => {
+        let total = 0;
+        ['TR1','TR2','TR3','TR4'].forEach(t => {
+          const ant = parseFloat((DATA.constats[t]?.anterieures || {})[p]) || 0;
+          const qMois = (DATA.constats[t]?.quantitesMois?.[p] !== undefined)
+            ? DATA.constats[t].quantitesMois[p]
+            : getQteMoisPourPrix(mois, t, p);   /* ← CORRIGÉ */
+          total += ant + qMois;
+        });
+        cumulees[p] = total;
       });
-      cumulees[p] = total;
-    });
 
     let existing = DATA.constatsEnregistres.find(c => c.mois === mois && c.troncon === 'CONS');
     if (existing) {
@@ -1879,7 +2074,7 @@ window.sauvegarderConstatMois = function() {
     const ant = parseFloat(wc.anterieures[p]) || 0;
     const qMois = (wc.quantitesMois?.[p] !== undefined)
       ? wc.quantitesMois[p]
-      : (met ? calculerQteDuMoisMetre(met, p) : 0);
+      : getQteMoisPourPrix(mois, tr, p);   /* ← CORRIGÉ */
     cumulees[p] = ant + qMois;
   });
 
@@ -2506,12 +2701,23 @@ function numeroSuiviPourPeriode(moisDebut, moisFin) {
    (utilisée par le module Équipements) */
 function getQtePrixPourTR(mois, prix, tr) {
   let t = 0;
+  
+  /* 1. Metré (Routier) */
   DATA.metresEnregistres.forEach(m => {
     if (m.mois !== mois || m.troncon !== tr) return;
     Object.values(m.entrees || {}).forEach(row => {
       t += parseFloat(row[prix]) || 0;
     });
   });
+  
+  /* 2. MetréV (Bâtiment) */
+  (DATA.metreVEnregistres || []).forEach(m => {
+    if (m.mois !== mois || m.troncon !== tr) return;
+    if (m.totauxParPrix && m.totauxParPrix[prix] !== undefined) {
+      t += parseFloat(m.totauxParPrix[prix]) || 0;
+    }
+  });
+  
   return t;
 }
 
@@ -2519,17 +2725,68 @@ function getQtePrixPourTR(mois, prix, tr) {
 function getQtePrixPourTRPeriode(moisDebut, moisFin, prix, tr) {
   if (!moisDebut) return 0;
   const fin = moisFin || moisDebut;
-  let t = 0;
+
+  /* ═══════════════════════════════════════════════════════════
+     SOURCE 1 : Attachement (source officielle)
+     ═══════════════════════════════════════════════════════════ */
+  let totalAtt = 0;
+  (DATA.attachements || []).forEach(att => {
+    if (!att.mois || att.mois < moisDebut || att.mois > fin) return;
+    if (att.troncon !== tr) return;
+    
+    (att.lignes || []).forEach(l => {
+      if (l.prix === prix) {
+        /* La quantité officielle est "totale" (colonne 9) */
+        totalAtt += parseFloat(l.totale) || 0;
+      }
+    });
+  });
+
+  if (totalAtt > 0) return totalAtt;
+
+  /* ═══════════════════════════════════════════════════════════
+     SOURCE 2 : Constat (si Attachement vide)
+     ═══════════════════════════════════════════════════════════ */
+  let totalConstat = 0;
+  (DATA.constatsEnregistres || []).forEach(c => {
+    if (!c.mois || c.mois < moisDebut || c.mois > fin) return;
+    if (c.troncon !== tr) return;
+    
+    if (c.quantitesMois && c.quantitesMois[prix] !== undefined) {
+      totalConstat += parseFloat(c.quantitesMois[prix]) || 0;
+    }
+  });
+
+  if (totalConstat > 0) return totalConstat;
+
+  /* ═══════════════════════════════════════════════════════════
+     SOURCE 3 : Metré (Routier) — compatibilité
+     ═══════════════════════════════════════════════════════════ */
+  let totalMetre = 0;
   DATA.metresEnregistres.forEach(m => {
     if (!m.mois || m.mois < moisDebut || m.mois > fin) return;
     if (m.troncon !== tr) return;
     Object.values(m.entrees || {}).forEach(row => {
-      t += parseFloat(row[prix]) || 0;
+      totalMetre += parseFloat(row[prix]) || 0;
     });
   });
-  return t;
-}
 
+  if (totalMetre > 0) return totalMetre;
+
+  /* ═══════════════════════════════════════════════════════════
+     SOURCE 4 : MetréV (Bâtiment) — compatibilité
+     ═══════════════════════════════════════════════════════════ */
+  let totalMetreV = 0;
+  (DATA.metreVEnregistres || []).forEach(m => {
+    if (!m.mois || m.mois < moisDebut || m.mois > fin) return;
+    if (m.troncon !== tr) return;
+    if (m.totauxParPrix && m.totauxParPrix[prix] !== undefined) {
+      totalMetreV += parseFloat(m.totauxParPrix[prix]) || 0;
+    }
+  });
+
+  return totalMetreV;
+}
 /* ─── Changement de période ─── */
 window.changerPeriodeSuivi = function() {
   const d = getMonthPickerValue('suivi-debut');
@@ -6446,15 +6703,25 @@ window.apercuConstat = function(tr) {
   `;
 
   /* ─── Recalculer les lignes (même logique que rendreConstatTR) ─── */
-  const trs = tr === 'CONS' ? ['TR1','TR2','TR3','TR4'] : [tr];
+    const trs = tr === 'CONS' ? ['TR1','TR2','TR3','TR4'] : [tr];
   const prixSet = new Set();
   trs.forEach(t => {
+    /* 1. Metré (Routier) */
     const met = DATA.metresEnregistres.find(m => m.mois === mois && m.troncon === t);
     if (met) {
       Object.values(met.entrees || {}).forEach(row => {
         Object.keys(row).forEach(p => { if (parseFloat(row[p])) prixSet.add(parseInt(p)); });
       });
     }
+    
+    /* 2. MetréV (Bâtiment) — NOUVEAU */
+    const metV = (DATA.metreVEnregistres || []).find(m => m.mois === mois && m.troncon === t);
+    if (metV && metV.totauxParPrix) {
+      Object.keys(metV.totauxParPrix).forEach(p => {
+        if (parseFloat(metV.totauxParPrix[p]) > 0) prixSet.add(parseInt(p));
+      });
+    }
+    
     if (DATA.constats[t]?.anterieures) Object.keys(DATA.constats[t].anterieures).forEach(p => prixSet.add(parseInt(p)));
     if (DATA.constats[t]?.observations) Object.keys(DATA.constats[t].observations).forEach(p => prixSet.add(parseInt(p)));
     if (DATA.constats[t]?.quantitesMois) Object.keys(DATA.constats[t].quantitesMois).forEach(p => prixSet.add(parseInt(p)));
@@ -6465,13 +6732,12 @@ window.apercuConstat = function(tr) {
   let totalAnt = 0, totalMois = 0, totalCum = 0;
   const lignes = prixList.map(p => {
     const cat = DATA.catalogue.find(x => x.numero === p);
-    let qteMois = 0;
+        let qteMois = 0;
     if (c.quantitesMois && c.quantitesMois[p] !== undefined) {
       qteMois = c.quantitesMois[p];
     } else {
       trs.forEach(t => {
-        const met = DATA.metresEnregistres.find(m => m.mois === mois && m.troncon === t);
-        if (met) qteMois += calculerQteDuMoisMetre(met, p);
+        qteMois += getQteMoisPourPrix(mois, t, p);
       });
     }
     let qteAnt = 0;
@@ -6558,15 +6824,25 @@ window.exporterConstatExcel = function(tr) {
   const c = DATA.constats[tr];
   const dateAffichage = formatDateFR(getFinDeMois(mois));
 
-  const trs = tr === 'CONS' ? ['TR1','TR2','TR3','TR4'] : [tr];
+    const trs = tr === 'CONS' ? ['TR1','TR2','TR3','TR4'] : [tr];
   const prixSet = new Set();
   trs.forEach(t => {
+    /* 1. Metré (Routier) */
     const met = DATA.metresEnregistres.find(m => m.mois === mois && m.troncon === t);
     if (met) {
       Object.values(met.entrees || {}).forEach(row => {
         Object.keys(row).forEach(p => { if (parseFloat(row[p])) prixSet.add(parseInt(p)); });
       });
     }
+    
+    /* 2. MetréV (Bâtiment) */
+    const metV = (DATA.metreVEnregistres || []).find(m => m.mois === mois && m.troncon === t);
+    if (metV && metV.totauxParPrix) {
+      Object.keys(metV.totauxParPrix).forEach(p => {
+        if (parseFloat(metV.totauxParPrix[p]) > 0) prixSet.add(parseInt(p));
+      });
+    }
+    
     if (DATA.constats[t]?.anterieures) Object.keys(DATA.constats[t].anterieures).forEach(p => prixSet.add(parseInt(p)));
     if (DATA.constats[t]?.quantitesMois) Object.keys(DATA.constats[t].quantitesMois).forEach(p => prixSet.add(parseInt(p)));
   });
@@ -6581,11 +6857,10 @@ window.exporterConstatExcel = function(tr) {
 
   prixList.forEach(p => {
     const cat = DATA.catalogue.find(x => x.numero === p);
-    let qMois = 0;
+     let qMois = 0;
     if (c.quantitesMois?.[p] !== undefined) qMois = c.quantitesMois[p];
     else trs.forEach(t => {
-      const met = DATA.metresEnregistres.find(m => m.mois === mois && m.troncon === t);
-      if (met) qMois += calculerQteDuMoisMetre(met, p);
+      qMois += getQteMoisPourPrix(mois, t, p);
     });
     let qAnt = 0;
     if (tr === 'CONS') qAnt = trs.reduce((s, t) => s + (parseFloat(DATA.constats[t].anterieures[p]) || 0), 0);
@@ -6879,6 +7154,12 @@ function rendreExportCentre() {
   if (!cont) return;
   const d = exportFilterDebut, f = exportFilterFin, tr = exportFilterTR;
 
+  /* ═══════════════════════════════════════════════════════════
+     Récupérer les sections actives du Marché
+     ═══════════════════════════════════════════════════════════ */
+  const sections = DATA.config?.sections || {};
+
+  /* ─── Récupérer tous les compteurs ─── */
   const nbCat = DATA.catalogue.length;
   const nbCmd = DATA.commandes.filter(c => {
     const m = (c.date || '').slice(0,7);
@@ -6907,21 +7188,52 @@ function rendreExportCentre() {
     return m >= d && m <= f;
   }).length;
   const nbAttachements = (DATA.attachements || []).filter(a => {
-  return a.mois >= d && a.mois <= f;
+    return a.mois >= d && a.mois <= f;
   }).length;
+  const nbMetreV = (DATA.metreVEnregistres || []).filter(m =>
+    m.mois >= d && m.mois <= f && (!tr || m.troncon === tr)
+  ).length;
 
-  const cards = [
-    { key:'catalogue',   icon:'📚', titre:'Catalogue (DE)', count:`${nbCat} prix`,                color:'#1e3a8a' },
-    { key:'commandes',   icon:'📝', titre:'Commandes',      count:`${nbCmd} commande(s)`,         color:'#0891b2' },
-    { key:'metre',       icon:'📑', titre:'Metré',          count:`${nbMetre} enregistré(s)`,     color:'#3b82f6' },
-    { key:'constat',     icon:'📋', titre:'Constats',       count:`${nbConstat} enregistré(s)`,   color:'#f59e0b' },
-    { key:'attachements', icon:'📄', titre:'Attachements',  count:`${nbAttachements} enregistré(s)`, color:'#c2410c' },  /* 🆕 */
-    { key:'suivi',       icon:'💰', titre:'Suivi des Prix', count:`${nbSuivi} suivi(s)`,          color:'#16a34a' },
-    { key:'equipements', icon:'🏗️', titre:'Équipements',    count:`${nbEquip} enregistré(s)`,     color:'#5b21b6' },
-    { key:'sinistres',   icon:'🚨', titre:'Sinistres',      count:`${nbSin} sinistre(s)`,         color:'#b91c1c' },
-    { key:'factures',    icon:'🧾', titre:'Factures',       count:`${nbFac} facture(s)`,          color:'#dc2626' }
+  /* ─── Définir TOUTES les cartes possibles ─── */
+  const toutesLesCartes = [
+    { key:'catalogue',    sectionKey:'catalogue',    icon:'📚', titre:'Catalogue (DE)',  count:`${nbCat} prix`,                color:'#1e3a8a' },
+    { key:'commandes',    sectionKey:'commandes',    icon:'📝', titre:'Commandes',        count:`${nbCmd} commande(s)`,         color:'#0891b2' },
+    { key:'metre',        sectionKey:'metre',        icon:'📑', titre:'Metré',            count:`${nbMetre} enregistré(s)`,     color:'#3b82f6' },
+    { key:'metrev',       sectionKey:'metrev',       icon:'📐', titre:'MetréV',           count:`${nbMetreV} enregistré(s)`,    color:'#8b5cf6' },
+    { key:'constat',      sectionKey:'constat',      icon:'📋', titre:'Constats',         count:`${nbConstat} enregistré(s)`,   color:'#f59e0b' },
+    { key:'attachements', sectionKey:'attachement',  icon:'📄', titre:'Attachements',     count:`${nbAttachements} enregistré(s)`, color:'#c2410c' },
+    { key:'suivi',        sectionKey:'suivi',        icon:'💰', titre:'Suivi des Prix',   count:`${nbSuivi} suivi(s)`,          color:'#16a34a' },
+    { key:'equipements',  sectionKey:'equipements',  icon:'🏗️', titre:'Équipements',      count:`${nbEquip} enregistré(s)`,     color:'#5b21b6' },
+    { key:'sinistres',    sectionKey:'sinistres',    icon:'🚨', titre:'Sinistres',        count:`${nbSin} sinistre(s)`,         color:'#b91c1c' },
+    { key:'factures',     sectionKey:'sinistres',    icon:'🧾', titre:'Factures',         count:`${nbFac} facture(s)`,          color:'#dc2626' }
   ];
 
+  /* ─── Filtrer selon les sections actives ─── */
+  const cards = toutesLesCartes.filter(c => {
+    /* Toujours afficher Catalogue (car il est "global") */
+    if (c.key === 'catalogue') return true;
+    
+    /* Vérifier si la section est active */
+    return sections[c.sectionKey] === true;
+  });
+
+  /* ─── Si aucune carte → message ─── */
+  if (cards.length === 0) {
+    cont.innerHTML = `
+      <div style="grid-column:1/-1;text-align:center;padding:40px;color:#94a3b8;">
+        <p style="font-size:16px;margin-bottom:10px;">
+          ⚠️ Aucune section active dans ce marché.
+        </p>
+        <p style="font-size:13px;">
+          Activez au moins une section dans <strong>⚙️ Paramètres</strong> 
+          ou via <strong>✏️ Modifier un Marché</strong>.
+        </p>
+      </div>
+    `;
+    return;
+  }
+
+  /* ─── Rendu des cartes ─── */
   cont.innerHTML = cards.map(c => `
     <div class="export-card-modern" style="border-top-color:${c.color}">
       <div class="export-card-icon">${c.icon}</div>
@@ -6988,6 +7300,29 @@ function exporterContenuExcel(html, nomFichier) {
 
 /* ─── ROUTEUR D'APERÇU ─── */
 window.apercuExport = function(key) {
+  /* ─── Vérifier que la section est active ─── */
+  const sections = DATA.config?.sections || {};
+  
+  const sectionMap = {
+    'catalogue':    'catalogue',
+    'commandes':    'commandes',
+    'metre':        'metre',
+    'metrev':       'metrev',
+    'constat':      'constat',
+    'attachements': 'attachement',
+    'suivi':        'suivi',
+    'equipements':  'equipements',
+    'sinistres':    'sinistres',
+    'factures':     'sinistres'
+  };
+  
+  const sectionKey = sectionMap[key];
+  if (sectionKey && sectionKey !== 'catalogue') {
+    if (sections[sectionKey] !== true) {
+      notifier('⚠️ Cette section n\'est pas active dans ce marché', 'danger');
+      return;
+    }
+  }
   const d = exportFilterDebut, f = exportFilterFin, tr = exportFilterTR;
   const periode = formatMoisFR(d) + (d === f ? '' : ' → ' + formatMoisFR(f));
   const trLabel = tr || 'Tous';
@@ -7071,6 +7406,66 @@ window.apercuExport = function(key) {
     `;
     nomFichier = `Metre_${d}_${f}${tr ? '_' + tr : ''}.xls`;
   }
+    /* ═══ 3.5. METRÉV (Bâtiment) ═══ */
+  else if (key === 'metrev') {
+    const metVList = (DATA.metreVEnregistres || []).filter(m =>
+      m.mois >= d && m.mois <= f && (!tr || m.troncon === tr)
+    );
+    if (metVList.length === 0) { 
+      notifier('⚠️ Aucun MetréV dans cette période', 'danger'); 
+      return; 
+    }
+
+    /* Agrégation par prix */
+    const agg = {};
+    metVList.forEach(m => {
+      Object.entries(m.totauxParPrix || {}).forEach(([p, q]) => {
+        const pn = parseInt(p);
+        agg[pn] = (agg[pn] || 0) + (parseFloat(q) || 0);
+      });
+    });
+
+    const prixList = Object.keys(agg).map(p => parseInt(p)).sort((a,b) => a-b);
+    let total = 0;
+    prixList.forEach(p => {
+      const cat = DATA.catalogue.find(x => x.numero === p);
+      total += agg[p] * (cat?.prixUnitaire || 0);
+    });
+
+    titre = `MetréV récapitulatif — ${periode}${tr ? ' — ' + tr : ''}`;
+    html = `
+      <h3 style="text-align:center;color:#8b5cf6;">METRÉV RÉCAPITULATIF</h3>
+      <p style="text-align:center;">Période : <b>${periode}</b> — Tronçon : <b>${trLabel}</b></p>
+      <table class="constat-table-print">
+        <thead><tr>
+          <th style="width:60px;">N° Prix</th><th>Libellé</th>
+          <th style="width:70px;">Unité</th><th style="width:100px;">Qté totale</th>
+          <th style="width:100px;">P.U (DH)</th><th style="width:120px;">Montant (DH)</th>
+        </tr></thead>
+        <tbody>
+          ${prixList.map(p => {
+            const cat = DATA.catalogue.find(x => x.numero === p);
+            const q = agg[p];
+            const pu = cat?.prixUnitaire || 0;
+            return `<tr>
+              <td style="text-align:center;">${p}</td>
+              <td style="font-size:9px;">${cat?.libelle || ''}</td>
+              <td style="text-align:center;">${cat?.unite || ''}</td>
+              <td style="text-align:right;font-weight:700;">${q.toFixed(2)}</td>
+              <td style="text-align:right;">${pu.toFixed(2)}</td>
+              <td style="text-align:right;font-weight:700;">${(q*pu).toFixed(2)}</td>
+            </tr>`;
+          }).join('')}
+        </tbody>
+        <tfoot><tr style="background:#8b5cf6;color:#fff;">
+          <td colspan="5" style="text-align:right;font-weight:700;">TOTAL</td>
+          <td style="text-align:right;font-weight:700;">${total.toFixed(2)}</td>
+        </tr></tfoot>
+      </table>
+    `;
+    nomFichier = `MetreV_${d}_${f}${tr ? '_' + tr : ''}.xls`;
+  }
+
 
   /* ═══ 4. CONSTAT (agrégé) ═══ */
   else if (key === 'constat') {
@@ -7591,6 +7986,11 @@ function binderBoutonsSettings() {
     ['Switch Metré',          () => switchMetre('TR1')],
     ['Switch Constat',        () => switchConstat('TR1')]
   ];
+
+  /* Initialiser MetréV */
+  if (typeof rendreMetreVEnregistres === 'function') {
+    try { rendreMetreVEnregistres(); } catch(e) { console.warn('MetréV:', e); }
+  }
 
   tasks.forEach(([nom, fn]) => {
     try { fn(); }
@@ -9028,3 +9428,26 @@ function verifierPremierLancement() {
 
 /* Appel de la fonction */
 verifierPremierLancement();
+
+/* ═══════════════════════════════════════════════════════════
+   🎯 QUANTITÉ DU MOIS — Lit depuis Metré OU MetréV
+   ═══════════════════════════════════════════════════════════ */
+function getQteMoisPourPrix(mois, tr, prix) {
+  let qte = 0;
+
+  /* 1. Metré (Routier) */
+  const met = DATA.metresEnregistres.find(m => 
+    m.mois === mois && m.troncon === tr
+  );
+  if (met) qte += calculerQteDuMoisMetre(met, prix);
+
+  /* 2. MetréV (Bâtiment) */
+  const metV = (DATA.metreVEnregistres || []).find(m => 
+    m.mois === mois && m.troncon === tr
+  );
+  if (metV && metV.totauxParPrix && metV.totauxParPrix[prix] !== undefined) {
+    qte += metV.totauxParPrix[prix] || 0;
+  }
+
+  return qte;
+}
