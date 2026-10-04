@@ -38,11 +38,60 @@
     "valideNom": "",
     "acceptePar": "Le représentant de l'entreprise",
     "accepteNom": "",
-    "accepteDate": ""
+    "accepteDate": "",
+    "entite": "",
+    "signatures": {
+      "TR1": {
+        "fonction": "",
+        "nom": "",
+        "remplacant": "",
+        "enConge": false
+      },
+      "TR2": {
+        "fonction": "",
+        "nom": "",
+        "remplacant": "",
+        "enConge": false
+      },
+      "TR3": {
+        "fonction": "",
+        "nom": "",
+        "remplacant": "",
+        "enConge": false
+      },
+      "TR4": {
+        "fonction": "",
+        "nom": "",
+        "remplacant": "",
+        "enConge": false
+      }
+    },
+    "ingenieurs": {
+      "ing1": {
+        "fonction": "",
+        "nom": ""
+      },
+      "ing2": {
+        "fonction": "Sighalem",
+        "nom": ""
+      }
+    },
+    "entreprise": {
+      "texte": "",
+      "nom": "",
+      "date": ""
+    }
   },
   "catalogue": [],
   "commandes": [],
-  "historique": [],
+  "historique": [
+    {
+      "id": "muts4n0urwjn8",
+      "date": "2026-10-04T12:10:45.006Z",
+      "action": "MODIFICATION PARAMÈTRES",
+      "details": "Mise à jour des paramètres et signatures"
+    }
+  ],
   "metresEnregistres": [],
   "constatsEnregistres": [],
   "suivisPrix": [],
