@@ -263,9 +263,34 @@
           "observations": ""
         }
       ],
-      "fiches": [],
+      "fiches": [
+        {
+          "id": "fiche_mutsxrwc15dko",
+          "prix": 1,
+          "libelle": "Surveillance et gardiennage assuré par un agent de sécurité au niveau de la Direction Régionale de Sud",
+          "unite": "Forfait / mois",
+          "numeroFiche": "1 / 26 / 1 / 1",
+          "dateDebut": "2026-01-01",
+          "dateFin": "2026-01-31",
+          "prestationsTerminees": [],
+          "prestationsNonTerminees": [
+            {
+              "designation": "Surveillance et gardiennage assuré par un agent de sécurité au niveau de la Direction Régionale de Sud",
+              "metrees": 8,
+              "estimees": 0
+            }
+          ],
+          "quantiteAnterieure": 0,
+          "quantiteDuMois": 8,
+          "totalAttachement": 8,
+          "croquis": "",
+          "observations": "",
+          "feuillet": "1/1",
+          "estDernierMois": false
+        }
+      ],
       "createdAt": "2026-10-04T12:32:01.960Z",
-      "updatedAt": "2026-10-04T12:32:18.969Z",
+      "updatedAt": "2026-10-04T12:33:24.348Z",
       "_numero": 1
     },
     {
