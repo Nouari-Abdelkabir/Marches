@@ -54,28 +54,28 @@
   "factureAutoNumbers": {},
   "metres": {
     "TR1": {
-      "date": "",
+      "date": "2026-10-31",
       "entrees": {},
       "sinistres": {},
       "fax": {},
       "prestations": {}
     },
     "TR2": {
-      "date": "",
+      "date": "2026-10-31",
       "entrees": {},
       "sinistres": {},
       "fax": {},
       "prestations": {}
     },
     "TR3": {
-      "date": "",
+      "date": "2026-10-31",
       "entrees": {},
       "sinistres": {},
       "fax": {},
       "prestations": {}
     },
     "TR4": {
-      "date": "",
+      "date": "2026-10-31",
       "entrees": {},
       "sinistres": {},
       "fax": {},
@@ -84,34 +84,35 @@
   },
   "constats": {
     "TR1": {
-      "date": "",
+      "date": "2026-10-31",
       "anterieures": {},
       "observations": {},
       "quantitesMois": {}
     },
     "TR2": {
-      "date": "",
+      "date": "2026-10-31",
       "anterieures": {},
       "observations": {},
       "quantitesMois": {}
     },
     "TR3": {
-      "date": "",
+      "date": "2026-10-31",
       "anterieures": {},
       "observations": {},
       "quantitesMois": {}
     },
     "TR4": {
-      "date": "",
+      "date": "2026-10-31",
       "anterieures": {},
       "observations": {},
       "quantitesMois": {}
     },
     "CONS": {
-      "date": "",
+      "date": "2026-10-31",
       "anterieures": {},
       "observations": {},
       "quantitesMois": {}
     }
-  }
+  },
+  "attachements": []
 }
