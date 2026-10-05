@@ -9654,42 +9654,44 @@
   },
   "constats": {
     "TR1": {
-      "date": "2026-06-30",
+      "date": "2026-09-30",
       "anterieures": {},
       "observations": {},
-      "quantitesMois": {}
+      "quantitesMois": {
+        "1": 100,
+        "5": 2,
+        "11": 70,
+        "18": 60
+      }
     },
     "TR2": {
-      "date": "2026-06-30",
+      "date": "2026-09-30",
       "anterieures": {},
       "observations": {},
       "quantitesMois": {}
     },
     "TR3": {
-      "date": "2026-06-30",
+      "date": "2026-09-30",
       "anterieures": {},
       "observations": {},
       "quantitesMois": {
-        "1": 476,
-        "5": 74,
-        "7": 122,
-        "8": 39,
-        "11": 500,
-        "13": 0.01,
-        "28": 2,
-        "37": 2,
-        "42": 3,
-        "121": 2
+        "1": 240,
+        "5": 4,
+        "6": 10,
+        "7": 5,
+        "11": 244
       }
     },
     "TR4": {
-      "date": "2026-06-30",
+      "date": "2026-09-30",
       "anterieures": {},
       "observations": {},
-      "quantitesMois": {}
+      "quantitesMois": {
+        "205": 250
+      }
     },
     "CONS": {
-      "date": "2026-06-30",
+      "date": "2026-09-30",
       "anterieures": {},
       "observations": {},
       "quantitesMois": {}
